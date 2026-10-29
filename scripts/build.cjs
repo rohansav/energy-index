@@ -28,6 +28,12 @@ function build(){
  // JSON encoding keeps author-supplied prose inert; the UI escapes it before rendering.
  const script=`const savedReviews=${JSON.stringify(reviews)};\nfor(const review of savedReviews){const drink=drinks.find(d=>d.id===review.id);if(!drink)continue;for(const key of ['score','sweetness','tartness','dryness'])drink[key]=review[key];if(review.notes)drink.notes=review.notes;if(review.body)drink.body=review.body;else if(review.score!==null)drink.body='Rated personally. Written notes have not been added yet.';}\n`;
  fs.writeFileSync(path.join(out,'reviews.js'),script);
+ // Change the ratings URL on every content change so cached scripts cannot hide a new review.
+ const revision=require('node:crypto').createHash('sha256').update(script).digest('hex').slice(0,16);
+ for(const page of ['index.html','brand.html']){
+  const file=path.join(out,page);
+  fs.writeFileSync(file,fs.readFileSync(file,'utf8').replace('src="reviews.js"',`src="reviews.js?v=${revision}"`));
+ }
  console.log('Built '+reviews.length+' reviews ('+reviews.filter(d=>d.score!==null).length+' rated)');
 }
 if(require.main===module)build();module.exports={collectReviews,build};
