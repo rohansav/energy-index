@@ -1,6 +1,6 @@
 # Energy index
 
-An energy drink catalogue with brand rankings and review excerpts. Built with plain HTML, CSS, and JavaScript; no build step or backend.
+An energy drink catalogue with brand rankings and review excerpts. Built with plain HTML, CSS, and JavaScript; a validated static build and a GitHub-backed review editor.
 
 ## Preview locally
 
@@ -8,7 +8,7 @@ Run `node scripts/build.cjs`, then `python3 -m http.server 4173 --directory dist
 
 ## Edit reviews
 
-Open `/admin/` and sign in with GitHub using the connected Netlify OAuth provider. Choose a drink, select Overall, Sweetness, Tartness and Dryness in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
+Open `/admin/` (which forwards to the editor on Netlify) and sign in with GitHub using the connected Netlify OAuth provider. Choose a drink, select Overall, Sweetness, Tartness and Dryness in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
 
 Review content lives in `reviews/<drink-id>.json`. Product names, IDs, photos and catalogue provenance live in `data.js`; don't edit ratings there. The build converts review dropdown strings into numeric values and merges only the four ratings and written notes. Blank ratings become null. Unknown IDs, changed identities and invalid scores fail the build, leaving the previous deployment live.
 

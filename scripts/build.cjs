@@ -23,6 +23,8 @@ function build(){
  const reviews=collectReviews(),out=path.join(root,'dist');fs.mkdirSync(out,{recursive:true});
  for(const file of ['index.html','brand.html','data.js','app.js','brand.js','style.css','.nojekyll'])fs.copyFileSync(path.join(root,file),path.join(out,file));
  for(const folder of ['assets','admin'])fs.cpSync(path.join(root,folder),path.join(out,folder),{recursive:true});
+ // Keep OAuth on the Netlify origin; Pages remains the public catalogue host.
+ fs.writeFileSync(path.join(out,'admin','index.html'),'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=https://brilliant-pavlova-12976b.netlify.app/"><title>Open review editor</title></head><body><p><a href="https://brilliant-pavlova-12976b.netlify.app/">Open the review editor</a></p></body></html>');
  // JSON encoding keeps author-supplied prose inert; the UI escapes it before rendering.
  const script=`const savedReviews=${JSON.stringify(reviews)};\nfor(const review of savedReviews){const drink=drinks.find(d=>d.id===review.id);if(!drink)continue;for(const key of ['score','sweetness','tartness','dryness'])drink[key]=review[key];if(review.notes)drink.notes=review.notes;if(review.body)drink.body=review.body;else if(review.score!==null)drink.body='Rated personally. Written notes have not been added yet.';}\n`;
  fs.writeFileSync(path.join(out,'reviews.js'),script);
