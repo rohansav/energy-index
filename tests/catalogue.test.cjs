@@ -16,7 +16,7 @@ test('catalogue entries have stable unique IDs, official sources, local photos a
  const {context}=setup();const ds=vm.runInContext('drinks',context);
  assert(ds.length>=150);assert.equal(new Set(ds.map(d=>d.id)).size,ds.length);
  const approved=['monsterenergy.com','celsius.com','bloomnu.com','redbull.com','drinkghost.com','alaninu.com'];
- for(const d of ds){assert(approved.some(h=>new URL(d.source).hostname===h||new URL(d.source).hostname.endsWith('.'+h)),d.id);assert(d.image?.startsWith('assets/drinks/'),d.id);assert(fs.statSync(path.join(root,d.image)).size>1000,d.id);assert(d.imageWidth>0&&d.imageWidth<=320);assert(d.imageHeight>0&&d.imageHeight<=480);assert(d.score===null||d.score>=0&&d.score<=10);assert.equal(d.score!==null,d.sampleReview);}
+ for(const d of ds){assert(approved.some(h=>new URL(d.source).hostname===h||new URL(d.source).hostname.endsWith('.'+h)),d.id);assert(d.image?.startsWith('assets/drinks/'),d.id);assert(fs.statSync(path.join(root,d.image)).size>1000,d.id);assert(d.imageWidth>0&&d.imageWidth<=320);assert(d.imageHeight>0&&d.imageHeight<=480);assert(d.score===null||d.score>=0&&d.score<=10);if(d.sampleReview)assert.notEqual(d.score,null);for(const f of vm.runInContext('ratingFields',context))assert(vm.runInContext(`validRating(${JSON.stringify(d[f.key])},ratingFields.find(f=>f.key==='${f.key}'))`,context),d.id+' '+f.key);}
  assert.equal(ds.filter(d=>d.sampleReview).length,24);
 });
 test('rankings keep unrated flavors after rated entries, without changing source order',()=>{
@@ -40,4 +40,13 @@ test('all six brand pages render full lists, and filters work together',()=>{
 });
 test('unknown brands fail gracefully and external text is escaped',()=>{
  const {context,node,run}=setup('?brand=unknown');run('brand.js');assert.match(node('#brand-page').innerHTML,/Brand not found/);assert.equal(vm.runInContext(`esc('<script>"&')`,context),'&lt;script&gt;&quot;&amp;');
+});
+
+test('ratings preserve tenths, distinguish missing from zero, and reject invalid precision',()=>{
+ const {context,node,run}=setup();
+ assert.equal(vm.runInContext(`ratingFields.every(f=>validRating(null,f)&&validRating(f.min,f)&&validRating(f.max,f)&&validRating(3.7,f)&&!validRating(3.75,f)&&!validRating(f.max+0.1,f)&&!validRating('3.7',f)&&!validRating(NaN,f))`,context),true);
+ const profile=vm.runInContext(`sensoryMarkup({sweetness:0,tartness:3.7,dryness:null,alertness:{effect:'Slight lift',context:'<script>',jitters:'None'}})`,context);
+ assert.match(profile,/0.0 <small>/);assert.match(profile,/3.7 <small>/);assert.match(profile,/Not rated/);assert.match(profile,/&lt;script&gt;/);assert(!profile.includes('<script>'));
+ run('app.js');node('#about-button').handlers.click();assert(node('#review-dialog').open);assert.match(node('#dialog-content').innerHTML,/not an average or a weighted formula/);assert.match(node('#dialog-content').innerHTML,/0.1 increments/);node('.close-dialog').handlers.click();assert(!node('#review-dialog').open);
+ const brand=setup('?brand=monster');brand.run('brand.js');brand.node('#about-button').handlers.click();assert.match(brand.node('#dialog-content').innerHTML,/One verdict. Three dimensions/);
 });

@@ -28,3 +28,13 @@ Typography loads from Google Fonts, with system-font fallbacks.
 ## Checks
 
 Run `node --test tests/catalogue.test.cjs` before publishing data or UI changes. Images live in `assets/drinks/` and are lazy-loaded, optimized WebP files.
+
+## Rating rubric
+
+`score` is the displayed **Overall**: a subjective 1.0–10.0 verdict, in 0.1 increments. It is informed by taste and the sensory profile, not computed from a formula. Rankings use this value.
+
+`sweetness`, `tartness`, and `dryness` are independent intensity values from 0.0–5.0, in 0.1 increments. Use `null` for unrecorded values; 0 means explicitly tasted and absent. All numeric ratings display one decimal. There are no finish or carbonation rating fields.
+
+`alertness` is `null` or an object with `effect` (No noticeable change / Slight lift / Clear lift), `context` (caffeine consumed, time, prior caffeine, sleep, observation time), and optional `jitters`. It does not contribute numerically to Overall. Do not invent observations. Existing sample scores remain labeled; the new fields are empty pending actual tastings. When publishing a real review, set `sampleReview: false`.
+
+The shared `scoringGuideMarkup()` in `data.js` supplies the guide on both catalogue and brand pages. `ratingFields` defines ranges and 0.1 steps; `validRating()` validates data during tests.
