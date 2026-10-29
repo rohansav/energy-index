@@ -8,7 +8,7 @@ Run `node scripts/build.cjs`, then `python3 -m http.server 4173 --directory dist
 
 ## Edit reviews
 
-Open `/admin/` and sign in with GitHub once the authentication service is connected. Choose a drink, select Overall, Sweetness, Tartness and Dryness in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
+Open `/admin/` and sign in with GitHub using the connected Netlify OAuth provider. Choose a drink, select Overall, Sweetness, Tartness and Dryness in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
 
 Review content lives in `reviews/<drink-id>.json`. Product names, IDs, photos and catalogue provenance live in `data.js`; don't edit ratings there. The build converts review dropdown strings into numeric values and merges only the four ratings and written notes. Blank ratings become null. Unknown IDs, changed identities and invalid scores fail the build, leaving the previous deployment live.
 
@@ -45,6 +45,6 @@ The shared `scoringGuideMarkup()` in `data.js` supplies the guide on both catalo
 
 Edit the existing `reviews/<drink-id>.json` file locally or in GitHub. `score` means Overall (1.0–10.0); sweetness, tartness and dryness use 0.0–5.0. Use tenths, or null for unrecorded values. `notes` is the short summary; `body` is the full review. Keep id, brand and name unchanged. Commit to main to publish. Rankings reorder automatically by Overall, then alphabetically for ties and unrated drinks.
 
-## Authentication setup (pending)
+## Authentication
 
-The editor deliberately disables login until `admin/auth-config.js` is configured. No secret belongs in this public repository. See `admin/SETUP.md`. The public catalogue stays on GitHub Pages.
+GitHub OAuth uses the Netlify project `brilliant-pavlova-12976b`. Public configuration is in `admin/auth-config.js`; the client secret stays in Netlify provider settings. See `admin/SETUP.md` for recovery instructions. The public catalogue stays on GitHub Pages.

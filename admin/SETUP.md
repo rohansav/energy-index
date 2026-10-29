@@ -2,7 +2,7 @@
 
 Editor: https://rohansav.github.io/energy-index/admin/
 
-The editor is implemented, but authenticated publishing cannot work until an OAuth provider is configured. The current setup page is intentional; there is no fake login or client-side password protection.
+GitHub OAuth is configured through Netlify project `brilliant-pavlova-12976b` (site ID `506dfa99-f4e7-4638-a16c-1f59bb01529d`). GitHub OAuth application: Energy Index Editor (3976113). The client secret lives only in Netlify provider settings. The instructions below document how to recreate the setup.
 
 ## Netlify authentication provider
 
