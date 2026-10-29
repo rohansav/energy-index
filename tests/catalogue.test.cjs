@@ -15,7 +15,7 @@ function setup(search=''){
 test('catalogue entries have stable unique IDs, official sources, local photos and valid review states',()=>{
  const {context}=setup();const ds=vm.runInContext('drinks',context);
  assert(ds.length>=150);assert.equal(new Set(ds.map(d=>d.id)).size,ds.length);
- const approved=['monsterenergy.com','celsius.com','bloomnu.com','redbull.com','drinkghost.com','alaninu.com'];
+ const approved=['monsterenergy.com','celsius.com','bloomnu.com','redbull.com','drinkghost.com','alaninu.com','bevnet.com'];
  for(const d of ds){assert(approved.some(h=>new URL(d.source).hostname===h||new URL(d.source).hostname.endsWith('.'+h)),d.id);assert(d.image?.startsWith('assets/drinks/'),d.id);assert(fs.statSync(path.join(root,d.image)).size>1000,d.id);assert(d.imageWidth>0&&d.imageWidth<=320);assert(d.imageHeight>0&&d.imageHeight<=480);assert(d.score===null||d.score>=0&&d.score<=10);for(const f of vm.runInContext('ratingFields',context))assert(vm.runInContext(`validRating(${JSON.stringify(d[f.key])},ratingFields.find(f=>f.key==='${f.key}'))`,context),d.id+' '+f.key);}
  assert(ds.every(d=>!('sampleReview' in d)));
 });

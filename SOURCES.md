@@ -5,13 +5,13 @@ Snapshot checked October 29, 2026. Scope: ready-to-drink energy products in the 
 | Brand | Entries | Primary catalogue |
 | --- | ---: | --- |
 | Monster | 52 | https://www.monsterenergy.com/en-us/products/ |
-| Celsius | 37 | https://www.celsius.com/products/ |
+| Celsius | 38 | https://www.celsius.com/products/ |
 | Bloom | 10 | https://bloomnu.com/products/sparkling-energy |
 | Red Bull | 20 | https://www.redbull.com/us-en/energydrink |
 | Ghost | 24 | https://drinkghost.com/collections/energy |
 | Alani | 17 | https://www.alaninu.com/collections/energy |
 
-**Total: 160 flavors/formulations.**
+**Total: 161 flavors/formulations.**
 
 ## Inclusion and identity
 
@@ -39,3 +39,5 @@ Photos and packaging remain the property of their respective brands. Sources and
 ## Validation
 
 Run `node --test tests/catalogue.test.cjs`. Checks cover unique IDs, official source domains, local image files/dimensions, unrated sorting, the six homepage previews, full brand lists, search/filter behavior, and safe handling of missing brands.
+
+Electric Vibe — Tropical Freeze: [CELSIUS launch release](https://www.bevnet.com/pr/2026/04/23/celsius-launches-limitededition-electric-vibe-a-sparkling-tropical-freeze-flavor-inspired-by-soccer-culture); photo from [Target](https://www.target.com/p/-/A-1009093154). Added October 29, 2026 as an unrated limited edition.

@@ -1157,6 +1157,32 @@ const drinks=[
     "aliases": []
   },
   {
+    "id": "celsius-electric-vibe",
+    "brand": "Celsius",
+    "name": "Electric Vibe — Tropical Freeze",
+    "line": "Celsius",
+    "source": "https://www.bevnet.com/pr/2026/04/23/celsius-launches-limitededition-electric-vibe-a-sparkling-tropical-freeze-flavor-inspired-by-soccer-culture",
+    "imageSource": "https://target.scene7.com/is/image/Target/GUEST_39adee54-0e21-430a-a6c0-0cc8f0a8ed9e",
+    "status": "limited",
+    "checkedAt": "2026-10-29",
+    "score": null,
+    "sweetness": null,
+    "tartness": null,
+    "dryness": null,
+    "alertness": null,
+    "image": "assets/drinks/celsius-electric-vibe.webp",
+    "imageWidth": 134,
+    "imageHeight": 387,
+    "notes": "Sparkling Tropical Freeze · Limited edition",
+    "body": "A limited-edition Celsius release introduced in April 2026. The brand describes pineapple, orange, cherry and grape notes. This flavor has not been personally reviewed yet.",
+    "aliases": [
+      "Sparkling Electric Vibe",
+      "Electric Vibe",
+      "Tropical Freeze"
+    ],
+    "statusNote": "Limited edition released in the US and Canada while supplies last; local availability may vary."
+  },
+  {
     "id": "celsius-sparkling-green-apple-cherry",
     "brand": "Celsius",
     "name": "Sparkling Green Apple Cherry",
