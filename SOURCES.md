@@ -20,7 +20,7 @@ Snapshot checked October 29, 2026. Scope: ready-to-drink energy products in the 
 - A flavor exclusive to a mini can is included. Larger/smaller packs of an already-listed flavor are not duplicated.
 - Ghost's beverage site is linked from the official Ghost Lifestyle site. Monster's official drinkmonster.com mirror was used to retrieve its public catalogue when the main domain did not serve the request.
 - Red Bull Sudachi Lime regular was verified on its individual US product page in addition to the catalogue's sugarfree listing.
-- Product marketing claims were not treated as personal tasting evidence. Existing illustrative critiques are marked `sampleReview: true`; every new entry has `score: null`.
+All illustrative ratings and critiques have been removed; personal ratings are entered separately from researched product data.
 
 ## Availability
 
