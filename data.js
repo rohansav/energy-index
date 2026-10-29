@@ -3518,9 +3518,11 @@ const scoreBands=[
 ];
 const scoreBand=score=>score===null?null:scoreBands.find(b=>score>=b.min);
 function scoreColor(score){
- const value=Math.max(1,Math.min(10,score));
- const hue=value<=5?(value-1)*15:60+(value-5)*12;
- return `hsl(${hue.toFixed(1)} 78% 34%)`;
+ const stops=[[4,0,78,42],[5,20,85,36],[6,32,88,41],[7,50,85,37],[8,72,75,35],[9,105,65,34],[10,135,70,30]];
+ const value=Math.max(4,Math.min(10,score));
+ const i=Math.min(stops.length-2,Math.floor(value)-4),lo=stops[i],hi=stops[i+1],t=value-lo[0];
+ const [h,s,l]=lo.slice(1).map((v,j)=>v+(hi[j+1]-v)*t);
+ return `hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}%)`;
 }
 function scoreMarkup(d,mode='full'){
  const band=scoreBand(d.score);
