@@ -48,7 +48,7 @@ test('ratings preserve tenths, distinguish missing from zero, and reject invalid
  const profile=vm.runInContext(`sensoryMarkup({sweetness:0,tartness:3.7,dryness:null,alertness:{effect:'Slight lift',context:'<script>',jitters:'None'}})`,context);
  assert.match(profile,/0.0 <small>/);assert.match(profile,/3.7 <small>/);assert.match(profile,/Not rated/);assert.match(profile,/&lt;script&gt;/);assert(!profile.includes('<script>'));
  run('app.js');node('#about-button').handlers.click();assert(node('#review-dialog').open);assert.match(node('#dialog-content').innerHTML,/not an average or a weighted formula/);assert.match(node('#dialog-content').innerHTML,/0.1 increments/);node('.close-dialog').handlers.click();assert(!node('#review-dialog').open);
- const brand=setup('?brand=monster');brand.run('brand.js');brand.node('#about-button').handlers.click();assert.match(brand.node('#dialog-content').innerHTML,/One verdict. Three dimensions/);
+ const brand=setup('?brand=monster');brand.run('brand.js');brand.node('#about-button').handlers.click();assert.match(brand.node('#dialog-content').innerHTML,/Energy · 0.0–5.0/);
 });
 
 test('real ratings drive rankings and reviewed labels without changing unrelated entries',()=>{
