@@ -51,7 +51,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-zero-sugar",
@@ -72,7 +73,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-vanilla-shot",
@@ -93,7 +95,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-zero-sugar-vanilla-shot",
@@ -114,7 +117,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-lando-norris",
@@ -135,7 +139,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-strawberry-shot",
@@ -156,7 +161,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-zero-sugar-strawberry-shot",
@@ -177,7 +183,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-electric-blue",
@@ -198,7 +205,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-orange-dreamsicle",
@@ -219,7 +227,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-lo-carb",
@@ -240,7 +249,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-reserve-orange-dreamsicle",
@@ -263,7 +273,8 @@ const drinks=[
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed in the official US catalogue, but discontinuation reports conflict with that listing. Local stock may be residual.",
     "statusSource": "https://www.historyoasis.com/post/discontinued-monster-energy-flavors",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-reserve-peaches-n-creme",
@@ -286,7 +297,8 @@ const drinks=[
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed in the official US catalogue, but discontinuation reports conflict with that listing. Local stock may be residual.",
     "statusSource": "https://www.historyoasis.com/post/discontinued-monster-energy-flavors",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-nitro-super-dry",
@@ -309,7 +321,8 @@ const drinks=[
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed by Monster. September 2026 reporting says US distribution is being phased out before 2027; remaining stock may vary.",
     "statusSource": "https://sporked.com/article/heres-all-12-monster-energy-drinks-being-discontinued-by-2027/",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-super-premium-import",
@@ -330,7 +343,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Original · US catalogue",
     "body": "Listed in Monster’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-zero-ultra-white-monster",
@@ -353,7 +367,8 @@ const drinks=[
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Ultra White"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "monster-ultra-red-white-blue-razz",
@@ -375,7 +390,8 @@ const drinks=[
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-punk-punch",
@@ -396,7 +412,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-blue-hawaiian",
@@ -417,7 +434,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-vice-guava",
@@ -438,7 +456,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-wild-passion",
@@ -459,7 +478,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-strawberry-dreams",
@@ -480,7 +500,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-sunrise",
@@ -503,7 +524,8 @@ const drinks=[
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Ultra Sunrise"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "monster-ultra-violet",
@@ -524,7 +546,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-peachy-keen",
@@ -545,7 +568,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-fantasy-ruby-red",
@@ -568,7 +592,8 @@ const drinks=[
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed by Monster. September 2026 reporting says US distribution is being phased out before 2027; remaining stock may vary.",
     "statusSource": "https://sporked.com/article/heres-all-12-monster-energy-drinks-being-discontinued-by-2027/",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-paradise",
@@ -591,7 +616,8 @@ const drinks=[
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Ultra Paradise"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "monster-ultra-fiesta-mango",
@@ -612,7 +638,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-watermelon",
@@ -635,7 +662,8 @@ const drinks=[
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed in the official US catalogue, but discontinuation reports conflict with that listing. Local stock may be residual.",
     "statusSource": "https://www.historyoasis.com/post/discontinued-monster-energy-flavors",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-rosa",
@@ -658,7 +686,8 @@ const drinks=[
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed in the official US catalogue, but discontinuation reports conflict with that listing. Local stock may be residual.",
     "statusSource": "https://www.historyoasis.com/post/discontinued-monster-energy-flavors",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-red",
@@ -681,7 +710,8 @@ const drinks=[
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed in the official US catalogue, but discontinuation reports conflict with that listing. Local stock may be residual.",
     "statusSource": "https://www.historyoasis.com/post/discontinued-monster-energy-flavors",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-blue",
@@ -702,7 +732,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-ultra-black",
@@ -723,7 +754,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Ultra · US catalogue",
     "body": "Listed in Monster’s US Ultra range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-java-dubai-chocolate",
@@ -744,7 +776,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Coffee + Energy · US catalogue",
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-java-mean-bean",
@@ -765,7 +798,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Coffee + Energy · US catalogue",
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-java-loca-moca",
@@ -786,7 +820,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Coffee + Energy · US catalogue",
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-java-salted-caramel",
@@ -807,7 +842,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Coffee + Energy · US catalogue",
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-java-cafe-latte",
@@ -830,7 +866,8 @@ const drinks=[
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed by Monster. September 2026 reporting says US distribution is being phased out before 2027; remaining stock may vary.",
     "statusSource": "https://sporked.com/article/heres-all-12-monster-energy-drinks-being-discontinued-by-2027/",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-java-irish-creme",
@@ -853,7 +890,8 @@ const drinks=[
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed by Monster. September 2026 reporting says US distribution is being phased out before 2027; remaining stock may vary.",
     "statusSource": "https://sporked.com/article/heres-all-12-monster-energy-drinks-being-discontinued-by-2027/",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-killer-brew-loca-moca",
@@ -874,7 +912,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Coffee + Energy · US catalogue",
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-killer-brew-mean-bean",
@@ -895,7 +934,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Coffee + Energy · US catalogue",
     "body": "Listed in Monster’s US Coffee + Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-juice-mango-loco",
@@ -918,7 +958,8 @@ const drinks=[
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Mango Loco"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "monster-juice-voodoo-grape",
@@ -939,7 +980,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Juice · US catalogue",
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-juice-strawberry-lemonade",
@@ -961,7 +1003,8 @@ const drinks=[
     "notes": "Juice · US catalogue",
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-juice-pacific-punch",
@@ -982,7 +1025,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Juice · US catalogue",
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-juice-viking-berry",
@@ -1003,7 +1047,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Juice · US catalogue",
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-juice-bad-apple",
@@ -1024,7 +1069,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Juice · US catalogue",
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-juice-rio-punch",
@@ -1047,7 +1093,8 @@ const drinks=[
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed by Monster. September 2026 reporting says US distribution is being phased out before 2027; remaining stock may vary.",
     "statusSource": "https://sporked.com/article/heres-all-12-monster-energy-drinks-being-discontinued-by-2027/",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-juice-pipeline-punch",
@@ -1068,7 +1115,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Juice · US catalogue",
     "body": "Listed in Monster’s US Juice range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-rehab-tea-lemonade",
@@ -1089,7 +1137,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Rehab · US catalogue",
     "body": "Listed in Monster’s US Rehab range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-rehab-peach-tea",
@@ -1110,7 +1159,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Rehab · US catalogue",
     "body": "Listed in Monster’s US Rehab range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-rehab-wild-berry-tea",
@@ -1131,7 +1181,8 @@ const drinks=[
     "imageHeight": 370,
     "notes": "Rehab · US catalogue",
     "body": "Listed in Monster’s US Rehab range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "monster-rehab-green-tea",
@@ -1154,7 +1205,8 @@ const drinks=[
     "body": "Listed in Monster’s US Rehab range. This flavor has not been personally reviewed yet.",
     "statusNote": "Still listed by Monster. September 2026 reporting says US distribution is being phased out before 2027; remaining stock may vary.",
     "statusSource": "https://sporked.com/article/heres-all-12-monster-energy-drinks-being-discontinued-by-2027/",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-electric-vibe",
@@ -1180,7 +1232,8 @@ const drinks=[
       "Electric Vibe",
       "Tropical Freeze"
     ],
-    "statusNote": "Limited edition released in the US and Canada while supplies last; local availability may vary."
+    "statusNote": "Limited edition released in the US and Canada while supplies last; local availability may vary.",
+    "energy": null
   },
   {
     "id": "celsius-sparkling-green-apple-cherry",
@@ -1201,7 +1254,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-fantasy-vibe",
@@ -1222,7 +1276,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-arctic-vibe",
@@ -1245,7 +1300,8 @@ const drinks=[
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Arctic Vibe"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-mango-passionfruit",
@@ -1266,7 +1322,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-tropical-vibe",
@@ -1289,7 +1346,8 @@ const drinks=[
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Tropical Vibe"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-peach-vibe",
@@ -1312,7 +1370,8 @@ const drinks=[
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Peach Vibe"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-fuji-apple-pear",
@@ -1333,7 +1392,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-orange",
@@ -1356,7 +1416,8 @@ const drinks=[
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Orange"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-kiwi-guava",
@@ -1377,7 +1438,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-wild-berry",
@@ -1398,7 +1460,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-watermelon",
@@ -1419,7 +1482,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-grape-rush",
@@ -1440,7 +1504,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-cola",
@@ -1461,7 +1526,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-fizz-free-peach-mango-green-tea",
@@ -1482,7 +1548,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-spritz-vibe-winter-edition",
@@ -1504,7 +1571,8 @@ const drinks=[
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-spritz-vibe-summer-edition",
@@ -1526,7 +1594,8 @@ const drinks=[
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-strawberry-passionfruit",
@@ -1547,7 +1616,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-mango-lemonade",
@@ -1568,7 +1638,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-fizz-free-pink-lemonade",
@@ -1589,7 +1660,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-fizz-free-dragon-fruit-lime",
@@ -1610,7 +1682,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-playa-vibe",
@@ -1631,7 +1704,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-retro-vibe",
@@ -1652,7 +1726,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-cherry-cola",
@@ -1673,7 +1748,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-kiwi-strawberry",
@@ -1694,7 +1770,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-watermelon-lemonade",
@@ -1715,7 +1792,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-raspberry-peach",
@@ -1736,7 +1814,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-galaxy-vibe",
@@ -1757,7 +1836,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-astro-vibe",
@@ -1778,7 +1858,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-fizz-free-blue-razz-lemonade",
@@ -1799,7 +1880,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-cosmic-vibe",
@@ -1820,7 +1902,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-sparkling-oasis-vibe",
@@ -1841,7 +1924,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Celsius · US catalogue",
     "body": "Listed in Celsius’s US Celsius range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-essentials-orangesicle",
@@ -1862,7 +1946,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Essentials · US catalogue",
     "body": "Listed in Celsius’s US Essentials range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-essentials-grape-slush",
@@ -1883,7 +1968,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Essentials · US catalogue",
     "body": "Listed in Celsius’s US Essentials range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-essentials-watermelon-ice",
@@ -1904,7 +1990,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Essentials · US catalogue",
     "body": "Listed in Celsius’s US Essentials range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-essentials-blue-crush",
@@ -1925,7 +2012,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Essentials · US catalogue",
     "body": "Listed in Celsius’s US Essentials range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-essentials-cherry-limeade",
@@ -1946,7 +2034,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Essentials · US catalogue",
     "body": "Listed in Celsius’s US Essentials range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "celsius-essentials-dragonberry",
@@ -1967,7 +2056,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Essentials · US catalogue",
     "body": "Listed in Celsius’s US Essentials range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "bloom-pear-scare",
@@ -1989,7 +2079,8 @@ const drinks=[
     "notes": "Sparkling Energy · US catalogue",
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "bloom-crisp-apple",
@@ -2010,7 +2101,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Sparkling Energy · US catalogue",
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "bloom-strawberry-watermelon",
@@ -2033,7 +2125,8 @@ const drinks=[
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Strawberry Watermelon"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "bloom-shirley-temple",
@@ -2054,7 +2147,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Sparkling Energy · US catalogue",
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "bloom-raspberry-lemon",
@@ -2077,7 +2171,8 @@ const drinks=[
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Raspberry Lemon"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "bloom-glacier-crush",
@@ -2098,7 +2193,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Sparkling Energy · US catalogue",
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "bloom-peach-mango",
@@ -2121,7 +2217,8 @@ const drinks=[
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Peach Mango"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "bloom-cherry-lime",
@@ -2144,7 +2241,8 @@ const drinks=[
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Cherry Lime"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "bloom-juicy-orange",
@@ -2165,7 +2263,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Sparkling Energy · US catalogue",
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "bloom-strawberry-rose",
@@ -2187,7 +2286,8 @@ const drinks=[
     "notes": "Sparkling Energy · US catalogue",
     "body": "Listed in Bloom’s US Sparkling Energy range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-voodoo-vanilla",
@@ -2209,7 +2309,8 @@ const drinks=[
     "notes": "Energy Mini · US catalogue",
     "body": "Listed in Alani’s US Energy Mini range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-witch-s-brew",
@@ -2231,7 +2332,8 @@ const drinks=[
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-purple-cotton-candy",
@@ -2252,7 +2354,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-strawberry-sunrise",
@@ -2273,7 +2376,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-cotton-candy",
@@ -2294,7 +2398,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-sherbet-swirl",
@@ -2315,7 +2420,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-blue-slush",
@@ -2336,7 +2442,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-watermelon-wave",
@@ -2357,7 +2464,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-hawaiian-shaved-ice",
@@ -2380,7 +2488,8 @@ const drinks=[
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Hawaiian Shaved Ice"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "alani-pink-slush",
@@ -2401,7 +2510,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-orange-kiss",
@@ -2422,7 +2532,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-cherry-twist",
@@ -2443,7 +2554,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-juicy-peach",
@@ -2464,7 +2576,8 @@ const drinks=[
     "imageHeight": 359,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-dream-float",
@@ -2485,7 +2598,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "alani-cosmic-stardust",
@@ -2508,7 +2622,8 @@ const drinks=[
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Cosmic Stardust"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "alani-cherry-slush",
@@ -2531,7 +2646,8 @@ const drinks=[
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Cherry Slush"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "alani-breezeberry",
@@ -2554,7 +2670,8 @@ const drinks=[
     "body": "Listed in Alani’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Breezeberry"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "ghost-sour-strips-appleberry",
@@ -2575,7 +2692,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-a-w-root-beer",
@@ -2596,7 +2714,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-bubblicious-strawberry-splash",
@@ -2617,7 +2736,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-bubblicious-original",
@@ -2638,7 +2758,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-7up-lemon-lime-soda",
@@ -2659,7 +2780,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-strawberry-watermelon",
@@ -2680,7 +2802,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy Half Can · US catalogue",
     "body": "Listed in Ghost’s US Energy Half Can range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-og-colada",
@@ -2701,7 +2824,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy Half Can · US catalogue",
     "body": "Listed in Ghost’s US Energy Half Can range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-blue-raspberry",
@@ -2722,7 +2846,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-sour-strips-rainbow",
@@ -2743,7 +2868,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-raspberry-cream",
@@ -2764,7 +2890,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-og",
@@ -2785,7 +2912,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-iced-tea-lemonade",
@@ -2806,7 +2934,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-peaches",
@@ -2827,7 +2956,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-merica-pop",
@@ -2848,7 +2978,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-strawbango",
@@ -2869,7 +3000,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-welch-s-grape",
@@ -2890,7 +3022,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-electric-limeade",
@@ -2911,7 +3044,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-warheads-sour-watermelon",
@@ -2934,7 +3068,8 @@ const drinks=[
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Sour Watermelon"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "ghost-warheads-sour-green-apple",
@@ -2955,7 +3090,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-tropical-mango",
@@ -2976,7 +3112,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-sour-pink-lemonade",
@@ -2999,7 +3136,8 @@ const drinks=[
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Sour Pink Lemonade"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "ghost-citrus",
@@ -3020,7 +3158,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Energy · US catalogue",
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "ghost-orange-cream",
@@ -3043,7 +3182,8 @@ const drinks=[
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Orange Cream"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "ghost-cherry-limeade",
@@ -3066,7 +3206,8 @@ const drinks=[
     "body": "Listed in Ghost’s US Energy range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Cherry Limeade"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "red-bull-pistachio-berries-winter-edition",
@@ -3088,7 +3229,8 @@ const drinks=[
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-fuji-apple-ginger-apple-edition",
@@ -3109,7 +3251,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-iced-vanilla-berry-iced-edition",
@@ -3130,7 +3273,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-white-peach-peach-edition",
@@ -3151,7 +3295,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-wild-berries-pink-edition",
@@ -3172,7 +3317,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-strawberry-apricot-amber-edition",
@@ -3193,7 +3339,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-juneberry-sea-blue-edition",
@@ -3214,7 +3361,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-coconut-berry-coconut-edition",
@@ -3235,7 +3383,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-tropical-yellow-edition",
@@ -3258,7 +3407,8 @@ const drinks=[
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Tropical"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "red-bull-watermelon-red-edition",
@@ -3281,7 +3431,8 @@ const drinks=[
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Watermelon"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "red-bull-the-original",
@@ -3304,7 +3455,8 @@ const drinks=[
     "body": "Listed in Red Bull’s US Original range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "The Original"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "red-bull-zero",
@@ -3325,7 +3477,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Original · US catalogue",
     "body": "Listed in Red Bull’s US Original range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-sugarfree",
@@ -3348,7 +3501,8 @@ const drinks=[
     "body": "Listed in Red Bull’s US Original range. This flavor has not been personally reviewed yet.",
     "aliases": [
       "Sugarfree"
-    ]
+    ],
+    "energy": null
   },
   {
     "id": "red-bull-pistachio-berries-sugarfree-winter-edition",
@@ -3370,7 +3524,8 @@ const drinks=[
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-sudachi-lime-sugarfree-summer-edition",
@@ -3392,7 +3547,8 @@ const drinks=[
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-iced-vanilla-berry-sugarfree-iced-edition",
@@ -3413,7 +3569,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-white-peach-sugarfree-peach-edition",
@@ -3434,7 +3591,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-wild-berries-sugarfree-pink-edition",
@@ -3455,7 +3613,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-juneberry-sugarfree-sea-blue-edition",
@@ -3476,7 +3635,8 @@ const drinks=[
     "imageHeight": 480,
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   },
   {
     "id": "red-bull-sudachi-lime-summer-edition",
@@ -3498,7 +3658,8 @@ const drinks=[
     "notes": "Editions · US catalogue",
     "body": "Listed in Red Bull’s US Editions range. This flavor has not been personally reviewed yet.",
     "statusNote": "Limited or seasonal listing; availability varies and the product page may outlast store stock.",
-    "aliases": []
+    "aliases": [],
+    "energy": null
   }
 ];
 const brandSlug=name=>name.toLowerCase().replaceAll(' ','-');
@@ -3535,22 +3696,24 @@ function sourceDetails(d){return `<dl class="source-facts"><div><dt>Product line
 const ratingFields = [
  {key:'score', label:'Overall', min:1, max:10, step:0.1},
  {key:'sweetness', label:'Sweetness', min:0, max:5, step:0.1},
- {key:'tartness', label:'Tartness', min:0, max:5, step:0.1},
- {key:'dryness', label:'Dryness', min:0, max:5, step:0.1}
+ {key:'tartness', label:'Sourness', min:0, max:5, step:0.1},
+ {key:'dryness', label:'Dryness', min:0, max:5, step:0.1},
+ {key:'energy', label:'Energy', min:0, max:5, step:0.1}
 ];
 function validRating(value, field){
  return value===null || (typeof value==='number' && Number.isFinite(value) && value>=field.min && value<=field.max && Math.abs(value*10-Math.round(value*10))<1e-8);
 }
 function sensoryMarkup(d){
- return `<div class="sensory-profile" aria-label="Sensory intensity profile">${ratingFields.slice(1).map(f=>`<div class="sensory-metric"><span>${f.label}</span><strong>${d[f.key]===null?'Not rated':d[f.key].toFixed(1)+' <small>/ 5</small>'}</strong><div class="intensity-track" aria-hidden="true"><span style="width:${d[f.key]===null?0:d[f.key]/5*100}%"></span></div></div>`).join('')}</div><p class="profile-caption">Intensity, not quality · 0.0–5.0</p><div class="alertness-note"><span>ALERTNESS · PERSONAL OBSERVATION</span><p>${d.alertness?esc(d.alertness.effect):'Not recorded'}</p>${d.alertness?`<p class="alertness-context">${esc(d.alertness.context||'')} ${d.alertness.jitters?'Jitteriness: '+esc(d.alertness.jitters):''}</p>`:''}</div>`;
+ return `<div class="sensory-profile" aria-label="Sensory intensity profile">${ratingFields.slice(1,4).map(f=>`<div class="sensory-metric"><span>${f.label}</span><strong>${d[f.key]===null?'Not rated':d[f.key].toFixed(1)+' <small>/ 5</small>'}</strong><div class="intensity-track" aria-hidden="true"><span style="width:${d[f.key]===null?0:d[f.key]/5*100}%"></span></div></div>`).join('')}</div><p class="profile-caption">Intensity, not quality · 0.0–5.0</p><div class="alertness-note"><span>ENERGY · PERSONAL OBSERVATION</span><p>${d.energy==null?'Not rated':d.energy.toFixed(1)+' / 5'}</p>${d.alertness?`<p class="alertness-context">${esc(d.alertness.effect)} ${esc(d.alertness.context||'')} ${d.alertness.jitters?'Jitteriness: '+esc(d.alertness.jitters):''}</p>`:''}</div>`;
 }
 function scoringGuideMarkup(){return `
- <div class="eyebrow">SCORING GUIDE</div><h2 id="dialog-title">One verdict. Three dimensions.</h2>
- <p><strong>Overall</strong> is a subjective verdict on the drink as a whole: taste, informed by sweetness, tartness, dryness, and your personal experience. It is not an average or a weighted formula. Alertness stays a separate observation and is not added to the score.</p>
+ <div class="eyebrow">SCORING GUIDE</div><h2 id="dialog-title">One verdict. A fuller profile.</h2>
+ <p><strong>Overall</strong> is a subjective verdict on the drink as a whole: taste, informed by sweetness, sourness, dryness, and your personal experience. It is not an average or a weighted formula. Energy records your perceived boost separately; it is not added to Overall by a formula.</p>
  <h3>Overall · 1.0–10.0</h3><p>Scored in 0.1 increments. Higher means more enjoyable. Rankings use Overall; unrated drinks follow alphabetically.</p>
  ${scoreBands.map(b=>`<div class="scale-row"><span class="score-guide-value" style="--score-color:${scoreColor(b.min)}">${b.range}</span><span>${b.label}</span></div>`).join('')}
  <h3>The sensory profile · 0.0–5.0</h3><p>Each field uses 0.1 increments. These measure intensity, not quality: more is not automatically better. An unrecorded value is “Not rated,” never zero.</p>
- <dl class="guide-fields"><dt>Sweetness</dt><dd>How sweet it tastes, regardless of sugar content. 0.0 = none; 5.0 = extremely sweet.</dd><dt>Tartness</dt><dd>How sour or tangy it tastes. 0.0 = none; 5.0 = intensely sour.</dd><dt>Dryness</dt><dd>The mouth-drying or puckering sensation. 0.0 = none; 5.0 = strongly mouth-drying. This describes a sensation, not measured tannin content or bitterness.</dd></dl>
+ <dl class="guide-fields"><dt>Sweetness</dt><dd>How sweet it tastes, regardless of sugar content. 0.0 = none; 5.0 = extremely sweet.</dd><dt>Sourness</dt><dd>How sour or tangy it tastes. 0.0 = none; 5.0 = intensely sour.</dd><dt>Dryness</dt><dd>The mouth-drying or puckering sensation. 0.0 = none; 5.0 = strongly mouth-drying. This describes a sensation, not measured tannin content or bitterness.</dd></dl>
+ <h3>Energy · 0.0–5.0</h3><p>Your perceived boost after drinking: 0.0 = no noticeable lift, 2.5 = moderate lift, 5.0 = very strong lift. Use 0.1 increments. Leave unrecorded observations blank. This is subjective and can vary with sleep, tolerance, and prior caffeine.</p>
  <p>Use 1.0 for slight, 2.5 for moderate, and 4.0 for strong intensity as working anchors. Tenths allow finer distinctions; they do not imply laboratory precision.</p>
  <p class="sample-note">Our own rubric, informed by professional sensory practice: separating description from judgment in the <a href="https://sca.coffee/value-assessment" target="_blank" rel="noopener noreferrer">SCA Coffee Value Assessment</a>, and sweetness, sourness, and bitterness in <a href="https://www.ars.usda.gov/research/project/?accnNo=438353&fy=2023" target="_blank" rel="noopener noreferrer">USDA juice research</a>.</p>
  <p class="sample-note">Only personal ratings determine rankings. Drinks without an Overall rating are marked Unrated; unrecorded sensory values stay blank until a tasting is entered.</p>`;}

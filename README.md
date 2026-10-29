@@ -8,9 +8,9 @@ Run `node scripts/build.cjs`, then `python3 -m http.server 4173 --directory dist
 
 ## Edit reviews
 
-Open `/admin/` (which forwards to the editor on Netlify) and sign in with GitHub using the connected Netlify OAuth provider. Choose a drink, select Overall, Sweetness, Tartness and Dryness in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
+Open `/admin/` (which forwards to the editor on Netlify) and sign in with GitHub using the connected Netlify OAuth provider. Choose a drink, select Overall, Sweetness, Sourness, Dryness and Energy in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
 
-Review content lives in `reviews/<drink-id>.json`. Product names, IDs, photos and catalogue provenance live in `data.js`; don't edit ratings there. The build converts review dropdown strings into numeric values and merges only the four ratings and written notes. Blank ratings become null. Unknown IDs, changed identities and invalid scores fail the build, leaving the previous deployment live.
+Review content lives in `reviews/<drink-id>.json`. Product names, IDs, photos and catalogue provenance live in `data.js`; don't edit ratings there. The build converts review dropdown strings into numeric values and merges only the five ratings and written notes. Blank ratings become null. Unknown IDs, changed identities and invalid scores fail the build, leaving the previous deployment live.
 
 All illustrative scores and critiques have been removed. See [SOURCES.md](SOURCES.md) for catalogue provenance.
 
@@ -48,3 +48,5 @@ Edit the existing `reviews/<drink-id>.json` file locally or in GitHub. `score` m
 ## Authentication
 
 GitHub OAuth uses the Netlify project `brilliant-pavlova-12976b`. Public configuration is in `admin/auth-config.js`; the client secret stays in Netlify provider settings. See `admin/SETUP.md` for recovery instructions. The public catalogue stays on GitHub Pages.
+
+Sourness uses the existing `tartness` key to preserve ratings. Optional `energy` is a subjective 0.0–5.0 boost rating in tenths; missing values remain unrated. The admin Rated filter checks only a valid 1.0–10.0 Overall (`score`).
