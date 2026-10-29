@@ -3491,10 +3491,15 @@ const scoreBands=[
  {min:1,key:'poor',range:'1.0–2.9',label:'Extremely unpleasant'}
 ];
 const scoreBand=score=>score===null?null:scoreBands.find(b=>score>=b.min);
+function scoreColor(score){
+ const value=Math.max(1,Math.min(10,score));
+ const hue=value<=5?(value-1)*15:60+(value-5)*12;
+ return `hsl(${hue.toFixed(1)} 78% 34%)`;
+}
 function scoreMarkup(d,mode='full'){
  const band=scoreBand(d.score);
- if(mode==='compact')return d.score===null?'<span class="compact-score is-unrated">Unrated</span>':`<span class="compact-score score-${band.key}" title="${band.label}">${d.score.toFixed(1)}<small>/ 10</small></span>`;
- return d.score===null?'<div class="excerpt-rating unrated"><span>OVERALL</span><strong>Unrated</strong><span>NOT REVIEWED</span></div>':`<div class="excerpt-rating score-${band.key}" title="${band.label}"><span>OVERALL</span><strong>${d.score.toFixed(1)}</strong><span>OUT OF 10</span></div>`;
+ if(mode==='compact')return d.score===null?'<span class="compact-score is-unrated">Unrated</span>':`<span class="compact-score" style="--score-color:${scoreColor(d.score)}" title="${band.label}">${d.score.toFixed(1)}<small>/ 10</small></span>`;
+ return d.score===null?'<div class="excerpt-rating unrated"><span>OVERALL</span><strong>Unrated</strong><span>NOT REVIEWED</span></div>':`<div class="excerpt-rating" style="--score-color:${scoreColor(d.score)}" title="${band.label}"><span>OVERALL</span><strong>${d.score.toFixed(1)}</strong><span>OUT OF 10</span></div>`;
 }
 function sourceDetails(d){return `<dl class="source-facts"><div><dt>Product line</dt><dd>${esc(d.line)}</dd></div><div><dt>US availability</dt><dd>${esc(statusLabel(d.status))}</dd></div><div><dt>Catalogue checked</dt><dd>October 29, 2026</dd></div></dl>${d.statusNote?`<p class="availability-note">${esc(d.statusNote)}</p>`:''}<div class="source-links"><a href="${esc(d.source)}" target="_blank" rel="noopener noreferrer">Official product source ↗</a><a href="${esc(d.imageSource)}" target="_blank" rel="noopener noreferrer">Original brand image ↗</a>${d.statusSource?`<a href="${esc(d.statusSource)}" target="_blank" rel="noopener noreferrer">Availability reporting ↗</a>`:''}</div>`;}
 
@@ -3515,7 +3520,7 @@ function scoringGuideMarkup(){return `
  <div class="eyebrow">SCORING GUIDE</div><h2 id="dialog-title">One verdict. Three dimensions.</h2>
  <p><strong>Overall</strong> is a subjective verdict on the drink as a whole: taste, informed by sweetness, tartness, dryness, and your personal experience. It is not an average or a weighted formula. Alertness stays a separate observation and is not added to the score.</p>
  <h3>Overall · 1.0–10.0</h3><p>Scored in 0.1 increments. Higher means more enjoyable. Rankings use Overall; unrated drinks follow alphabetically.</p>
- ${scoreBands.map(b=>`<div class="scale-row"><span class="score-guide-value score-${b.key}">${b.range}</span><span>${b.label}</span></div>`).join('')}
+ ${scoreBands.map(b=>`<div class="scale-row"><span class="score-guide-value" style="--score-color:${scoreColor(b.min)}">${b.range}</span><span>${b.label}</span></div>`).join('')}
  <h3>The sensory profile · 0.0–5.0</h3><p>Each field uses 0.1 increments. These measure intensity, not quality: more is not automatically better. An unrecorded value is “Not rated,” never zero.</p>
  <dl class="guide-fields"><dt>Sweetness</dt><dd>How sweet it tastes, regardless of sugar content. 0.0 = none; 5.0 = extremely sweet.</dd><dt>Tartness</dt><dd>How sour or tangy it tastes. 0.0 = none; 5.0 = intensely sour.</dd><dt>Dryness</dt><dd>The mouth-drying or puckering sensation. 0.0 = none; 5.0 = strongly mouth-drying. This describes a sensation, not measured tannin content or bitterness.</dd></dl>
  <p>Use 1.0 for slight, 2.5 for moderate, and 4.0 for strong intensity as working anchors. Tenths allow finer distinctions; they do not imply laboratory precision.</p>
