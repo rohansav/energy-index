@@ -4,17 +4,19 @@ An energy drink catalogue with brand rankings and review excerpts. Built with pl
 
 ## Preview locally
 
-Run `python3 -m http.server 4173` in this directory, then open http://localhost:4173.
+Run `node scripts/build.cjs`, then `python3 -m http.server 4173 --directory dist`. Open http://localhost:4173.
 
 ## Edit reviews
 
-Edit `data.js`. Each drink entry contains a stable ID, name, score (or `null` when unrated), product line, availability, source links, image metadata, and optional review excerpt. The homepage shows the top four drinks per brand; brand pages show every review, ordered by score.
+Open `/admin/` and sign in with GitHub once the authentication service is connected. Choose a drink, select Overall, Sweetness, Tartness and Dryness in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
 
-The 160-entry US catalogue uses official product photos. All illustrative scores and critiques have been removed. Drinks remain unrated until a personal rating is entered. See [SOURCES.md](SOURCES.md) for coverage, availability caveats, and image provenance.
+Review content lives in `reviews/<drink-id>.json`. Product names, IDs, photos and catalogue provenance live in `data.js`; don't edit ratings there. The build converts review dropdown strings into numeric values and merges only the four ratings and written notes. Blank ratings become null. Unknown IDs, changed identities and invalid scores fail the build, leaving the previous deployment live.
+
+All illustrative scores and critiques have been removed. See [SOURCES.md](SOURCES.md) for catalogue provenance.
 
 ## Publishing
 
-GitHub Pages publishes the root directory of the `main` branch. Push changes to `main` to update the public site. Files in this repository, including review data, are public. Do not commit secrets or private drafts.
+GitHub Pages publishes the validated `dist/` artifact from `.github/workflows/pages.yml`. Push changes to `main` to update the public site. Files in this repository, including review data, are public. Do not commit secrets or private drafts.
 
 - `index.html`: catalogue landing page
 - `brand.html`: brand review page
@@ -27,7 +29,7 @@ Typography loads from Google Fonts, with system-font fallbacks.
 
 ## Checks
 
-Run `node --test tests/catalogue.test.cjs` before publishing data or UI changes. Images live in `assets/drinks/` and are lazy-loaded, optimized WebP files.
+Run `node --test tests/*.test.cjs` before publishing data or UI changes. Images live in `assets/drinks/` and are lazy-loaded, optimized WebP files.
 
 ## Rating rubric
 
@@ -39,13 +41,10 @@ Run `node --test tests/catalogue.test.cjs` before publishing data or UI changes.
 
 The shared `scoringGuideMarkup()` in `data.js` supplies the guide on both catalogue and brand pages. `ratingFields` defines ranges and 0.1 steps; `validRating()` validates data during tests.
 
-## Publish a rating
+## Manual rating updates
 
-1. Open `data.js` locally, or open it on GitHub and choose Edit (the pencil).
-2. Search for the drink's `id` or exact `name`. Edit that existing entry only.
-3. Set `score` to your Overall (1.0–10.0), and `sweetness`, `tartness`, `dryness` to your intensities (0.0–5.0). All accept tenths. Keep missing values `null`, without quotes.
-4. Set `notes` to a short summary and `body` to your critique. Leave product IDs, photos, and source links unchanged. Alertness is optional.
-5. Locally, run `node --test tests/catalogue.test.cjs`, then commit and push to `main`. In GitHub's editor, choose Commit changes to `main`.
-6. GitHub Pages publishes the change automatically. The brand rankings and homepage previews reorder by Overall, highest first; ties sort alphabetically. No manual rank field is needed.
+Edit the existing `reviews/<drink-id>.json` file locally or in GitHub. `score` means Overall (1.0–10.0); sweetness, tartness and dryness use 0.0–5.0. Use tenths, or null for unrecorded values. `notes` is the short summary; `body` is the full review. Keep id, brand and name unchanged. Commit to main to publish. Rankings reorder automatically by Overall, then alphabetically for ties and unrated drinks.
 
-You can also send the drink name, four ratings, and notes in this chat to have the entry updated and published. There is no on-site rating editor at present.
+## Authentication setup (pending)
+
+The editor deliberately disables login until `admin/auth-config.js` is configured. No secret belongs in this public repository. See `admin/SETUP.md`. The public catalogue stays on GitHub Pages.
