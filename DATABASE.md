@@ -2,13 +2,14 @@
 
 ## Status
 
-PostgreSQL storage is implemented and tested. All six brands and 161 products with
-their editorial review records have been migrated and verified in a **local**
-PostgreSQL database. This is not a production cutover. The hosted site and existing
-Decap editor still use Git files until a hosted database and server-side editor
-connection are configured together.
+Production storage is AWS RDS PostgreSQL in `us-east-1`. All six brands and 161
+products/review records were imported with exact read-back verification.
 
-No new product UI, accounts, review forms, or dashboard are part of this change.
+The existing Netlify Decap editor keeps GitHub sign-in, ratings and notes, but saves
+to an owner-authorized API instead of GitHub files. Public pages refresh their
+catalogue from the same API on load/focus. No new product features were added.
+
+See [infra/README.md](infra/README.md) for deployed infrastructure and operations.
 
 ## Storage
 
@@ -50,24 +51,21 @@ are expected once the database becomes authoritative and receives new reviews.
 `CATALOGUE_STORAGE=postgres` requires a working database; errors never silently
 fall back to old files. The default remains `files` during the cutover period.
 
-## Production cutover still required
+## Production publishing and recovery
 
-1. Connect a hosted database and a server runtime (the existing Netlify account
-   can host a server endpoint). GitHub Pages cannot run database code.
-2. Keep the existing editor UI and GitHub sign-in, but replace its Git persistence
-   with an authenticated server adapter. Verify GitHub identity and repository
-   owner authorization on the server for every write. Never send database
-   credentials to the editor. Read the review and version in one snapshot.
-3. Pause editor publishing briefly, pull the latest review files, import into the
-   hosted database, and verify all fields. The local rehearsal is not the final
-   source if reviews have since changed.
-4. Switch both reader and writer together. Do not switch only the public build:
-   Git-based editor saves would then stop appearing. With static Pages, publish
-   still needs a rebuild; a server-rendered host or public read API is needed to
-   remove per-edit builds. No such endpoint is claimed as deployed yet.
-5. Verify an authenticated save, reload, and public read before retiring file
-   publishing. Retain the last Git snapshot for recovery. After DB-only edits,
-   rolling back requires exporting those edits first; old files will be stale.
+`reviews/` and `src/data/catalogue.json` are the preserved pre-migration snapshot.
+They are not the live content store. Do not re-import them over newer DB content.
+The importer refuses to overwrite differences as an additional guard.
+
+GitHub Pages builds use `CATALOGUE_STORAGE=http` and the public API URL in repository
+variables. These are public configuration, not database credentials. Pages include
+a static snapshot for resilience and search indexing; the browser reads current
+ratings directly from PostgreSQL through the API. Code deploys still build pages;
+review publishing no longer does.
+
+RDS has seven-day automated backups. Restore to a new RDS instance, verify content,
+then update the API connection. Static HTML fallback can be stale during an API
+outage. Refresh editor tabs opened before the migration before publishing again.
 
 ## Backup and tests
 

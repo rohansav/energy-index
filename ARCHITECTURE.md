@@ -3,25 +3,22 @@
 ## Current system
 
 ```text
-src/data/catalogue.json + reviews/*.json + assets/
-                    ↓
-server/catalogue-repository.ts   (file adapter)
-server/validation.ts             (runtime schemas)
-                    ↓
-app/*/page.tsx                   (server route components)
-                    ↓
-components/                     (typed React props)
-                    ↓
-Next.js static export → GitHub Pages
+Existing Decap editor + GitHub OAuth
+                  ↓ owner-authorized API Gateway routes
+AWS Lambda → RDS PostgreSQL → public /catalogue API
+                  ↓
+Next.js routes → typed React components → GitHub Pages
+                  ↓
+Browser refreshes published data through /catalogue on load/focus
 ```
 
-The repository returns a `Catalogue` containing `Brand[]` and `Drink[]`. Each `Drink` contains product metadata and a separate normalized `Review`. Persisted review files retain their current IDs and fields so the live Decap editor continues to work unchanged.
+The repository returns a `Catalogue` containing `Brand[]` and `Drink[]`. Each `Drink` contains product metadata and a separate normalized `Review`. Persisted review records retain their existing IDs and fields.
 
 ## Boundaries
 
 - **Data:** `src/data/catalogue.json` is product metadata only. `reviews/` is editorial content. Neither contains rendering code.
 - **Domain:** types, score colors, rating rules, filtering, ordering, and content fallbacks. These pure functions do not know about React, the browser, GitHub, or filesystem APIs.
-- **Server:** reads files and validates unknown JSON. Converts Decap's decimal strings to numbers and blank/missing fields to null. No storage imports appear in client components.
+- **Server:** reads through the selected database/API adapter and validates unknown JSON. Converts Decap's decimal strings to numbers and blank/missing fields to null. No storage imports appear in client components.
 - **Routes:** load data through `CatalogueRepository`, select a brand or product, define metadata/static paths, and compose the view. Invalid routes render a not-found page.
 - **Components:** accept typed props. Shared `Score`, `ProductPhoto`, `SensoryProfile`, `ProductSources`, and `DrinkDetail` render the same content consistently in cards, rows, dialogs, and pages.
 - **Client state:** only interactive views, dialogs, image fallbacks, and the header guide use client components. Search, filters, sorting, and modal state belong to their view, not global mutable state.
@@ -31,23 +28,21 @@ React handles DOM updates and text escaping. There is no `innerHTML` templating,
 
 ## Existing editor
 
-The Netlify-hosted Decap editor uses GitHub OAuth and writes `reviews/*.json`. Its login, repository permissions, and Publish action are unchanged. The public site's Editor link and legacy `/admin/` entry point both open that editor. No new sign-in page is introduced.
+The Netlify-hosted Decap editor retains GitHub OAuth. `admin/database-backend.js`
+extends its GitHub backend for authentication while replacing review persistence
+with the AWS API. The server verifies the immutable GitHub user ID on every editor
+request. Review updates use an expected version and return 409 for stale writes.
+Database credentials never reach the browser. Media creation/deletion is disabled.
 
-Changes to editor code still need a Netlify upload; normal review publishing does not. This refactor does not redeploy or reset the live editor. Its compatible source is kept in `admin/` and is formatted for readability.
+## Storage and delivery
 
-## PostgreSQL storage
+`PostgresCatalogueRepository` provides consistent reads and transactional validated
+writes with history. The HTTP repository lets static Next.js builds read the same
+published data without DB credentials. `useLiveCatalogue` refreshes client-side
+content without triggering deployments. These transports preserve the existing
+`Catalogue`/`Drink`/`Review` shapes and rendering components.
 
-`CatalogueRepository` now has a PostgreSQL adapter in `src/server/postgres-repository.ts`.
-`CATALOGUE_STORAGE=postgres` selects it explicitly; a database error never falls back
-to files. Routes and components are unchanged. Reads use a consistent transaction;
-validated writes use optimistic versions and atomically append review history.
-
-`src/server/migrate-database.ts` applies checksummed SQL migrations and imports the
-file catalogue transactionally, verifying exact read-back equality. It refuses to
-overwrite an existing database that differs. The original file adapter remains in
-`src/server/file-catalogue.ts` for migration and the current production deployment.
-
-See [DATABASE.md](DATABASE.md) for commands, verification, backups, and the remaining
-hosted cutover. The local migration is complete; production and the editor have not
-been switched. This distinction is intentional: switching the public reader before
-the editor writer would strand new Git-based reviews.
+`file-catalogue.ts` and the original JSON files remain for migration, tests, and
+recovery reference. They no longer control live publishing. Migration scripts
+refuse to overwrite differing database records. See [DATABASE.md](DATABASE.md) and
+[infra/README.md](infra/README.md) for operations and recovery.

@@ -11,6 +11,8 @@ if (!window.ENERGY_AUTH) {
       "The editor could not load. Check your connection and reload. Your published reviews have not changed.";
   };
   script.onload = () => {
+    if (window.ENERGY_API_URL)
+      window.registerEnergyDatabaseBackend(CMS, window.ENERGY_API_URL);
     const choices = (min, max) => [
       { label: "Not rated", value: "" },
       ...Array.from({ length: Math.round((max - min) * 10) + 1 }, (_, i) => {
@@ -30,7 +32,7 @@ if (!window.ENERGY_AUTH) {
       config: {
         load_config_file: false,
         backend: {
-          name: "github",
+          name: window.ENERGY_API_URL ? "energy-database" : "github",
           auth_scope: "public_repo",
           repo: "rohansav/energy-index",
           branch: "main",
@@ -87,7 +89,7 @@ if (!window.ENERGY_AUTH) {
                 name: "body",
                 widget: "text",
                 required: false,
-                hint: "Write your review in plain text. Publish saves it to GitHub; the public site updates after deployment.",
+                hint: "Write your review in plain text. Publish saves your ratings and notes; refresh the catalogue to see the update.",
               },
             ],
           },

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useLiveCatalogue } from "@/lib/live-catalogue";
 import { useState } from "react";
 import type { Catalogue, Drink } from "@/domain/types";
 import { filterDrinks } from "@/domain/catalogue";
@@ -9,7 +10,8 @@ import { DrinkDetail } from "@/components/drinks/DrinkDetail";
 import { BrandCard } from "./BrandCard";
 import { DrinkTable } from "./DrinkTable";
 
-export function CatalogueView({ brands, drinks }: Catalogue) {
+export function CatalogueView(initial: Catalogue) {
+  const { brands, drinks } = useLiveCatalogue(initial);
   const [view, setView] = useState<"brands" | "all">("brands");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Drink | null>(null);
@@ -109,7 +111,12 @@ export function CatalogueView({ brands, drinks }: Catalogue) {
       >
         {selected && (
           <>
-            <DrinkDetail drink={selected} titleId="drink-dialog-title" />
+            <DrinkDetail
+              drink={
+                drinks.find((drink) => drink.id === selected.id) ?? selected
+              }
+              titleId="drink-dialog-title"
+            />
             <Link className="full-review-link" href={drinkPath(selected.id)}>
               Open drink page →
             </Link>

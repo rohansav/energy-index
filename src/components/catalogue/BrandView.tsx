@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useLiveCatalogue } from "@/lib/live-catalogue";
 import { useState, type CSSProperties } from "react";
 import type { Brand, Drink } from "@/domain/types";
 import {
@@ -16,7 +17,9 @@ interface Props {
   brands: Brand[];
   drinks: Drink[];
 }
-export function BrandView({ brand, brands, drinks }: Props) {
+export function BrandView({ brand, brands, drinks: initialDrinks }: Props) {
+  const catalogue = useLiveCatalogue({ brands, drinks: initialDrinks });
+  const drinks = catalogue.drinks.filter((drink) => drink.brand === brand.name);
   const [filters, setFilters] = useState<CatalogueFilters>({ sort: "score" });
   const ranked = rankDrinks(drinks);
   const shown = filterDrinks(drinks, filters);

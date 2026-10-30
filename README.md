@@ -1,6 +1,6 @@
 # Energy index
 
-An energy drink catalogue built with **Next.js, React, and TypeScript**. Public pages are exported to GitHub Pages. The existing Netlify editor signs in through GitHub and publishes reviews to this repository.
+An energy drink catalogue built with **Next.js, React, and TypeScript**. Public pages are exported to GitHub Pages. The existing Netlify editor signs in through GitHub and publishes reviews to AWS PostgreSQL through an authenticated API.
 
 ## Run locally
 
@@ -23,14 +23,17 @@ npm run format    # Formats application and editor source
 
 Open https://brilliant-pavlova-12976b.netlify.app/, sign in with GitHub, choose a drink, enter ratings/notes, then **Publish → Publish now**. The existing review JSON format and IDs have been preserved. `Rated` filters only on Overall. Save drafts before refreshing the editor.
 
-Review changes trigger GitHub Actions, which validates the content, builds all public pages, and deploys `out/`. A successful editor save means the Git commit succeeded; deployment completes separately. Build errors leave the previous public site intact. Next.js fingerprints its JavaScript and CSS; refreshed pages contain current review data directly.
+Publishing saves directly to PostgreSQL. Refresh the public catalogue to see new
+ratings; no GitHub build is required. Code changes still trigger GitHub Actions to
+build and deploy public pages. Static HTML is retained as a fallback during API
+outages. Refresh editor tabs that were opened before the database migration.
 
 ## Where to make changes
 
 | Change                                      | File or directory                                     |
 | ------------------------------------------- | ----------------------------------------------------- |
-| Product names, image sources, availability  | `src/data/catalogue.json`                             |
-| Personal ratings and notes                  | `reviews/<drink-id>.json` (normally via editor)       |
+| Product names, image sources, availability  | PostgreSQL products (JSON file is an archive)         |
+| Personal ratings and notes                  | Existing editor → PostgreSQL (files are an archive)   |
 | Shared page shell                           | `src/components/layout/`                              |
 | Catalogue and brand interactions            | `src/components/catalogue/`                           |
 | Drink detail and review rows                | `src/components/drinks/`                              |
@@ -60,4 +63,4 @@ Overall (`score`) is 1.0–10.0. Sweetness, Sourness (stored as `tartness` for c
 
 `notes` is the short summary (300 characters), `body` is plain-text review prose (20,000 characters). Review text is rendered through React escaping, never interpreted as HTML. Identity changes, malformed ratings, missing photos, and unknown review files fail the build.
 
-PostgreSQL storage and migration tooling are available; see [DATABASE.md](DATABASE.md). Production remains file-backed until the hosted database and existing editor are switched together. No new authentication screens, review forms, community accounts, dashboard, or paid services have been introduced.
+PostgreSQL storage and migration tooling are available; see [DATABASE.md](DATABASE.md). Production now reads and writes through the AWS API. No new authentication screens, review forms, community accounts, dashboard, or paid services have been introduced.

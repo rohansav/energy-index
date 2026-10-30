@@ -11,6 +11,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CATALOGUE_STORAGE: ${{ vars.CATALOGUE_STORAGE || 'files' }}
+      NEXT_PUBLIC_CATALOGUE_API: ${{ vars.NEXT_PUBLIC_CATALOGUE_API }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

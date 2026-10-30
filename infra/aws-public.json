@@ -1,0 +1,6 @@
+{
+  "region": "us-east-1",
+  "database": "energy-index",
+  "apiUrl": "https://018z4i407i.execute-api.us-east-1.amazonaws.com",
+  "apiId": "018z4i407i"
+}

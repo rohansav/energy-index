@@ -1,3 +1,5 @@
+"use client";
+import { useLiveCatalogue } from "@/lib/live-catalogue";
 import type { Drink } from "@/domain/types";
 import { availabilityLabels, reviewBody } from "@/domain/catalogue";
 import { isRated } from "@/domain/ratings";
@@ -8,7 +10,7 @@ import { ProductSources } from "./ProductSources";
 import { ReviewText } from "./ReviewText";
 
 export function DrinkDetail({
-  drink,
+  drink: initialDrink,
   titleId,
   page = false,
 }: {
@@ -16,6 +18,10 @@ export function DrinkDetail({
   titleId: string;
   page?: boolean;
 }) {
+  const catalogue = useLiveCatalogue({ brands: [], drinks: [initialDrink] });
+  const drink =
+    catalogue.drinks.find((item) => item.id === initialDrink.id) ??
+    initialDrink;
   const Heading = page ? "h1" : "h2";
   return (
     <div className="drink-detail">
