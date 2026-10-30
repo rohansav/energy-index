@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Catalogue } from "@/domain/types";
 import { isRated } from "@/domain/ratings";
 import { filterDrinks } from "@/domain/catalogue";
+import { MonthlyTheme } from "./MonthlyTheme";
 import { BrandCard } from "./BrandCard";
 import { DrinkTable } from "./DrinkTable";
 
@@ -34,70 +35,79 @@ export function CatalogueView(initial: Catalogue) {
           <div className="collection-barcode" aria-hidden="true" />
         </div>
       </div>
-      <div className="toolbar">
-        <div className="views" aria-label="Catalogue layout">
-          <button
-            type="button"
-            className={view === "brands" ? "selected" : ""}
-            aria-pressed={view === "brands"}
-            onClick={() => setView("brands")}
-          >
-            By brand
-          </button>
-          <button
-            type="button"
-            className={view === "all" ? "selected" : ""}
-            aria-pressed={view === "all"}
-            onClick={() => setView("all")}
-          >
-            All flavors
-          </button>
-        </div>
-        <label className="reviewed-filter">
-          <input
-            type="checkbox"
-            checked={ratedOnly}
-            onChange={(e) => setRatedOnly(e.target.checked)}
-          />{" "}
-          Reviewed only
-        </label>
-        <label className="search">
-          <span aria-hidden="true">⌕</span>
-          <input
-            type="search"
-            aria-label="Search brands or drinks"
-            placeholder="Find a brand or flavor"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-        </label>
-        <span className="sort-note">
-          SCORED FIRST, THEN UNRATED <span aria-hidden="true">↓</span>
-        </span>
-      </div>
-      <div className="results-meta">
-        <span>
-          {shownBrands.length} BRANDS / {filtered.length} FLAVORS
-        </span>
-        <span>OVERALL / UNRATED</span>
-      </div>
-      <div aria-live="polite">
-        {!filtered.length ? (
-          <p className="empty">No matches. Try a different brand or flavor.</p>
-        ) : view === "brands" ? (
-          <div className="brand-grid">
-            {shownBrands.map((brand) => (
-              <BrandCard
-                key={brand.name}
-                brand={brand}
-                index={brands.indexOf(brand)}
-                drinks={filtered.filter((drink) => drink.brand === brand.name)}
+      <div className="catalogue-columns">
+        <MonthlyTheme drinks={drinks} />
+        <section className="brand-catalogue" aria-label="Browse the catalogue">
+          <div className="toolbar">
+            <div className="views" aria-label="Catalogue layout">
+              <button
+                type="button"
+                className={view === "brands" ? "selected" : ""}
+                aria-pressed={view === "brands"}
+                onClick={() => setView("brands")}
+              >
+                By brand
+              </button>
+              <button
+                type="button"
+                className={view === "all" ? "selected" : ""}
+                aria-pressed={view === "all"}
+                onClick={() => setView("all")}
+              >
+                All flavors
+              </button>
+            </div>
+            <label className="reviewed-filter">
+              <input
+                type="checkbox"
+                checked={ratedOnly}
+                onChange={(e) => setRatedOnly(e.target.checked)}
+              />{" "}
+              Reviewed only
+            </label>
+            <label className="search">
+              <span aria-hidden="true">⌕</span>
+              <input
+                type="search"
+                aria-label="Search brands or drinks"
+                placeholder="Find a brand or flavor"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
               />
-            ))}
+            </label>
+            <span className="sort-note">
+              SCORED FIRST, THEN UNRATED <span aria-hidden="true">↓</span>
+            </span>
           </div>
-        ) : (
-          <DrinkTable drinks={filtered} />
-        )}
+          <div className="results-meta">
+            <span>
+              {shownBrands.length} BRANDS / {filtered.length} FLAVORS
+            </span>
+            <span>OVERALL / UNRATED</span>
+          </div>
+          <div aria-live="polite">
+            {!filtered.length ? (
+              <p className="empty">
+                No matches. Try a different brand or flavor.
+              </p>
+            ) : view === "brands" ? (
+              <div className="brand-grid">
+                {shownBrands.map((brand) => (
+                  <BrandCard
+                    key={brand.name}
+                    brand={brand}
+                    index={brands.indexOf(brand)}
+                    drinks={filtered.filter(
+                      (drink) => drink.brand === brand.name,
+                    )}
+                  />
+                ))}
+              </div>
+            ) : (
+              <DrinkTable drinks={filtered} />
+            )}
+          </div>
+        </section>
       </div>
       <div className="catalogue-note">
         <span>CATALOGUE NOTES</span>
