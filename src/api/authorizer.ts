@@ -1,5 +1,20 @@
 import { CognitoJwtVerifier } from "aws-jwt-verify";
-let verifier: ReturnType<typeof CognitoJwtVerifier.create> | undefined;
+export function createEditorVerifier(
+  userPoolId: string,
+  clientId: string,
+  owner: string,
+) {
+  return CognitoJwtVerifier.create({
+    userPoolId,
+    clientId,
+    tokenUse: "access",
+    customJwtCheck: ({ payload }) => {
+      if (!owner || payload.sub !== owner)
+        throw new Error("Editor access required");
+    },
+  });
+}
+let verifier: ReturnType<typeof createEditorVerifier> | undefined;
 /** Runs outside the VPC so verification needs no paid NAT gateway. */
 export async function handler(event: { headers?: Record<string, string> }) {
   const authorization = event.headers?.authorization;
@@ -12,11 +27,7 @@ export async function handler(event: { headers?: Record<string, string> }) {
       const client = process.env.COGNITO_CLIENT_ID;
       const owner = process.env.EDITOR_COGNITO_SUB;
       if (!pool || !client || !owner) return { isAuthorized: false };
-      verifier ??= CognitoJwtVerifier.create({
-        userPoolId: pool,
-        clientId: client,
-        tokenUse: "access",
-      });
+      verifier ??= createEditorVerifier(pool, client, owner);
       const payload = await verifier.verify(token);
       const isAuthorized = payload.sub === owner;
       return {
