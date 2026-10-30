@@ -18,6 +18,7 @@ GitHub OAuth is configured through Netlify project `brilliant-pavlova-12976b` (s
 GitHub checks repository write permissions on every save. Keep the repository's collaborator access owner-only. The editor page itself is public; write access is authenticated. A login or OAuth-provider outage does not affect the read-only catalogue.
 
 Official references:
+
 - https://decapcms.org/docs/github-backend/
 - https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/
 

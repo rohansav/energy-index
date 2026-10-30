@@ -16,11 +16,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/*.test.cjs
-      - run: node scripts/build.cjs
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: out
   deploy:
     needs: build
     permissions:

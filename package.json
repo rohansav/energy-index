@@ -1,0 +1,28 @@
+{
+  "name": "energy-index",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/prepare-public.mjs && next dev",
+    "build": "node scripts/prepare-public.mjs && next build && node scripts/finalize-export.mjs && node scripts/check-export.mjs",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts tests/*.test.tsx",
+    "format": "prettier --write src scripts admin tests next.config.ts tsconfig.json README.md ARCHITECTURE.md",
+    "check": "npm run typecheck && npm test"
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "type": "module"
+}

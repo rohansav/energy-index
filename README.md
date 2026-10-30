@@ -1,52 +1,63 @@
 # Energy index
 
-An energy drink catalogue with brand rankings and review excerpts. Built with plain HTML, CSS, and JavaScript; a validated static build and a GitHub-backed review editor.
+An energy drink catalogue built with **Next.js, React, and TypeScript**. Public pages are exported to GitHub Pages. The existing Netlify editor signs in through GitHub and publishes reviews to this repository.
 
-## Preview locally
+## Run locally
 
-Run `node scripts/build.cjs`, then `python3 -m http.server 4173 --directory dist`. Open http://localhost:4173.
+Requires Node.js 22 (CI) or a supported Next.js Node version.
 
-## Edit reviews
+```sh
+npm ci
+npm run dev
+```
 
-Open `/admin/` (which forwards to the editor on Netlify) and sign in with GitHub using the connected Netlify OAuth provider. Choose a drink, select Overall, Sweetness, Sourness, Dryness and Energy in the dropdowns, write a short summary and notes, then Publish. Publishing commits the review JSON to `main`; the workflow validates it, builds the public site, and deploys. A CMS save confirms the GitHub commit, not completion of the Pages deployment. Check Actions if the public site has not updated.
+Open http://localhost:3000/energy-index/. The `/energy-index` prefix matches production; `NEXT_PUBLIC_BASE_PATH` can override it for another host.
 
-Review content lives in `reviews/<drink-id>.json`. Product names, IDs, photos and catalogue provenance live in `data.js`; don't edit ratings there. The build converts review dropdown strings into numeric values and merges only the five ratings and written notes. Blank ratings become null. Unknown IDs, changed identities and invalid scores fail the build, leaving the previous deployment live.
+```sh
+npm run check     # TypeScript + validation/component/editor tests
+npm run build     # Produces out/ for static hosting
+npm run format    # Formats application and editor source
+```
 
-All illustrative scores and critiques have been removed. See [SOURCES.md](SOURCES.md) for catalogue provenance.
+## Publish a review
 
-## Publishing
+Open https://brilliant-pavlova-12976b.netlify.app/, sign in with GitHub, choose a drink, enter ratings/notes, then **Publish → Publish now**. The existing review JSON format and IDs have been preserved. `Rated` filters only on Overall. Save drafts before refreshing the editor.
 
-GitHub Pages publishes the validated `dist/` artifact from `.github/workflows/pages.yml`. Push changes to `main` to update the public site. Files in this repository, including review data, are public. Do not commit secrets or private drafts.
+Review changes trigger GitHub Actions, which validates the content, builds all public pages, and deploys `out/`. A successful editor save means the Git commit succeeded; deployment completes separately. Build errors leave the previous public site intact. Next.js fingerprints its JavaScript and CSS; refreshed pages contain current review data directly.
 
-- `index.html`: catalogue landing page
-- `brand.html`: brand review page
-- `data.js`: brands and review data
-- `app.js`: catalogue interactions
-- `brand.js`: brand-page interactions
-- `style.css`: layout and appearance
+## Where to make changes
 
-Typography loads from Google Fonts, with system-font fallbacks.
+| Change                                      | File or directory                                     |
+| ------------------------------------------- | ----------------------------------------------------- |
+| Product names, image sources, availability  | `src/data/catalogue.json`                             |
+| Personal ratings and notes                  | `reviews/<drink-id>.json` (normally via editor)       |
+| Shared page shell                           | `src/components/layout/`                              |
+| Catalogue and brand interactions            | `src/components/catalogue/`                           |
+| Drink detail and review rows                | `src/components/drinks/`                              |
+| Score colors, sensory profile, guide        | `src/components/ratings/` and `src/domain/ratings.ts` |
+| Filtering, sorting, review text fallbacks   | `src/domain/catalogue.ts`                             |
+| Content validation and file storage adapter | `src/server/`                                         |
+| Page routes                                 | `src/app/`                                            |
+| Styles                                      | `src/styles/site.css`                                 |
+| Can images                                  | `assets/drinks/`                                      |
+| Existing editor configuration               | `admin/`                                              |
 
-## Checks
+See [ARCHITECTURE.md](ARCHITECTURE.md) for data flow and future database integration, [SOURCES.md](SOURCES.md) for product provenance, and [admin/SETUP.md](admin/SETUP.md) for authentication recovery.
 
-Run `node --test tests/*.test.cjs` before publishing data or UI changes. Images live in `assets/drinks/` and are lazy-loaded, optimized WebP files.
+## Routes
 
-## Rating rubric
+- `/`: catalogue with brand cards, all-flavors table, search, and quick review dialogs.
+- `/brands/<slug>/`: full brand catalogue with filters and rankings.
+- `/drinks/<id>/`: shareable individual drink page.
+- `/admin/`: forwards to the existing editor.
+- Old `/brand.html?brand=<slug>` links redirect to the corresponding brand page.
 
-`score` is the displayed **Overall**: a subjective 1.0–10.0 verdict, in 0.1 increments. It is informed by taste and the sensory profile, not computed from a formula. Rankings use this value.
+All routes sit under `/energy-index` on GitHub Pages.
 
-`sweetness`, `tartness`, and `dryness` are independent intensity values from 0.0–5.0, in 0.1 increments. Use `null` for unrecorded values; 0 means explicitly tasted and absent. All numeric ratings display one decimal. There are no finish or carbonation rating fields.
+## Content rules
 
-`alertness` is `null` or an object with `effect` (No noticeable change / Slight lift / Clear lift), `context` (caffeine consumed, time, prior caffeine, sleep, observation time), and optional `jitters`. It does not contribute numerically to Overall. Do not invent observations. Leave unrecorded fields as `null`.
+Overall (`score`) is 1.0–10.0. Sweetness, Sourness (stored as `tartness` for compatibility), Dryness, and Energy are 0.0–5.0. All use 0.1 increments. Null or blank is unrecorded; zero is a recorded intensity. Overall is subjective, never calculated from other fields.
 
-The shared `scoringGuideMarkup()` in `data.js` supplies the guide on both catalogue and brand pages. `ratingFields` defines ranges and 0.1 steps; `validRating()` validates data during tests.
+`notes` is the short summary (300 characters), `body` is plain-text review prose (20,000 characters). Review text is rendered through React escaping, never interpreted as HTML. Identity changes, malformed ratings, missing photos, and unknown review files fail the build.
 
-## Manual rating updates
-
-Edit the existing `reviews/<drink-id>.json` file locally or in GitHub. `score` means Overall (1.0–10.0); sweetness, tartness and dryness use 0.0–5.0. Use tenths, or null for unrecorded values. `notes` is the short summary; `body` is the full review. Keep id, brand and name unchanged. Commit to main to publish. Rankings reorder automatically by Overall, then alphabetically for ties and unrated drinks.
-
-## Authentication
-
-GitHub OAuth uses the Netlify project `brilliant-pavlova-12976b`. Public configuration is in `admin/auth-config.js`; the client secret stays in Netlify provider settings. See `admin/SETUP.md` for recovery instructions. The public catalogue stays on GitHub Pages.
-
-Sourness uses the existing `tartness` key to preserve ratings. Optional `energy` is a subjective 0.0–5.0 boost rating in tenths; missing values remain unrated. The admin Rated filter checks only a valid 1.0–10.0 Overall (`score`).
+No new authentication screens, review forms, community accounts, dashboard, database, or paid services are introduced in this refactor. Your existing editor remains the publishing interface.
