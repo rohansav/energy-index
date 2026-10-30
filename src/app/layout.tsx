@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { SessionProvider } from "@/components/auth/SessionProvider";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import "@/styles/site.css";
@@ -16,11 +17,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
-        <div className="site-shell">
-          <SiteHeader />
-          <main id="main-content">{children}</main>
-          <SiteFooter />
-        </div>
+        <SessionProvider>
+          <div className="site-shell">
+            <SiteHeader />
+            <main id="main-content">{children}</main>
+            <SiteFooter />
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );

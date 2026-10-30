@@ -5,6 +5,7 @@ import { rankDrinks, reviewSummary } from "@/domain/catalogue";
 import { isRated } from "@/domain/ratings";
 import { brandPath } from "@/lib/paths";
 import { ProductPhoto } from "@/components/drinks/ProductPhoto";
+import { ReviewAction } from "@/components/editor/ReviewAction";
 import { Score } from "@/components/ratings/Score";
 
 interface Props {
@@ -42,20 +43,22 @@ export function BrandCard({ brand, drinks, index, onSelect }: Props) {
         <span>{rated ? "OVERALL ↓" : "UNRATED · A–Z"}</span>
       </div>
       {ordered.slice(0, 4).map((drink) => (
-        <button
-          type="button"
-          className="drink-row photo-row"
-          key={drink.id}
-          onClick={() => onSelect(drink)}
-          aria-label={`${drink.name}. ${isRated(drink.review) ? `Overall ${drink.review.score?.toFixed(1)}` : "Unrated"}. Open details.`}
-        >
-          <ProductPhoto product={drink} className="mini-product" />
-          <span>
-            <span className="drink-name">{drink.name}</span>
-            <span className="drink-note">{reviewSummary(drink)}</span>
-          </span>
-          <Score value={drink.review.score} compact />
-        </button>
+        <div className="preview-drink" key={drink.id}>
+          <button
+            type="button"
+            className="drink-row photo-row"
+            onClick={() => onSelect(drink)}
+            aria-label={`${drink.name}. ${isRated(drink.review) ? `Overall ${drink.review.score?.toFixed(1)}` : "Unrated"}. Open details.`}
+          >
+            <ProductPhoto product={drink} className="mini-product" />
+            <span>
+              <span className="drink-name">{drink.name}</span>
+              <span className="drink-note">{reviewSummary(drink)}</span>
+            </span>
+            <Score value={drink.review.score} compact />
+          </button>
+          <ReviewAction review={drink.review} />
+        </div>
       ))}
       <Link className="brand-all-link" href={brandPath(brand.name)}>
         Browse all {drinks.length} flavors <span>→</span>

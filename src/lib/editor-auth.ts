@@ -1,5 +1,6 @@
 import { UserManager, WebStorageStateStore } from "oidc-client-ts";
 import config from "./auth-config.json";
+import { safeReturnPath } from "./auth-navigation";
 import { basePath } from "./paths";
 let manager: UserManager | undefined;
 export function editorAuth() {
@@ -18,6 +19,26 @@ export function editorAuth() {
     });
   return manager;
 }
+let refreshing: ReturnType<UserManager["signinSilent"]> | undefined;
+export async function currentSession() {
+  const user = await editorAuth().getUser();
+  if (!user?.expired) return user;
+  refreshing ??= editorAuth()
+    .signinSilent()
+    .finally(() => {
+      refreshing = undefined;
+    });
+  return refreshing;
+}
+export function startSignIn() {
+  return editorAuth().signinRedirect({
+    state: {
+      returnTo: safeReturnPath(
+        window.location.pathname + window.location.search,
+      ),
+    },
+  });
+}
 export async function signOut() {
   await editorAuth().removeUser();
   const query = new URLSearchParams({
@@ -30,8 +51,7 @@ export async function editorRequest<T>(
   path: string,
   init: RequestInit = {},
 ): Promise<T> {
-  let user = await editorAuth().getUser();
-  if (user?.expired) user = await editorAuth().signinSilent();
+  const user = await currentSession();
   if (!user)
     throw new Error(
       "Please sign in to continue. Your unsaved notes are still here.",

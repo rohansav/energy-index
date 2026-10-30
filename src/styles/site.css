@@ -1627,3 +1627,72 @@ dialog .sample-note a {
     flex-wrap: wrap;
   }
 }
+
+.header-account {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.header-account .header-note {
+  margin-left: 0;
+}
+.session-control {
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.session-control span,
+.session-status {
+  font-size: 11px;
+  color: #62685d;
+}
+.review-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid #b6bcae;
+  padding: 9px 12px;
+  font-size: 11px;
+  background: #f1f3eb;
+}
+.review-action:hover {
+  background: #e6ebdd;
+  border-color: #687d42;
+}
+.preview-drink {
+  border-bottom: 1px solid var(--line);
+}
+.preview-drink .drink-row {
+  width: 100%;
+  border-bottom: 0;
+  text-align: left;
+}
+.preview-drink .review-action {
+  margin: 0 12px 12px 12px;
+}
+.excerpt-copy > .review-action {
+  margin: 16px 0 4px;
+}
+@media (max-width: 1000px) {
+  .header-account .header-note {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .site-header {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 88px;
+    padding: 18px 0;
+    gap: 16px;
+  }
+  .header-account {
+    margin-left: auto;
+  }
+  .session-control {
+    padding: 8px 10px;
+  }
+}

@@ -63,3 +63,17 @@ secret is shipped in the site. `auth-config.json` contains public identifiers on
 The owner's Cognito login and browser publish/reload were verified.
 `legacyDisabled: true` disables GitHub authorization, and the Netlify URL redirects
 to `/editor/`. Community accounts, reviews, and moderation are outside this migration.
+
+## Shared editor session and review links
+
+`SessionProvider` lives in the root layout and observes Cognito login, logout,
+expiry, refresh, and window focus. The existing session-storage tokens survive
+navigation and refresh in the same tab; passwords are never persisted by the app.
+`SessionControl` shows the login state in the header. `ReviewAction` appears only
+for the configured editor on the homepage previews and brand rows. API permission
+checks remain authoritative.
+
+Review links use `/editor/?drink=<stable-id>`. The editor loads that review from the
+API. OAuth state preserves the intended page through login; `safeReturnPath`
+rejects external destinations and callback loops. An existing unpublished draft
+is restored first to prevent a review link from silently discarding work.

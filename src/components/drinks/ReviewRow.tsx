@@ -7,6 +7,7 @@ import {
 } from "@/domain/catalogue";
 import { isRated } from "@/domain/ratings";
 import { drinkPath } from "@/lib/paths";
+import { ReviewAction } from "@/components/editor/ReviewAction";
 import { Score } from "@/components/ratings/Score";
 import { SensoryProfile } from "@/components/ratings/SensoryProfile";
 import { ProductPhoto } from "./ProductPhoto";
@@ -45,6 +46,7 @@ export function ReviewRow({ drink, rank }: { drink: Drink; rank: number }) {
             ))}
         </div>
         <SensoryProfile drink={drink} />
+        <ReviewAction review={drink.review} />
         <details>
           <summary>
             Product details &amp; sources <span>+</span>

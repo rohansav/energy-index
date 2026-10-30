@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { SessionControl } from "@/components/auth/SessionControl";
 import { Modal } from "@/components/ui/Modal";
 import { ScoringGuide } from "@/components/ratings/ScoringGuide";
 
@@ -18,7 +19,10 @@ export function SiteHeader() {
             Scoring guide <span>↗</span>
           </button>
         </nav>
-        <span className="header-note">A PERSONAL DRINK LOG</span>
+        <div className="header-account">
+          <span className="header-note">A PERSONAL DRINK LOG</span>
+          <SessionControl />
+        </div>
       </header>
       <Modal
         open={guideOpen}

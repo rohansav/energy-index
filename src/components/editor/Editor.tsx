@@ -1,7 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { Product, Review } from "@/domain/types";
-import { editorAuth, editorRequest, signOut } from "@/lib/editor-auth";
+import {
+  currentSession,
+  startSignIn,
+  editorRequest,
+  signOut,
+} from "@/lib/editor-auth";
+import { requestedDrink } from "@/lib/auth-navigation";
 import { basePath } from "@/lib/paths";
 import { ProductPhoto } from "@/components/drinks/ProductPhoto";
 import { ReviewForm } from "./ReviewForm";
@@ -30,10 +36,8 @@ export function Editor({
   const loadList = () =>
     editorRequest<Review[]>("/editor/reviews").then(setReviews);
   useEffect(() => {
-    editorAuth()
-      .getUser()
+    currentSession()
       .then(async (user) => {
-        if (user?.expired) user = await editorAuth().signinSilent();
         setSignedIn(!!user);
         if (user) {
           await loadList();
@@ -53,11 +57,15 @@ export function Editor({
                 setOriginal(draft.original);
                 setVersion(draft.version);
                 setMessage("Restored your unpublished draft from this tab.");
+                return;
               }
             } catch {
               sessionStorage.removeItem(`editor-draft:${user.profile.sub}`);
             }
           }
+          const id = requestedDrink(window.location.search);
+          if (id && products.some((product) => product.id === id))
+            await select(id);
         }
       })
       .catch((e) => {
@@ -180,9 +188,7 @@ export function Editor({
       {error && (
         <div className="editor-error" role="alert">
           {error}{" "}
-          <button onClick={() => void editorAuth().signinRedirect()}>
-            Sign in again
-          </button>
+          <button onClick={() => void startSignIn()}>Sign in again</button>
         </div>
       )}
       {signedIn === null ? (
@@ -193,11 +199,7 @@ export function Editor({
           <p>Sign in with your editor account to update ratings and notes.</p>
           <button
             className="editor-primary"
-            onClick={() =>
-              void editorAuth()
-                .signinRedirect()
-                .catch((e) => setError(e.message))
-            }
+            onClick={() => void startSignIn().catch((e) => setError(e.message))}
           >
             Sign in
           </button>
