@@ -40,7 +40,7 @@ for (const product of catalogue.products)
   await stat(path.join(root, "drinks", product.id, "index.html"));
 assert(
   (await readFile("out/admin/index.html", "utf8")).includes(
-    "https://brilliant-pavlova-12976b.netlify.app/",
+    "/energy-index/editor/",
   ),
 );
 assert((await readFile("out/brand.html", "utf8")).includes("URLSearchParams"));

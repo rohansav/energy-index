@@ -64,3 +64,17 @@ Overall (`score`) is 1.0–10.0. Sweetness, Sourness (stored as `tartness` for c
 `notes` is the short summary (300 characters), `body` is plain-text review prose (20,000 characters). Review text is rendered through React escaping, never interpreted as HTML. Identity changes, malformed ratings, missing photos, and unknown review files fail the build.
 
 PostgreSQL storage and migration tooling are available; see [DATABASE.md](DATABASE.md). Production now reads and writes through the AWS API. No new authentication screens, review forms, community accounts, or dashboards have been introduced. AWS infrastructure is now billable as documented in `infra/README.md`.
+
+### Integrated editor
+
+Open https://rohansav.github.io/energy-index/editor/ and choose **Sign in**.
+The editor account uses its email address as the username. On first use, enter the
+temporary password from the Cognito invitation and choose a new password. Search
+or filter by brand and Rated/Unrated, select a drink, update the dropdowns and
+notes, then choose **Publish review**. Rated means Overall is set, regardless of
+other fields. Publishing writes directly to the existing database.
+
+The editor warns before discarding changes and keeps unpublished edits in the
+same browser tab across reauthentication/reload. A stale save is rejected rather
+than overwriting a newer review; copy your notes before reloading the drink after
+a conflict. The previous Netlify editor remains available during login cutover.

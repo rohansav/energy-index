@@ -6,3 +6,4 @@ public/assets/
 *.tsbuildinfo
 .env*
 !.env.example
+__pycache__/

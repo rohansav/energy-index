@@ -49,7 +49,10 @@ if __name__=='__main__':
     role=ensure_role('energy-index-api','AWSLambdaVPCAccessExecutionRole')
     authRole=ensure_role('energy-index-authorizer','AWSLambdaBasicExecutionRole')
     apiArn=function('energy-index-api',role,'handler.handler',{'DATABASE_URL':config['appUrl'],'DATABASE_CA_FILE':'/var/task/rds-ca.pem'}, {'SubnetIds':['subnet-0eb2c46f898a6654a','subnet-0bc592c05c05cbb1f'],'SecurityGroupIds':[sg]})
-    authArn=function('energy-index-authorizer',authRole,'authorizer.handler',{'EDITOR_GITHUB_ID':'33819259'})
+    authConfig=json.loads((ROOT/'src/lib/auth-config.json').read_text())
+    authEnv={'COGNITO_USER_POOL_ID':authConfig['userPoolId'],'COGNITO_CLIENT_ID':authConfig['clientId'],'EDITOR_COGNITO_SUB':authConfig.get('editorSub','')}
+    if not authConfig.get('legacyDisabled'): authEnv['EDITOR_GITHUB_ID']='33819259'
+    authArn=function('energy-index-authorizer',authRole,'authorizer.handler',authEnv)
     apis=aws('apigatewayv2','get-apis')['Items']
     api=next((api for api in apis if api['Name']=='energy-index'),None)
     if not api: api=aws('apigatewayv2','create-api','--name','energy-index','--protocol-type','HTTP')

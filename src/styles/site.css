@@ -1388,3 +1388,216 @@ dialog .sample-note a {
     align-items: flex-start;
   }
 }
+
+/* Editor shares the catalogue's paper, typography, and understated rules. */
+.editor-page {
+  padding-bottom: 48px;
+}
+.editor-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 42px 0 30px;
+}
+.editor-intro h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 40px;
+  margin: 8px 0;
+}
+.editor-eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.editor-workspace {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  border: 1px solid var(--line);
+}
+.editor-picker {
+  padding: 24px;
+  border-right: 1px solid var(--line);
+}
+.editor-page label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.editor-page input,
+.editor-page select,
+.editor-page textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  padding: 12px;
+  border: 1px solid #b6bcae;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+}
+.editor-page select:focus-visible,
+.editor-page textarea:focus-visible {
+  outline: 2px solid #687d42;
+  outline-offset: 2px;
+}
+.editor-page textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+.editor-page small {
+  font-size: 11px;
+  color: #62685d;
+  font-weight: 400;
+}
+.editor-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+.editor-help {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #62685d;
+}
+.editor-drinks {
+  max-height: 680px;
+  overflow-y: auto;
+}
+.editor-drinks button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 10px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+}
+.editor-drinks button span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.editor-drinks button[aria-pressed="true"] {
+  background: #e6ebdd;
+  box-shadow: inset 3px 0 #536439;
+}
+.editor-review {
+  padding: 32px;
+  min-width: 0;
+}
+.editor-review-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.editor-review h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 30px;
+  margin: 8px 0;
+}
+.editor-review-heading a {
+  font-size: 12px;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+.editor-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+.editor-ratings {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.editor-primary {
+  background: #25351d;
+  color: white;
+  padding: 13px 23px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.editor-page button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.editor-publish {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  gap: 16px;
+}
+.editor-publish span {
+  font-size: 12px;
+  color: #62685d;
+}
+.editor-status {
+  color: #375b2c;
+  min-height: 22px;
+}
+.editor-error {
+  padding: 16px;
+  background: #ffe8df;
+  color: #862c17;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+.editor-error button {
+  text-decoration: underline;
+}
+.editor-login,
+.editor-empty {
+  padding: 48px 24px;
+  text-align: center;
+}
+.editor-login {
+  border: 1px solid var(--line);
+}
+.editor-login p {
+  margin-bottom: 24px;
+}
+@media (max-width: 1000px) {
+  .editor-ratings {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .editor-review {
+    padding: 24px;
+  }
+}
+@media (max-width: 700px) {
+  .editor-workspace {
+    grid-template-columns: 1fr;
+  }
+  .editor-picker {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 18px;
+  }
+  .editor-drinks {
+    max-height: 230px;
+  }
+  .editor-review {
+    padding: 18px;
+  }
+  .editor-ratings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .editor-review-heading {
+    align-items: flex-start;
+  }
+  .editor-intro h1 {
+    font-size: 32px;
+  }
+}

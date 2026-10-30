@@ -10,7 +10,7 @@ await writeFile("out/.nojekyll", "");
 await mkdir("out/admin", { recursive: true });
 await writeFile(
   "out/admin/index.html",
-  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=https://brilliant-pavlova-12976b.netlify.app/"><title>Review editor</title></head><body><a href="https://brilliant-pavlova-12976b.netlify.app/">Open review editor</a></body></html>`,
+  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=${base}/editor/"><title>Review editor</title></head><body><a href="${base}/editor/">Open review editor</a></body></html>`,
 );
 // Preserve previously shared brand.html?brand= URLs; whitelist the destination slug.
 await writeFile(

@@ -46,3 +46,22 @@ content without triggering deployments. These transports preserve the existing
 recovery reference. They no longer control live publishing. Migration scripts
 refuse to overwrite differing database records. See [DATABASE.md](DATABASE.md) and
 [infra/README.md](infra/README.md) for operations and recovery.
+
+## Integrated editor and Cognito
+
+`/editor/` is the typed React replacement for Decap. `Editor` coordinates loading,
+filters and versioned saves; `ReviewForm` owns the five rating dropdowns and note
+fields. `/auth/callback/` completes authorization-code login with PKCE using
+`oidc-client-ts`. Session tokens and unpublished drafts are scoped to the browser
+tab. Drafts are scoped to the authenticated subject and cleared after publishing.
+
+Cognito Essentials handles passwords and recovery. Public registration is disabled.
+The API authorizer verifies the access-token signature, issuer, client, expiry,
+and token use with `aws-jwt-verify`, then requires the configured editor subject.
+Being signed in alone does not grant publishing access. No password or client
+secret is shipped in the site. `auth-config.json` contains public identifiers only.
+
+The existing Netlify/GitHub login remains a temporary fallback until the owner's
+first Cognito login and publish are verified. Setting `legacyDisabled: true` in
+`auth-config.json` and redeploying the API removes GitHub authorization. Community
+accounts, reviews, and moderation are outside this migration.

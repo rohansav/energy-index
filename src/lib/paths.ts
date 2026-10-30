@@ -6,4 +6,4 @@ export const assetPath = (relative: string): string =>
 export const brandPath = (name: string): string =>
   `/brands/${brandSlug(name)}/`;
 export const drinkPath = (id: string): string => `/drinks/${id}/`;
-export const editorUrl = "https://brilliant-pavlova-12976b.netlify.app/";
+export const editorUrl = `${basePath}/editor/`;
