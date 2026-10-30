@@ -7,7 +7,10 @@ export function ProductPhoto({
   product,
   className,
 }: {
-  product: Product;
+  product: Pick<
+    Product,
+    "brand" | "name" | "image" | "imageWidth" | "imageHeight"
+  >;
   className: string;
 }) {
   const [failed, setFailed] = useState(false);

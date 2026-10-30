@@ -1601,3 +1601,29 @@ dialog .sample-note a {
     font-size: 32px;
   }
 }
+
+.editor-drink-identity {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+.editor-drink-photo {
+  width: 76px;
+  height: 116px;
+  object-fit: contain;
+  flex: 0 0 76px;
+}
+@media (max-width: 700px) {
+  .editor-drink-identity {
+    gap: 12px;
+  }
+  .editor-drink-photo {
+    width: 52px;
+    height: 84px;
+    flex-basis: 52px;
+  }
+  .editor-review-heading {
+    flex-wrap: wrap;
+  }
+}

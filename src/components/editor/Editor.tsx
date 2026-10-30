@@ -1,10 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { Review } from "@/domain/types";
+import type { Product, Review } from "@/domain/types";
 import { editorAuth, editorRequest, signOut } from "@/lib/editor-auth";
 import { basePath } from "@/lib/paths";
+import { ProductPhoto } from "@/components/drinks/ProductPhoto";
 import { ReviewForm } from "./ReviewForm";
-export function Editor() {
+export function Editor({
+  products,
+}: {
+  products: Pick<
+    Product,
+    "id" | "brand" | "name" | "image" | "imageWidth" | "imageHeight"
+  >[];
+}) {
   const [signedIn, setSignedIn] = useState<boolean | null>(null);
   const [accountId, setAccountId] = useState("");
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -17,6 +25,7 @@ export function Editor() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const product = products.find((product) => product.id === review?.id);
   const dirty = !!review && JSON.stringify(review) !== original;
   const loadList = () =>
     editorRequest<Review[]>("/editor/reviews").then(setReviews);
@@ -259,9 +268,18 @@ export function Editor() {
             {review ? (
               <>
                 <div className="editor-review-heading">
-                  <div>
-                    <p className="editor-eyebrow">{review.brand}</p>
-                    <h2>{review.name}</h2>
+                  <div className="editor-drink-identity">
+                    {product && (
+                      <ProductPhoto
+                        key={product.id}
+                        product={product}
+                        className="editor-drink-photo"
+                      />
+                    )}
+                    <div>
+                      <p className="editor-eyebrow">{review.brand}</p>
+                      <h2>{review.name}</h2>
+                    </div>
                   </div>
                   <a
                     href={`${basePath}/drinks/${review.id}/`}
