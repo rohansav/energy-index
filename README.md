@@ -78,3 +78,14 @@ The editor warns before discarding changes and keeps unpublished edits in the
 same browser tab across reauthentication/reload. A stale save is rejected rather
 than overwriting a newer review; copy your notes before reloading the drink after
 a conflict. The previous Netlify URL redirects to this editor; GitHub tokens no longer authorize review writes.
+
+### Community reviews
+
+Each drink opens its own page with an editor review, separate community average,
+range/distribution and category averages, followed by community reviews. Choose
+**Sign in / Join**, confirm your email, and enter a public display name. Overall is
+required; other ratings and notes are optional. Publishing is immediate. One review
+per account per drink counts toward the average; editing updates that contribution,
+and deleting removes it. Your email and login identity are not shown publicly.
+The editor account may submit a separate community review, but its editorial
+review never counts automatically as a community vote.

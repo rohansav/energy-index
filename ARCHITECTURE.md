@@ -54,7 +54,7 @@ fields. `/auth/callback/` completes authorization-code login with PKCE using
 `oidc-client-ts`. Session tokens and unpublished drafts are scoped to the browser
 tab. Drafts are scoped to the authenticated subject and cleared after publishing.
 
-Cognito Essentials handles passwords and recovery. Public registration is disabled.
+Cognito Essentials handles passwords and recovery. Public registration uses email confirmation.
 The API authorizer verifies the access-token signature, issuer, client, expiry,
 and token use with `aws-jwt-verify`, then requires the configured editor subject.
 Being signed in alone does not grant publishing access. No password or client
@@ -62,7 +62,7 @@ secret is shipped in the site. `auth-config.json` contains public identifiers on
 
 The owner's Cognito login and browser publish/reload were verified.
 `legacyDisabled: true` disables GitHub authorization, and the Netlify URL redirects
-to `/editor/`. Community accounts, reviews, and moderation are outside this migration.
+to `/editor/`. Community reviews are stored separately; there is no moderation queue.
 
 ## Shared editor session and review links
 
@@ -77,3 +77,20 @@ Review links use `/editor/?drink=<stable-id>`. The editor loads that review from
 API. OAuth state preserves the intended page through login; `safeReturnPath`
 rejects external destinations and callback loops. An existing unpublished draft
 is restored first to prevent a review link from silently discarding work.
+
+## Community publication
+
+Drink previews now link directly to `/drinks/<id>/`; the catalogue no longer opens
+review modals. `DrinkDetail` composes the single editorial review with a
+`CommunitySummary` and the bottom `CommunityReviews` section. `useCommunity`
+manages paginated loading and refresh; `CommunityForm` reuses the editor's rating
+controls and saves member-owned reviews. Same-tab drafts are scoped to account and
+drink, while published reviews live in PostgreSQL. `CommunityCompact` displays only
+average/count in the catalogue and brand rows. Editorial ranking remains unchanged.
+
+The Cognito authorizer now accepts valid member sessions and passes verified
+issuer/subject plus an editor flag to the handler. Editorial routes still require
+that flag; community `/mine` routes use the authenticated identity. Public GET
+`/community/{id}` returns aggregates and paginated reviews; GET/PUT/DELETE
+`/community/{id}/mine` reads, publishes, or deletes only the caller's review.
+Public signup uses email confirmation. Reviews publish immediately, with no queue.

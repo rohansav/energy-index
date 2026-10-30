@@ -1,12 +1,8 @@
 "use client";
-import Link from "next/link";
 import { useLiveCatalogue } from "@/lib/live-catalogue";
 import { useState } from "react";
-import type { Catalogue, Drink } from "@/domain/types";
+import type { Catalogue } from "@/domain/types";
 import { filterDrinks } from "@/domain/catalogue";
-import { drinkPath } from "@/lib/paths";
-import { Modal } from "@/components/ui/Modal";
-import { DrinkDetail } from "@/components/drinks/DrinkDetail";
 import { BrandCard } from "./BrandCard";
 import { DrinkTable } from "./DrinkTable";
 
@@ -14,7 +10,6 @@ export function CatalogueView(initial: Catalogue) {
   const { brands, drinks } = useLiveCatalogue(initial);
   const [view, setView] = useState<"brands" | "all">("brands");
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Drink | null>(null);
   const filtered = filterDrinks(drinks, { query });
   const shownBrands = brands.filter((brand) =>
     filtered.some((drink) => drink.brand === brand.name),
@@ -87,12 +82,11 @@ export function CatalogueView(initial: Catalogue) {
                 brand={brand}
                 index={brands.indexOf(brand)}
                 drinks={filtered.filter((drink) => drink.brand === brand.name)}
-                onSelect={setSelected}
               />
             ))}
           </div>
         ) : (
-          <DrinkTable drinks={filtered} onSelect={setSelected} />
+          <DrinkTable drinks={filtered} />
         )}
       </div>
       <div className="catalogue-note">
@@ -104,25 +98,6 @@ export function CatalogueView(initial: Catalogue) {
           brands.
         </p>
       </div>
-      <Modal
-        open={selected !== null}
-        onClose={() => setSelected(null)}
-        titleId="drink-dialog-title"
-      >
-        {selected && (
-          <>
-            <DrinkDetail
-              drink={
-                drinks.find((drink) => drink.id === selected.id) ?? selected
-              }
-              titleId="drink-dialog-title"
-            />
-            <Link className="full-review-link" href={drinkPath(selected.id)}>
-              Open drink page →
-            </Link>
-          </>
-        )}
-      </Modal>
     </>
   );
 }

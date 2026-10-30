@@ -32,9 +32,11 @@ export function useLiveCatalogue(initial: Catalogue): Catalogue {
     };
     refresh();
     window.addEventListener("focus", refresh);
+    window.addEventListener("catalogue-refresh", refresh);
     return () => {
       active = false;
       window.removeEventListener("focus", refresh);
+      window.removeEventListener("catalogue-refresh", refresh);
     };
   }, []);
   return catalogue;

@@ -1,5 +1,9 @@
 import type { APIGatewayProxyEventV2WithLambdaAuthorizer } from "aws-lambda";
 import { z, ZodError } from "zod";
+import {
+  CommunityRepository,
+  CommunityNotFound,
+} from "../server/community-repository";
 import { databasePool } from "../server/database";
 import {
   PostgresCatalogueRepository,
@@ -16,13 +20,64 @@ const reply = (statusCode: number, data: unknown) => ({
 });
 
 export async function handler(
-  event: APIGatewayProxyEventV2WithLambdaAuthorizer<{ owner: string }>,
+  event: APIGatewayProxyEventV2WithLambdaAuthorizer<{
+    owner: string;
+    subject?: string;
+    issuer?: string;
+  }>,
 ) {
   const method = event.requestContext.http.method;
   const path = event.rawPath;
   try {
     if (method === "GET" && path === "/catalogue")
       return reply(200, await repository().getCatalogue());
+    const communityMatch = path.match(/^\/community\/([a-z0-9-]+)(\/mine)?$/);
+    if (communityMatch) {
+      const [, drinkId, mine] = communityMatch;
+      const community = new CommunityRepository(databasePool());
+      if (method === "GET" && !mine) {
+        const params = event.queryStringParameters ?? {};
+        const sort = z
+          .enum(["newest", "highest", "lowest"])
+          .parse(params.sort ?? "newest");
+        const offset = z.coerce
+          .number()
+          .int()
+          .min(0)
+          .max(100000)
+          .parse(params.offset ?? 0);
+        return reply(200, await community.page(drinkId, sort, offset));
+      }
+      const identity = event.requestContext.authorizer?.lambda;
+      if (!identity?.subject || !identity.issuer)
+        return reply(401, { error: "Sign in to review" });
+      const actor = {
+        subject: identity.subject,
+        issuer: identity.issuer,
+        owner: identity.owner === "true",
+      };
+      if (method === "GET" && mine)
+        return reply(200, await community.mine(drinkId, actor));
+      if (mine && (method === "PUT" || method === "DELETE")) {
+        const body = event.isBase64Encoded
+          ? Buffer.from(event.body ?? "", "base64").toString()
+          : (event.body ?? "");
+        if (Buffer.byteLength(body) > 100000)
+          return reply(413, { error: "Review is too large" });
+        const input = z
+          .object({
+            version: z.number().int().nonnegative(),
+            displayName: z.string().optional(),
+            review: z.unknown().optional(),
+          })
+          .parse(JSON.parse(body));
+        return reply(
+          200,
+          await community.save(drinkId, actor, input, method === "DELETE"),
+        );
+      }
+      return reply(405, { error: "Method not allowed" });
+    }
     if (event.requestContext.authorizer?.lambda?.owner !== "true")
       return reply(403, { error: "Editor access required" });
     if (method === "GET" && path === "/editor/reviews") {
@@ -80,6 +135,13 @@ export async function handler(
     }
     return reply(405, { error: "Method not allowed" });
   } catch (error) {
+    if (error instanceof CommunityNotFound)
+      return reply(404, { error: "Drink or review not found" });
+    if (
+      error instanceof Error &&
+      error.message === "Overall rating is required"
+    )
+      return reply(400, { error: error.message });
     if (error instanceof ReviewConflictError)
       return reply(409, { error: error.message });
     if (

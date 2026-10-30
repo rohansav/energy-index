@@ -55,3 +55,21 @@ test("GitHub authorizer fails closed for missing, invalid and non-owner credenti
     else process.env.EDITOR_GITHUB_ID = previous;
   }
 });
+
+test("authenticated community members cannot use editorial routes", async () => {
+  const event = {
+    rawPath: "/editor/reviews/alani-blue-slush",
+    body: "{}",
+    requestContext: {
+      http: { method: "PUT" },
+      authorizer: {
+        lambda: {
+          owner: "false",
+          subject: "member",
+          issuer: "https://test.example",
+        },
+      },
+    },
+  };
+  assert.equal((await handler(event as any)).statusCode, 403);
+});

@@ -7,6 +7,7 @@ import {
 } from "@/domain/catalogue";
 import { isRated } from "@/domain/ratings";
 import { drinkPath } from "@/lib/paths";
+import { CommunityCompact } from "@/components/community/CommunityCompact";
 import { ReviewAction } from "@/components/editor/ReviewAction";
 import { Score } from "@/components/ratings/Score";
 import { SensoryProfile } from "@/components/ratings/SensoryProfile";
@@ -46,6 +47,7 @@ export function ReviewRow({ drink, rank }: { drink: Drink; rank: number }) {
             ))}
         </div>
         <SensoryProfile drink={drink} />
+        <CommunityCompact stats={drink.community} />
         <ReviewAction review={drink.review} />
         <details>
           <summary>

@@ -1,14 +1,11 @@
+import Link from "next/link";
+import { drinkPath } from "@/lib/paths";
+import { CommunityCompact } from "@/components/community/CommunityCompact";
 import type { Drink } from "@/domain/types";
 import { availabilityLabels } from "@/domain/catalogue";
 import { ProductPhoto } from "@/components/drinks/ProductPhoto";
 import { Score } from "@/components/ratings/Score";
-export function DrinkTable({
-  drinks,
-  onSelect,
-}: {
-  drinks: Drink[];
-  onSelect: (drink: Drink) => void;
-}) {
+export function DrinkTable({ drinks }: { drinks: Drink[] }) {
   return (
     <div className="table-scroll">
       <table>
@@ -28,9 +25,8 @@ export function DrinkTable({
                 <ProductPhoto product={drink} className="table-product" />
               </td>
               <td>
-                <button type="button" onClick={() => onSelect(drink)}>
-                  {drink.name} ↗
-                </button>
+                <Link href={drinkPath(drink.id)}>{drink.name} ↗</Link>
+                <CommunityCompact stats={drink.community} />
               </td>
               <td>{drink.brand}</td>
               <td className="flavor-cell">

@@ -73,7 +73,7 @@ export async function editorRequest<T>(
   if (!response.ok)
     throw new Error(
       response.status === 401 || response.status === 403
-        ? "Your session expired or this account does not have editor access. Sign in again; your unsaved notes are still here."
+        ? "Your session expired or this account does not have access. Sign in again; your unsaved notes are still here."
         : result.error || "Could not save. Please try again.",
     );
   return result;

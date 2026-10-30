@@ -33,6 +33,9 @@ function createRepository(): CatalogueRepository {
         brands,
         drinks: products.map((product, i) => ({
           ...product,
+          ...(raw.drinks[i].community
+            ? { community: raw.drinks[i].community }
+            : {}),
           review: parseReview(raw.drinks[i].review, product),
         })),
       };

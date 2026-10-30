@@ -9,10 +9,16 @@ import {
 import type { User } from "oidc-client-ts";
 import { editorAuth, currentSession } from "@/lib/editor-auth";
 import config from "@/lib/auth-config.json";
-const SessionContext = createContext({
+const SessionContext = createContext<{
+  loading: boolean;
+  isEditor: boolean;
+  signedIn: boolean;
+  subject: string | null;
+}>({
   loading: true,
   isEditor: false,
   signedIn: false,
+  subject: null,
 });
 export function SessionProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -50,6 +56,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       value={{
         loading,
         signedIn: !!user,
+        subject: user?.profile.sub ?? null,
         isEditor: !!user && user.profile.sub === config.editorSub,
       }}
     >

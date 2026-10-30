@@ -1696,3 +1696,209 @@ dialog .sample-note a {
     padding: 8px 10px;
   }
 }
+
+/* Community data is visually separate from the single editorial review. */
+.drink-page {
+  max-width: 1180px;
+}
+.drink-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 42px;
+  align-items: start;
+}
+.community-box {
+  border: 1px solid var(--line);
+  padding: 24px;
+  background: #f0f2e9;
+}
+.community-box-title,
+.community-range,
+.community-review-heading,
+.community-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.community-box h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  margin: 0;
+}
+.community-box-title > span,
+.community-range,
+.community-footnote {
+  font-size: 11px;
+  color: #62685d;
+}
+.community-average {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 24px 0;
+  font-size: 12px;
+}
+.community-range b {
+  color: var(--ink);
+  margin-left: 6px;
+}
+.community-distribution {
+  height: 75px;
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  margin: 16px 0 22px;
+}
+.community-distribution > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  height: 100%;
+  gap: 6px;
+  border-bottom: 1px solid var(--line);
+}
+.community-distribution span {
+  display: block;
+  width: 100%;
+  background: #7d8c5c;
+}
+.community-distribution small {
+  font-size: 10px;
+}
+.community-sensory {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.community-sensory dt {
+  font-size: 11px;
+  color: #62685d;
+  margin-bottom: 6px;
+}
+.community-sensory dd {
+  margin: 0;
+  font-size: 17px;
+}
+.community-sensory small {
+  font-size: 10px;
+  color: #62685d;
+}
+.community-counts {
+  font-size: 11px;
+  margin: 16px 0 22px;
+}
+.community-counts summary {
+  cursor: pointer;
+}
+.community-box > .review-action {
+  width: 100%;
+}
+.community-footnote {
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+.community-compact {
+  display: block;
+  font-size: 11px;
+  color: #62685d;
+  margin: 10px 0;
+}
+.preview-drink > .community-compact {
+  margin: 0 20px 12px;
+}
+.community-section {
+  border-top: 1px solid var(--ink);
+  margin-top: 48px;
+  padding-top: 30px;
+}
+.community-list-heading h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 32px;
+  margin: 8px 0;
+}
+.community-list-heading label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+}
+.community-list-heading select {
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+}
+.community-review {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.community-review-heading time {
+  display: block;
+  font-size: 11px;
+  color: #62685d;
+  margin-top: 6px;
+}
+.community-review-summary {
+  font-weight: 600;
+}
+.community-review-ratings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 11px;
+  color: #62685d;
+  margin-top: 15px;
+}
+.community-form {
+  margin-top: 36px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  scroll-margin-top: 24px;
+}
+.community-form h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  margin: 0 0 14px;
+}
+.community-form > label {
+  margin: 24px 0;
+  max-width: 420px;
+}
+.community-form input,
+.community-form textarea {
+  font-weight: 400;
+}
+.community-delete {
+  margin-top: 20px;
+  text-decoration: underline;
+  color: #862c17;
+}
+.community-empty {
+  padding: 20px 0;
+  color: #62685d;
+}
+.editorial-review .product-dialog-heading .review-action {
+  margin-top: 14px;
+}
+@media (max-width: 900px) {
+  .drink-overview {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .community-box {
+    max-width: 100%;
+  }
+  .community-form {
+    padding: 18px;
+  }
+  .community-list-heading {
+    align-items: flex-start;
+  }
+  .community-list-heading h2 {
+    font-size: 27px;
+  }
+}

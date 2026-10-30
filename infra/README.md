@@ -13,7 +13,7 @@ Region: `us-east-1`. AWS CLI profile: `energy-index` (temporary browser login).
   the VPC. No NAT gateway required. API Gateway only allows authenticated owner
   access to editor routes; `/catalogue` is public published content.
 - TLS certificate verification uses the official AWS RDS regional CA bundle.
-- Cognito Essentials user pool, public PKCE client, registration disabled, one
+- Cognito Essentials user pool, public PKCE client, email-confirmed public registration, one
   explicitly authorized editor subject. Stale review saves return HTTP 409.
 - The former Netlify editor URL redirects to the integrated editor; GitHub write
   authorization is disabled.
@@ -62,3 +62,23 @@ Email recovery is verified. Passwords are managed by Cognito, not stored here.
 To redeploy the old-host redirect, use `netlify deploy --dir=admin/retired --prod
 --site=506dfa99-f4e7-4638-a16c-1f59bb01529d --no-build`. Do not redeploy `admin/`
 as the live editor. The old OAuth application is no longer trusted by the API.
+
+## Community rollout and checks
+
+`python3 scripts/aws/migrate-schema.py` applies checksum-verified migrations in a
+temporary Lambda in the existing private VPC, grants the application only the
+community table permissions it needs, verifies editorial data is unchanged, then
+removes the runner. It does not reopen RDS networking or import file snapshots.
+
+The Cognito helper scripts use the AWS CLI's bundled Python SDK on this host:
+`/opt/homebrew/opt/awscli/libexec/bin/python scripts/aws/enable-community.py`.
+It preserves all existing pool settings while enabling self-registration.
+`verify-community.py` uses a disposable member account to exercise create/update/
+delete, averages, conflicts, and editorial denial against the live API. It removes
+its public test review/account and restores temporary client auth-flow settings.
+Do not run that live test against a drink that already has community reviews.
+
+Email verification/recovery currently uses Cognito's default delivery, which AWS
+limits to 50 messages per day per account. Configure a verified SES sender and
+production SES access before inviting enough members to exceed that volume.
+https://docs.aws.amazon.com/cognito/latest/developerguide/quotas.html

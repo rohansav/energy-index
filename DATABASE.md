@@ -84,3 +84,23 @@ test competing writes, verify history, and confirm re-import cannot erase edits.
 Synthetic test edits exist only in that separate test database. CI also builds all
 public pages using the test database. Without this variable the integration test
 is explicitly skipped.
+
+## Community reviews
+
+Migration `002_community.sql` adds `community_users` (stable Cognito issuer/subject,
+public display name, server-assigned role), `community_reviews` (one row per user
+and product), and versioned `community_review_history`. Editorial reviews remain
+one separate record per product. No editorial ratings are included in community
+aggregates. Community Overall is required; the other four ratings are nullable.
+All ratings remain integer tenths in storage.
+
+Deletion marks the community row deleted and appends history. Deleted rows are
+excluded from public lists and aggregates; republishing reuses the same identity
+and increments the version. The API derives ownership from verified Cognito
+claims, never from a user ID supplied in the request. Writes are transactional,
+serialized per account, and reject stale versions with HTTP 409.
+
+Aggregates use grouped SQL: count, exact unrounded mean, min/max, ten distribution
+bins (1.0–1.9 through 9.0–9.9, then 10.0), and separate count/mean per optional
+category. Public displays round to one decimal. Reads for a drink's stats and list
+share a repeatable-read snapshot. Lists support newest/highest/lowest, 20 at a time.

@@ -1,3 +1,4 @@
+import { verifyCommunity } from "./community-storage";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { Pool } from "pg";
@@ -93,6 +94,7 @@ test(
         history.rows.map((row) => row.review),
         [sample.review, updated],
       );
+      await verifyCommunity(pool, sample);
     } finally {
       await pool.end();
     }

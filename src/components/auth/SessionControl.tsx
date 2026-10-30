@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useSession } from "./SessionProvider";
-import { startSignIn } from "@/lib/editor-auth";
+import { startSignIn, signOut } from "@/lib/editor-auth";
 export function SessionControl() {
   const { loading, isEditor, signedIn } = useSession();
   const [error, setError] = useState("");
@@ -19,7 +19,14 @@ export function SessionControl() {
       </Link>
     );
   if (signedIn)
-    return <span className="session-status">Signed in · no editor access</span>;
+    return (
+      <span className="session-status">
+        Member · Signed in{" "}
+        <button className="session-control" onClick={() => void signOut()}>
+          Sign out
+        </button>
+      </span>
+    );
   return (
     <span className="session-status">
       <button
@@ -30,7 +37,7 @@ export function SessionControl() {
           )
         }
       >
-        Sign in
+        Sign in / Join
       </button>
       {error && <span role="alert">{error}</span>}
     </span>

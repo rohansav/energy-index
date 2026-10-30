@@ -1,3 +1,4 @@
+import { communityStats } from "./community-repository";
 import type { Pool, PoolClient } from "pg";
 import type { Catalogue, Review } from "@/domain/types";
 import type { CatalogueRepository } from "./catalogue-repository";
@@ -70,6 +71,9 @@ export class PostgresCatalogueRepository implements CatalogueRepository {
     try {
       await client.query("BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY");
       const catalogue = await readCatalogue(client);
+      const summaries = await communityStats(client);
+      for (const drink of catalogue.drinks)
+        if (summaries[drink.id]) drink.community = summaries[drink.id];
       await client.query("COMMIT");
       return catalogue;
     } catch (error) {

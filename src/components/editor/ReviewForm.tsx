@@ -18,12 +18,14 @@ export function ReviewForm({
   onPublish,
   busy,
   dirty,
+  requiredOverall = false,
 }: {
   review: Review;
   onChange: (review: Review) => void;
   onPublish: () => void;
   busy: boolean;
   dirty: boolean;
+  requiredOverall?: boolean;
 }) {
   return (
     <form
@@ -39,6 +41,7 @@ export function ReviewForm({
             <label key={key}>
               {label}
               <select
+                required={requiredOverall && key === "score"}
                 value={review[key] ?? ""}
                 onChange={(e) =>
                   onChange({

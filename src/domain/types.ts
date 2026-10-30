@@ -46,6 +46,7 @@ export interface Review {
   body: string;
 }
 export interface Drink extends Product {
+  community?: import("./community").CommunityStats;
   review: Review;
 }
 export interface Catalogue {

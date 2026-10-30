@@ -1,16 +1,16 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { generateKeyPairSync, sign } from "node:crypto";
-import { createEditorVerifier } from "../src/api/authorizer";
+import { createSessionVerifier } from "../src/api/authorizer";
 
-test("Cognito editor verifier rejects wrong owner, client, issuer, token use, expiry and signature", async () => {
+test("Cognito sessions verify members and reject wrong client, issuer, token use, expiry and signature", async () => {
   const { privateKey, publicKey } = generateKeyPairSync("rsa", {
     modulusLength: 2048,
   });
   const pool = "us-east-1_TestPool",
     client = "test-client",
     owner = "editor-sub";
-  const verifier = createEditorVerifier(pool, client, owner);
+  const verifier = createSessionVerifier(pool, client);
   verifier.cacheJwks({
     keys: [
       {
@@ -38,8 +38,11 @@ test("Cognito editor verifier rejects wrong owner, client, issuer, token use, ex
     return `${head}.${body}.${sign("RSA-SHA256", Buffer.from(`${head}.${body}`), privateKey).toString("base64url")}`;
   };
   assert.equal((await verifier.verify(jwt())).sub, owner);
+  assert.equal(
+    (await verifier.verify(jwt({ sub: "community-member" }))).sub,
+    "community-member",
+  );
   for (const invalid of [
-    { sub: "someone-else" },
     { client_id: "wrong-client" },
     { iss: "https://example.com" },
     { token_use: "id", aud: client },
