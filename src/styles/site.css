@@ -1904,3 +1904,34 @@ dialog .sample-note a {
 }
 
 .guest-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+/* The catalogue gets its own beach setting; detail/editor pages keep their paper surface. */
+body:has(.catalogue-home) { background: #e7cbb6; }
+body:has(.catalogue-home) .site-header { position: relative; z-index: 2; background: rgba(255,248,230,.94); margin-inline: -24px; padding-inline: 24px; border-color: rgba(80,61,74,.2); }
+body:has(.catalogue-home) .site-footer { color: #493d48; }
+.beach-hero { position: relative; min-height: clamp(480px, 43vw, 660px); display: flex; align-items: center; isolation: isolate; }
+.beach-scenery { position: absolute; z-index: -1; width: 100vw; left: calc(50% - 50vw); top: -88px; height: calc(100% + 340px); overflow: hidden; background: #75628d; pointer-events: none; }
+.beach-scenery img { width: 100%; height: 100%; object-fit: cover; object-position: center 68%; image-rendering: auto; }
+.beach-title-panel { padding: 32px 38px; margin: 24px 0 48px; background: rgba(27,38,63,.83); border: 1px solid rgba(255,234,198,.35); color: #fff3d6; box-shadow: 8px 8px 0 rgba(23,33,57,.2); backdrop-filter: blur(5px); }
+.beach-title-panel .eyebrow { color: #f4c99e; letter-spacing: 2px; }
+.beach-title-panel h1 { font-size: clamp(58px,6vw,88px); line-height: 1.02; letter-spacing: -3px; margin: 20px 0; }
+.beach-title-panel p { font-size: 14px; color: #f0dfcb; margin: 0 0 28px; }
+.beach-title-panel a { display: flex; justify-content: space-between; gap: 48px; padding-top: 16px; border-top: 1px solid #8c8b93; font-size: 12px; }
+.beach-title-panel a:focus-visible { outline-color: #fff3d6; }
+.beach-scene-label { position: absolute; right: 0; bottom: 45px; color: #fff5de; background: rgba(27,38,63,.8); padding: 9px 12px; font-size: 9px; letter-spacing: 2px; }
+.catalogue-overlay { position: relative; background: rgba(255,250,238,.96); border: 1px solid rgba(255,255,255,.7); box-shadow: 0 12px 48px rgba(53,36,55,.16); padding: 0 32px 12px; margin-bottom: 32px; scroll-margin-top: 20px; }
+.catalogue-overlay .page-heading h2 { font-family: "Playfair Display",Georgia,serif; font-size: 48px; font-weight: 500; letter-spacing: -2px; margin: 10px 0; }
+.catalogue-overlay .brand-panel { background: rgba(255,253,247,.8); }
+@media (max-width: 760px) {
+  body:has(.catalogue-home) .site-header { margin-inline: -12px; padding-inline: 12px; }
+  .beach-hero { min-height: 580px; align-items: flex-start; }
+  .beach-scenery { height: calc(100% + 120px); }
+  .beach-scenery img { object-position: 82% center; }
+  .beach-title-panel { margin-top: 24px; padding: 22px 24px; }
+  .beach-title-panel h1 { font-size: 52px; }
+  .beach-title-panel p { margin-bottom: 18px; font-size: 12px; }
+  .beach-title-panel a { gap: 24px; }
+  .beach-scene-label { bottom: 20px; }
+  .catalogue-overlay { padding: 0 16px 8px; margin-inline: -8px; }
+  .catalogue-overlay .page-heading h2 { font-size: 38px; }
+}
