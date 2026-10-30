@@ -1,3 +1,4 @@
+import { roundedAverage } from "@/domain/community";
 import type { CommunityStats } from "@/domain/community";
 import { Score } from "@/components/ratings/Score";
 export function CommunitySummary({
@@ -26,7 +27,7 @@ export function CommunitySummary({
       {stats ? (
         <>
           <div className="community-average">
-            <Score value={stats.average} />
+            <Score value={roundedAverage(stats.average)} />
             <span>Average overall</span>
           </div>
           {stats.count > 1 && (
@@ -69,7 +70,9 @@ export function CommunitySummary({
                     : key[0].toUpperCase() + key.slice(1)}
                 </dt>
                 <dd>
-                  {value.average === null ? "—" : value.average.toFixed(1)}
+                  {value.average === null
+                    ? "—"
+                    : roundedAverage(value.average).toFixed(1)}
                   <small> / 5</small>
                 </dd>
               </div>

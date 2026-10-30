@@ -28,7 +28,7 @@ test("community box handles empty, single-review and aggregate states", () => {
   const single = render({ ...stats, count: 1 });
   assert.doesNotMatch(single, /community-distribution/);
   const multiple = render(stats);
-  assert.match(multiple, /7.3/);
+  assert.match(multiple, /7.4/);
   assert.match(multiple, /Lowest/);
   assert.match(multiple, /8.7/);
   assert.match(multiple, /0.0/);

@@ -25,3 +25,7 @@ export interface OwnCommunityReview {
   version: number;
   displayName: string;
 }
+
+/** Round only at display time; stored aggregates retain their full precision. */
+export const roundedAverage = (value: number) =>
+  Math.round((value + Number.EPSILON) * 10) / 10;
