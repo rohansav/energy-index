@@ -47,7 +47,6 @@ export function ReviewRow({ drink, rank }: { drink: Drink; rank: number }) {
             ))}
         </div>
         <SensoryProfile drink={drink} />
-        <CommunityCompact stats={drink.community} />
         <ReviewAction review={drink.review} />
         <details>
           <summary>
@@ -59,7 +58,10 @@ export function ReviewRow({ drink, rank }: { drink: Drink; rank: number }) {
           </div>
         </details>
       </div>
-      <Score value={drink.review.score} />
+      <div className="review-scores">
+        <Score value={drink.review.score} label="EDITOR" />
+        <CommunityCompact stats={drink.community} />
+      </div>
     </article>
   );
 }

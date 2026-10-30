@@ -17,6 +17,15 @@ interface Props {
 export function BrandCard({ brand, drinks, index }: Props) {
   const ordered = rankDrinks(drinks),
     rated = ordered.some((drink) => isRated(drink.review));
+  const topFour = ordered.slice(0, 4);
+  const communityExtras = ordered
+    .filter(
+      (drink) =>
+        (drink.community?.count ?? 0) > 0 &&
+        !topFour.some((top) => top.id === drink.id),
+    )
+    .sort((a, b) => b.community!.average - a.community!.average)
+    .slice(0, 2);
   return (
     <section
       data-brand={brand.name}
@@ -28,7 +37,7 @@ export function BrandCard({ brand, drinks, index }: Props) {
         <span>{rated ? "TOP 4 PREVIEW" : "FLAVOR PREVIEW"}</span>
         <span>{rated ? "OVERALL ↓" : "UNRATED · A–Z"}</span>
       </div>
-      {ordered.slice(0, 4).map((drink, rank) => (
+      {topFour.map((drink, rank) => (
         <div className="preview-drink" key={drink.id}>
           <Link
             href={drinkPath(drink.id)}
@@ -49,6 +58,35 @@ export function BrandCard({ brand, drinks, index }: Props) {
           <ReviewAction review={drink.review} />
         </div>
       ))}
+      {communityExtras.length > 0 && (
+        <>
+          <div className="list-heading">
+            <span>COMMUNITY RATED</span>
+            <span>AVERAGE / 10</span>
+          </div>
+          {communityExtras.map((drink) => (
+            <div className="preview-drink" key={drink.id}>
+              <Link
+                href={drinkPath(drink.id)}
+                className="drink-row photo-row community-preview-row"
+              >
+                <span className="preview-rank" aria-hidden="true">
+                  ↗
+                </span>
+                <ProductPhoto product={drink} className="mini-product" />
+                <span>
+                  <span className="drink-name">{drink.name}</span>
+                  <span className="drink-note">
+                    {drink.community!.count} community{" "}
+                    {drink.community!.count === 1 ? "review" : "reviews"}
+                  </span>
+                </span>
+                <Score value={drink.community!.average} compact />
+              </Link>
+            </div>
+          ))}
+        </>
+      )}
       <Link className="brand-all-link" href={brandPath(brand.name)}>
         Browse all {drinks.length} flavors <span>→</span>
       </Link>

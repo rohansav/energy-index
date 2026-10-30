@@ -1903,4 +1903,75 @@ dialog .sample-note a {
   }
 }
 
-.guest-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.guest-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Keep community aggregates beside the editorial score, including on narrow rows. */
+.community-compact.has-ratings {
+  color: var(--ink);
+}
+.community-compact strong {
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.review-scores {
+  min-width: 0;
+  text-align: center;
+}
+.review-scores .community-compact {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+.review-scores .community-compact > span:first-child {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.review-scores .community-compact strong {
+  display: block;
+  font-size: 27px;
+}
+.review-scores .community-compact > span:last-child {
+  display: block;
+  font-size: 10px;
+}
+@media (max-width: 600px) {
+  .review-scores {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .review-scores .community-compact strong {
+    font-size: 22px;
+  }
+}
+@media (max-width: 600px) {
+  .excerpt-row .review-scores {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+  }
+  .review-scores .excerpt-rating {
+    padding-top: 0;
+  }
+  .review-scores .community-compact {
+    margin: 0;
+    padding: 0 0 0 20px;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+  .excerpt-row:has(.review-scores) .excerpt-copy h2,
+  .excerpt-row:has(.review-scores) .excerpt-copy .eyebrow {
+    padding-right: 0;
+  }
+}

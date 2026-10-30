@@ -20,7 +20,9 @@ function createRepository(): CatalogueRepository {
       const url = process.env.NEXT_PUBLIC_CATALOGUE_API;
       if (!url?.startsWith("https://"))
         throw new Error("HTTPS catalogue API is required");
-      const response = await fetch(`${url}/catalogue`, {
+      // A static export needs a fresh database snapshot on every build, not a
+      // persisted Next.js fetch-cache entry from an earlier export.
+      const response = await fetch(`${url}/catalogue?build=${Date.now()}`, {
         signal: AbortSignal.timeout(30000),
       });
       if (!response.ok) throw new Error("Database catalogue API unavailable");

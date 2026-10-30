@@ -2,8 +2,8 @@ import type { CSSProperties } from "react";
 import type { Rating } from "@/domain/types";
 import { formatRating, scoreColor, scoreDescription } from "@/domain/ratings";
 
-type Props = { value: Rating; compact?: boolean };
-export function Score({ value, compact = false }: Props) {
+type Props = { value: Rating; compact?: boolean; label?: string };
+export function Score({ value, compact = false, label = "OVERALL" }: Props) {
   const style =
     value === null
       ? undefined
@@ -26,7 +26,7 @@ export function Score({ value, compact = false }: Props) {
       style={style}
       title={title}
     >
-      <span>OVERALL</span>
+      <span>{label}</span>
       <strong>{formatRating(value)}</strong>
       <span>{value === null ? "NOT REVIEWED" : "OUT OF 10"}</span>
     </div>
