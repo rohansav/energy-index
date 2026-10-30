@@ -42,7 +42,7 @@ Review changes trigger GitHub Actions, which validates the content, builds all p
 | Can images                                  | `assets/drinks/`                                      |
 | Existing editor configuration               | `admin/`                                              |
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for data flow and future database integration, [SOURCES.md](SOURCES.md) for product provenance, and [admin/SETUP.md](admin/SETUP.md) for authentication recovery.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for data flow and storage boundaries, [SOURCES.md](SOURCES.md) for product provenance, and [admin/SETUP.md](admin/SETUP.md) for authentication recovery.
 
 ## Routes
 
@@ -60,4 +60,4 @@ Overall (`score`) is 1.0–10.0. Sweetness, Sourness (stored as `tartness` for c
 
 `notes` is the short summary (300 characters), `body` is plain-text review prose (20,000 characters). Review text is rendered through React escaping, never interpreted as HTML. Identity changes, malformed ratings, missing photos, and unknown review files fail the build.
 
-No new authentication screens, review forms, community accounts, dashboard, database, or paid services are introduced in this refactor. Your existing editor remains the publishing interface.
+PostgreSQL storage and migration tooling are available; see [DATABASE.md](DATABASE.md). Production remains file-backed until the hosted database and existing editor are switched together. No new authentication screens, review forms, community accounts, dashboard, or paid services have been introduced.

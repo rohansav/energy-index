@@ -35,16 +35,19 @@ The Netlify-hosted Decap editor uses GitHub OAuth and writes `reviews/*.json`. I
 
 Changes to editor code still need a Netlify upload; normal review publishing does not. This refactor does not redeploy or reset the live editor. Its compatible source is kept in `admin/` and is formatted for readability.
 
-## Future centralized database
+## PostgreSQL storage
 
-This is a typed rendering and infrastructure migration, not a database migration. Git remains the current content store, and reviews still trigger static builds.
+`CatalogueRepository` now has a PostgreSQL adapter in `src/server/postgres-repository.ts`.
+`CATALOGUE_STORAGE=postgres` selects it explicitly; a database error never falls back
+to files. Routes and components are unchanged. Reads use a consistent transaction;
+validated writes use optimistic versions and atomically append review history.
 
-When community features are approved:
+`src/server/migrate-database.ts` applies checksummed SQL migrations and imports the
+file catalogue transactionally, verifying exact read-back equality. It refuses to
+overwrite an existing database that differs. The original file adapter remains in
+`src/server/file-catalogue.ts` for migration and the current production deployment.
 
-1. Implement `CatalogueRepository` against PostgreSQL, preserving product IDs and normalized output types.
-2. Add users, roles, editorial/community review records, and server-side write validation and authorization.
-3. Add review submission and moderation APIs with rate limits; keep editorial scores separate from community aggregates.
-4. Move Next.js from static export to server-capable hosting and use appropriate revalidation after database writes.
-5. Replace Decap's Git writer with the authenticated application workflow, then retire the Netlify OAuth helper.
-
-The display components need not know whether their props originated from JSON or PostgreSQL. Authentication, database provisioning, and community review submissions are deliberately not implemented or simulated here.
+See [DATABASE.md](DATABASE.md) for commands, verification, backups, and the remaining
+hosted cutover. The local migration is complete; production and the editor have not
+been switched. This distinction is intentional: switching the public reader before
+the editor writer would strand new Git-based reviews.
