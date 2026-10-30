@@ -1,5 +1,4 @@
 "use client";
-import { BeachHero } from "./BeachHero";
 import { useLiveCatalogue } from "@/lib/live-catalogue";
 import { useState } from "react";
 import type { Catalogue } from "@/domain/types";
@@ -16,100 +15,89 @@ export function CatalogueView(initial: Catalogue) {
     filtered.some((drink) => drink.brand === brand.name),
   );
   return (
-    <div className="catalogue-home">
-      <BeachHero />
-      <section
-        id="browse-catalogue"
-        className="catalogue-overlay"
-        aria-labelledby="browse-title"
-      >
-        <div className="page-heading">
-          <div>
-            <div className="eyebrow">THE CATALOGUE / 001</div>
-            <h2 id="browse-title">By brand.</h2>
-            <p>US flavors, product details, and a place for every review.</p>
+    <>
+      <div className="page-heading">
+        <div>
+          <div className="eyebrow">THE CATALOGUE / 001</div>
+          <h1>By brand.</h1>
+          <p>US flavors, product details, and a place for every review.</p>
+        </div>
+        <div className="catalogue-stats">
+          <strong>
+            {String(brands.length).padStart(2, "0")} <span>brands</span>
+          </strong>
+          <strong>
+            <span className="stat-number">{drinks.length}</span>{" "}
+            <span>flavors</span>
+          </strong>
+        </div>
+      </div>
+      <div className="toolbar">
+        <div className="views" aria-label="Catalogue layout">
+          <button
+            type="button"
+            className={view === "brands" ? "selected" : ""}
+            aria-pressed={view === "brands"}
+            onClick={() => setView("brands")}
+          >
+            By brand
+          </button>
+          <button
+            type="button"
+            className={view === "all" ? "selected" : ""}
+            aria-pressed={view === "all"}
+            onClick={() => setView("all")}
+          >
+            All flavors
+          </button>
+        </div>
+        <label className="search">
+          <span aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            aria-label="Search brands or drinks"
+            placeholder="Find a brand or flavor"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </label>
+        <span className="sort-note">
+          SCORED FIRST, THEN UNRATED <span aria-hidden="true">↓</span>
+        </span>
+      </div>
+      <div className="results-meta">
+        <span>
+          {shownBrands.length} BRANDS / {filtered.length} FLAVORS
+        </span>
+        <span>OVERALL / UNRATED</span>
+      </div>
+      <div aria-live="polite">
+        {!filtered.length ? (
+          <p className="empty">No matches. Try a different brand or flavor.</p>
+        ) : view === "brands" ? (
+          <div className="brand-grid">
+            {shownBrands.map((brand) => (
+              <BrandCard
+                key={brand.name}
+                brand={brand}
+                index={brands.indexOf(brand)}
+                drinks={filtered.filter((drink) => drink.brand === brand.name)}
+              />
+            ))}
           </div>
-          <div className="catalogue-stats">
-            <strong>
-              {String(brands.length).padStart(2, "0")} <span>brands</span>
-            </strong>
-            <strong>
-              <span className="stat-number">{drinks.length}</span>{" "}
-              <span>flavors</span>
-            </strong>
-          </div>
-        </div>
-        <div className="toolbar">
-          <div className="views" aria-label="Catalogue layout">
-            <button
-              type="button"
-              className={view === "brands" ? "selected" : ""}
-              aria-pressed={view === "brands"}
-              onClick={() => setView("brands")}
-            >
-              By brand
-            </button>
-            <button
-              type="button"
-              className={view === "all" ? "selected" : ""}
-              aria-pressed={view === "all"}
-              onClick={() => setView("all")}
-            >
-              All flavors
-            </button>
-          </div>
-          <label className="search">
-            <span aria-hidden="true">⌕</span>
-            <input
-              type="search"
-              aria-label="Search brands or drinks"
-              placeholder="Find a brand or flavor"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </label>
-          <span className="sort-note">
-            SCORED FIRST, THEN UNRATED <span aria-hidden="true">↓</span>
-          </span>
-        </div>
-        <div className="results-meta">
-          <span>
-            {shownBrands.length} BRANDS / {filtered.length} FLAVORS
-          </span>
-          <span>OVERALL / UNRATED</span>
-        </div>
-        <div aria-live="polite">
-          {!filtered.length ? (
-            <p className="empty">
-              No matches. Try a different brand or flavor.
-            </p>
-          ) : view === "brands" ? (
-            <div className="brand-grid">
-              {shownBrands.map((brand) => (
-                <BrandCard
-                  key={brand.name}
-                  brand={brand}
-                  index={brands.indexOf(brand)}
-                  drinks={filtered.filter(
-                    (drink) => drink.brand === brand.name,
-                  )}
-                />
-              ))}
-            </div>
-          ) : (
-            <DrinkTable drinks={filtered} />
-          )}
-        </div>
-        <div className="catalogue-note">
-          <span>CATALOGUE NOTES</span>
-          <p>
-            US brand catalogues checked October 29, 2026. Ratings are personal;
-            unreviewed flavors are marked Unrated. Limited editions and
-            uncertain availability are labeled. Product photos belong to their
-            respective brands.
-          </p>
-        </div>
-      </section>
-    </div>
+        ) : (
+          <DrinkTable drinks={filtered} />
+        )}
+      </div>
+      <div className="catalogue-note">
+        <span>CATALOGUE NOTES</span>
+        <p>
+          US brand catalogues checked October 29, 2026. Ratings are personal;
+          unreviewed flavors are marked Unrated. Limited editions and uncertain
+          availability are labeled. Product photos belong to their respective
+          brands.
+        </p>
+      </div>
+    </>
   );
 }
