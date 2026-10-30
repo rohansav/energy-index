@@ -19,6 +19,8 @@ export function ReviewForm({
   busy,
   dirty,
   requiredOverall = false,
+  published = false,
+  awaitingConfirmation = false,
 }: {
   review: Review;
   onChange: (review: Review) => void;
@@ -26,6 +28,8 @@ export function ReviewForm({
   busy: boolean;
   dirty: boolean;
   requiredOverall?: boolean;
+  published?: boolean;
+  awaitingConfirmation?: boolean;
 }) {
   return (
     <form
@@ -95,11 +99,19 @@ export function ReviewForm({
         <div className="editor-publish">
           <span>{dirty ? "Unsaved changes" : "Up to date"}</span>
           <button
-            className="editor-primary"
+            className={`editor-primary${published && !dirty && !busy ? " is-published" : ""}`}
+            aria-live="polite"
+            aria-busy={busy}
             type="submit"
-            disabled={busy || !dirty}
+            disabled={busy || (!dirty && !awaitingConfirmation)}
           >
-            {busy ? "Publishing…" : "Publish review"}
+            {busy
+              ? "Publishing…"
+              : published && !dirty
+                ? "✓ Published"
+                : awaitingConfirmation && !dirty
+                  ? "Check publication"
+                  : "Publish review"}
           </button>
         </div>
       </fieldset>

@@ -10,6 +10,7 @@ import {
 import { requestedDrink } from "@/lib/auth-navigation";
 import { basePath } from "@/lib/paths";
 import { ProductPhoto } from "@/components/drinks/ProductPhoto";
+import { confirmPublication } from "@/lib/confirm-publication";
 import { ReviewForm } from "./ReviewForm";
 export function Editor({
   products,
@@ -29,6 +30,10 @@ export function Editor({
   const [original, setOriginal] = useState("");
   const [version, setVersion] = useState(0);
   const [busy, setBusy] = useState(false);
+  const [published, setPublished] = useState(false);
+  const [pendingPublication, setPendingPublication] = useState<Review | null>(
+    null,
+  );
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const product = products.find((product) => product.id === review?.id);
@@ -109,6 +114,8 @@ export function Editor({
       const data = await editorRequest<{ review: Review; version: number }>(
         `/editor/reviews/${id}`,
       );
+      setPublished(false);
+      setPendingPublication(null);
       setReview(data.review);
       setOriginal(JSON.stringify(data.review));
       setVersion(data.version);
@@ -119,7 +126,8 @@ export function Editor({
     }
   }
   async function publish() {
-    if (!review) return;
+    if (!review || busy) return;
+    setPublished(false);
     setBusy(true);
     setError("");
     setMessage("");
@@ -129,19 +137,26 @@ export function Editor({
       body: review.body.trim(),
     };
     try {
-      const result = await editorRequest<{ version: number }>(
-        `/editor/reviews/${review.id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify({ review: normalized, version }),
-        },
-      );
-      setVersion(result.version);
-      setReview(normalized);
-      setOriginal(JSON.stringify(normalized));
-      setReviews((items) =>
-        items.map((r) => (r.id === normalized.id ? normalized : r)),
-      );
+      if (!pendingPublication || dirty) {
+        const result = await editorRequest<{ version: number }>(
+          `/editor/reviews/${review.id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({ review: normalized, version }),
+          },
+        );
+        setVersion(result.version);
+        setReview(normalized);
+        setOriginal(JSON.stringify(normalized));
+        setReviews((items) =>
+          items.map((r) => (r.id === normalized.id ? normalized : r)),
+        );
+        setPendingPublication(normalized);
+      }
+      await confirmPublication(normalized);
+      setPendingPublication(null);
+      setPublished(true);
+      window.dispatchEvent(new Event("catalogue-refresh"));
       setMessage("Published. Your ratings and notes are live.");
     } catch (e) {
       setError((e as Error).message);
@@ -296,10 +311,15 @@ export function Editor({
                 </p>
                 <ReviewForm
                   review={review}
-                  onChange={setReview}
+                  onChange={(next) => {
+                    setPublished(false);
+                    setReview(next);
+                  }}
                   onPublish={() => void publish()}
                   busy={busy}
                   dirty={dirty}
+                  published={published}
+                  awaitingConfirmation={!!pendingPublication}
                 />
               </>
             ) : (

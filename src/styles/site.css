@@ -1975,3 +1975,10 @@ dialog .sample-note a {
     padding-right: 0;
   }
 }
+
+.editor-page .editor-primary.is-published:disabled {
+  background: #d9edcf;
+  color: #24502c;
+  border-color: #a8ce99;
+  opacity: 1;
+}

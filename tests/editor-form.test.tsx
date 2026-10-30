@@ -55,3 +55,48 @@ test("JWT-shaped credentials cannot fall back to GitHub identity", async () => {
     globalThis.fetch = original;
   }
 });
+
+test("publish button distinguishes pending, confirmed, edited and retry states", () => {
+  const review = {
+    id: "test",
+    brand: "Test",
+    name: "Test",
+    score: 7,
+    sweetness: null,
+    tartness: null,
+    dryness: null,
+    energy: null,
+    notes: "",
+    body: "",
+  };
+  const render = (state: {
+    busy: boolean;
+    dirty: boolean;
+    published?: boolean;
+    awaitingConfirmation?: boolean;
+  }) =>
+    renderToStaticMarkup(
+      <ReviewForm
+        review={review}
+        onChange={() => {}}
+        onPublish={() => {}}
+        {...state}
+      />,
+    );
+  const busy = render({ busy: true, dirty: false });
+  assert.match(busy, /Publishing…/);
+  assert.match(busy, /aria-busy="true"/);
+  const confirmed = render({ busy: false, dirty: false, published: true });
+  assert.match(confirmed, /is-published/);
+  assert.match(confirmed, /✓ Published/);
+  const edited = render({ busy: false, dirty: true, published: true });
+  assert.doesNotMatch(edited, /is-published/);
+  assert.match(edited, /Publish review/);
+  const retry = render({
+    busy: false,
+    dirty: false,
+    awaitingConfirmation: true,
+  });
+  assert.match(retry, /Check publication/);
+  assert.doesNotMatch(retry, /disabled=""/);
+});
