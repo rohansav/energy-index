@@ -11,10 +11,24 @@ import { ReviewText } from "../src/components/drinks/ReviewText";
 import { SensoryProfile } from "../src/components/ratings/SensoryProfile";
 
 const catalogue = await loadFileCatalogue();
-test("catalogue server render has six brand cards and four previews per brand", () => {
+test("catalogue server render has six brand cards and up to three rated editor previews per brand", () => {
   const html = renderToStaticMarkup(<CatalogueView {...catalogue} />);
   assert.equal((html.match(/class="brand-panel"/g) || []).length, 6);
-  assert.equal((html.match(/class="drink-row photo-row"/g) || []).length, 24);
+  assert.equal(
+    (html.match(/class="drink-row photo-row"/g) || []).length,
+    catalogue.brands.reduce(
+      (count, brand) =>
+        count +
+        Math.min(
+          3,
+          catalogue.drinks.filter(
+            (drink) =>
+              drink.brand === brand.name && drink.review.score !== null,
+          ).length,
+        ),
+      0,
+    ),
+  );
   assert(html.includes(String(catalogue.drinks.length)));
 });
 test("all brand pages render every drink and individual drink-page links", () => {

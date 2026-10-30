@@ -328,3 +328,11 @@ body:has(.catalogue-home) .wordmark span {
     width: 47px;
   }
 }
+
+.catalogue-home .ranking-empty {
+  margin: 0;
+  padding: 20px;
+  font-size: 12px;
+  color: #62685d;
+  border-bottom: 1px solid var(--line);
+}
