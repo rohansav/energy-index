@@ -19,6 +19,12 @@ async function files(directory) {
 const htmlFiles = (await files(root)).filter((file) => file.endsWith(".html"));
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
+  if (html.includes('rel="stylesheet"')) {
+    assert(
+      html.includes("<style data-export-styles>"),
+      `Missing embedded styles: ${file}`,
+    );
+  }
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = match[1];
     if (!url.startsWith(`${base}/`)) continue;
