@@ -89,3 +89,8 @@ per account per drink counts toward the average; editing updates that contributi
 and deleting removes it. Your email and login identity are not shown publicly.
 The editor account may submit a separate community review, but its editorial
 review never counts automatically as a community vote.
+
+Visitors can choose **Review as a guest** without creating an account. Guest
+reviews show **Anonymous** and can be edited/deleted from the same browser.
+Clearing site data loses that access. Signed-in reviewing remains available.
+Guest reviews publish immediately and count toward community statistics.

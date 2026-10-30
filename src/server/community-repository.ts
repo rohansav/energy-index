@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type { Pool, PoolClient } from "pg";
 import { z } from "zod";
 import type {
@@ -98,19 +99,21 @@ export class CommunityRepository {
             : "";
       const rows = (
         await client.query(
-          `SELECT r.*,p.metadata,u.display_name FROM community_reviews r JOIN community_users u ON u.id=r.user_id JOIN products p ON p.id=r.product_id WHERE r.product_id=$1 AND NOT r.deleted ORDER BY ${order} r.created_at DESC,r.user_id LIMIT 21 OFFSET $2`,
+          `SELECT r.*,p.metadata,u.display_name,u.issuer FROM community_reviews r JOIN community_users u ON u.id=r.user_id JOIN products p ON p.id=r.product_id WHERE r.product_id=$1 AND NOT r.deleted ORDER BY ${order} r.created_at DESC,r.user_id LIMIT 21 OFFSET $2`,
           [id, offset],
         )
       ).rows;
-      const reviews: CommunityEntry[] = rows
-        .slice(0, 20)
-        .map((r) => ({
-          authorId: r.user_id,
-          displayName: r.display_name,
-          review: decode(r),
-          createdAt: r.created_at.toISOString(),
-          updatedAt: r.updated_at.toISOString(),
-        }));
+      const reviews: CommunityEntry[] = rows.slice(0, 20).map((r) => ({
+        authorId:
+          r.issuer === "energy-index:guest"
+            ? createHash("sha256").update(`${r.user_id}:${id}`).digest("hex")
+            : r.user_id,
+        displayName:
+          r.issuer === "energy-index:guest" ? "Anonymous" : r.display_name,
+        review: decode(r),
+        createdAt: r.created_at.toISOString(),
+        updatedAt: r.updated_at.toISOString(),
+      }));
       await client.query("COMMIT");
       return {
         stats,
@@ -165,7 +168,11 @@ export class CommunityRepository {
         )
       ).rows[0];
       if (!remove) {
-        const name = displayNameSchema.parse(input.displayName);
+        const name = displayNameSchema.parse(
+          actor.issuer === "energy-index:guest"
+            ? "Anonymous"
+            : input.displayName,
+        );
         user = (
           await client.query(
             `INSERT INTO community_users(issuer,subject,display_name,role) VALUES($1,$2,$3,$4) ON CONFLICT(issuer,subject) DO UPDATE SET display_name=EXCLUDED.display_name,role=EXCLUDED.role RETURNING id`,

@@ -1,3 +1,4 @@
+import { guestActor, limitGuest, GuestError } from "../server/guest-reviews";
 import type { APIGatewayProxyEventV2WithLambdaAuthorizer } from "aws-lambda";
 import { z, ZodError } from "zod";
 import {
@@ -31,6 +32,41 @@ export async function handler(
   try {
     if (method === "GET" && path === "/catalogue")
       return reply(200, await repository().getCatalogue());
+    const guestId = path.match(/^\/guest\/([a-z0-9-]+)$/)?.[1];
+    if (guestId) {
+      const actor = guestActor(event.headers?.["x-guest-token"]);
+      const community = new CommunityRepository(databasePool());
+      if (method === "GET")
+        return reply(200, await community.mine(guestId, actor));
+      if (method !== "PUT" && method !== "DELETE")
+        return reply(405, { error: "Method not allowed" });
+      const body = event.isBase64Encoded
+        ? Buffer.from(event.body ?? "", "base64").toString()
+        : (event.body ?? "");
+      if (Buffer.byteLength(body) > 100000)
+        return reply(413, { error: "Review is too large" });
+      const input = z
+        .object({
+          version: z.number().int().nonnegative(),
+          review: z.unknown().optional(),
+          website: z.string().max(0).optional(),
+        })
+        .parse(JSON.parse(body));
+      await limitGuest(
+        databasePool(),
+        actor.subject,
+        event.requestContext.http.sourceIp,
+      );
+      return reply(
+        200,
+        await community.save(
+          guestId,
+          actor,
+          { ...input, displayName: "Anonymous" },
+          method === "DELETE",
+        ),
+      );
+    }
     const communityMatch = path.match(/^\/community\/([a-z0-9-]+)(\/mine)?$/);
     if (communityMatch) {
       const [, drinkId, mine] = communityMatch;
@@ -135,6 +171,8 @@ export async function handler(
     }
     return reply(405, { error: "Method not allowed" });
   } catch (error) {
+    if (error instanceof GuestError)
+      return reply(error.status, { error: error.message });
     if (error instanceof CommunityNotFound)
       return reply(404, { error: "Drink or review not found" });
     if (

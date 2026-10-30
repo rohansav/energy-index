@@ -13,6 +13,7 @@ const fingerprint=async()=> (await pool.query("SELECT md5(jsonb_agg(to_jsonb(r) 
 const before=await fingerprint();await migrateDatabase(pool);
 await pool.query("GRANT SELECT,INSERT,UPDATE ON community_users,community_reviews TO energy_app");
 await pool.query("GRANT INSERT ON community_review_history TO energy_app");
+await pool.query("GRANT SELECT,INSERT,UPDATE,DELETE ON guest_rate_limits TO energy_app");
 return {editorialUnchanged:before===await fingerprint(),communityCount:Number((await pool.query('SELECT count(*) AS count FROM community_reviews WHERE NOT deleted')).rows[0].count)};
 }finally{await pool.end();}}
 '''

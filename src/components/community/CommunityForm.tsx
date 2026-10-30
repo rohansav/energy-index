@@ -1,4 +1,9 @@
 "use client";
+import {
+  createGuestCredential,
+  hasGuestCredential,
+  guestRequest,
+} from "@/lib/guest-auth";
 import { reviewSchema } from "@/server/validation";
 import { useEffect, useState } from "react";
 import type { Drink, Review } from "@/domain/types";
@@ -26,6 +31,17 @@ export function CommunityForm({
   onSaved: () => Promise<unknown>;
 }) {
   const { signedIn, loading, subject } = useSession();
+  const [guest, setGuest] = useState(false);
+  const [website, setWebsite] = useState("");
+  const isGuest = guest && !signedIn;
+  const canReview = signedIn || isGuest;
+  const request = isGuest ? guestRequest : editorRequest;
+  const endpoint = isGuest
+    ? `/guest/${drink.id}`
+    : `/community/${drink.id}/mine`;
+  useEffect(() => {
+    if (hasGuestCredential()) setGuest(true);
+  }, []);
   const [review, setReview] = useState(() => blank(drink)),
     [name, setName] = useState(""),
     [version, setVersion] = useState(0),
@@ -36,20 +52,23 @@ export function CommunityForm({
     [error, setError] = useState(""),
     [message, setMessage] = useState("");
   const dirty = ready && JSON.stringify({ review, name }) !== original;
-  const draftKey = `community-draft:${subject}:${drink.id}`;
+  const draftKey = `community-draft:${isGuest ? "guest" : subject}:${drink.id}`;
   async function load(restore = false) {
     setReady(false);
     setError("");
     try {
-      const own = await editorRequest<OwnCommunityReview>(
-        `/community/${drink.id}/mine`,
-      );
+      const own = await request<OwnCommunityReview>(endpoint);
       const r = own.review ?? blank(drink);
       setReview(r);
-      setName(own.displayName);
+      setName(isGuest ? "Anonymous" : own.displayName);
       setVersion(own.version);
       setExists(!!own.review);
-      setOriginal(JSON.stringify({ review: r, name: own.displayName }));
+      setOriginal(
+        JSON.stringify({
+          review: r,
+          name: isGuest ? "Anonymous" : own.displayName,
+        }),
+      );
       if (restore) {
         try {
           const saved = JSON.parse(sessionStorage.getItem(draftKey) ?? "null");
@@ -79,11 +98,11 @@ export function CommunityForm({
     }
   }
   useEffect(() => {
-    if (signedIn) void load(true);
+    if (!loading && canReview) void load(true);
     else setReady(false);
-  }, [signedIn, subject, drink.id]);
+  }, [signedIn, subject, drink.id, isGuest, loading]);
   useEffect(() => {
-    if (!ready || !subject) return;
+    if (!ready || !canReview) return;
     try {
       if (dirty)
         sessionStorage.setItem(
@@ -94,7 +113,7 @@ export function CommunityForm({
     } catch {
       /* In-memory edits still work when storage is full. */
     }
-  }, [ready, subject, dirty, draftKey, review, name, version]);
+  }, [ready, canReview, dirty, draftKey, review, name, version]);
   useEffect(() => {
     const warn = (e: BeforeUnloadEvent) => {
       if (dirty) {
@@ -123,9 +142,14 @@ export function CommunityForm({
     setError("");
     setMessage("");
     try {
-      await editorRequest(`/community/${drink.id}/mine`, {
+      await request(endpoint, {
         method: remove ? "DELETE" : "PUT",
-        body: JSON.stringify({ version, displayName: name.trim(), review }),
+        body: JSON.stringify({
+          version,
+          displayName: name.trim(),
+          review,
+          website,
+        }),
       });
       setMessage(
         remove
@@ -146,9 +170,23 @@ export function CommunityForm({
       <h3>{exists ? "Your community review" : "Write a community review"}</h3>
       {loading ? (
         <p>Checking your session…</p>
-      ) : !signedIn ? (
+      ) : !canReview ? (
         <>
-          <p>Sign in or create an account to share your ratings and notes.</p>
+          <p>No account needed. Guest reviews are published as Anonymous.</p>
+          <button
+            className="editor-primary"
+            onClick={() => {
+              try {
+                createGuestCredential();
+                setGuest(true);
+                setError("");
+              } catch (e) {
+                setError((e as Error).message);
+              }
+            }}
+          >
+            Review as a guest
+          </button>
           <button
             className="editor-primary"
             onClick={() => void startSignIn().catch((e) => setError(e.message))}
@@ -160,21 +198,38 @@ export function CommunityForm({
         <>
           {ready ? (
             <>
-              <p>One review per person. Your review publishes immediately.</p>
-              <label>
-                Public display name
-                <input
-                  maxLength={40}
-                  minLength={2}
-                  value={name}
-                  disabled={busy}
-                  onChange={(e) => setName(e.target.value)}
-                  autoComplete="nickname"
-                />
-                <small>
-                  Shown with your reviews. Your email stays private.
-                </small>
-              </label>
+              <p>
+                {isGuest
+                  ? "Published as Anonymous. Edit or delete from this browser; clearing browser data loses that access."
+                  : "One review per account. Your review publishes immediately."}
+              </p>
+              {isGuest && (
+                <label className="guest-honeypot" aria-hidden="true">
+                  Website
+                  <input
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </label>
+              )}
+              {!isGuest && (
+                <label>
+                  Public display name
+                  <input
+                    maxLength={40}
+                    minLength={2}
+                    value={name}
+                    disabled={busy}
+                    onChange={(e) => setName(e.target.value)}
+                    autoComplete="nickname"
+                  />
+                  <small>
+                    Shown with your reviews. Your email stays private.
+                  </small>
+                </label>
+              )}
               <ReviewForm
                 review={review}
                 onChange={setReview}
@@ -203,7 +258,7 @@ export function CommunityForm({
       {error && (
         <div role="alert" className="editor-error">
           {error}
-          {signedIn && (
+          {canReview && (
             <button
               onClick={() => {
                 if (

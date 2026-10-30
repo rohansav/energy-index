@@ -82,3 +82,9 @@ Email verification/recovery currently uses Cognito's default delivery, which AWS
 limits to 50 messages per day per account. Configure a verified SES sender and
 production SES access before inviting enough members to exceed that volume.
 https://docs.aws.amazon.com/cognito/latest/developerguide/quotas.html
+
+Guest deployment: run `scripts/aws/migrate-schema.py`, build the API with
+`node scripts/build-api.mjs`, then run `scripts/aws/deploy-api.py`. The deployer
+creates and preserves a random `GUEST_RATE_SECRET` in Lambda configuration. Guest
+routes validate their own `X-Guest-Token` credential; they do not use Cognito.
+CORS allows that header only from the catalogue origin. Keep the secret private.

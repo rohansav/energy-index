@@ -104,3 +104,20 @@ Aggregates use grouped SQL: count, exact unrounded mean, min/max, ten distributi
 bins (1.0–1.9 through 9.0–9.9, then 10.0), and separate count/mean per optional
 category. Public displays round to one decimal. Reads for a drink's stats and list
 share a repeatable-read snapshot. Lists support newest/highest/lowest, 20 at a time.
+
+Guest reviews use the existing community tables with issuer `energy-index:guest`.
+The browser generates a 256-bit random credential and keeps it in localStorage;
+the API stores only its SHA-256 digest as the private subject. Guest names are
+server-enforced as Anonymous. Public guest author IDs are scoped to each drink,
+so they neither reveal the credential nor link a guest across drinks.
+Guest ratings contribute to the same aggregates as account reviews. Editorial
+reviews remain separate. Browser-data deletion loses ownership access; another
+browser is a different guest. This is not proof of unique people.
+
+Guest writes have atomic database limits of 10 per credential and 20 per network
+address per clock hour, including edits/deletes. Network addresses are HMAC-hashed
+with a server secret and the hour; raw addresses are not saved in this table.
+Rate records expire after two hours and are purged on subsequent guest writes.
+A hidden website field rejects basic form bots. No CAPTCHA or moderation queue
+is configured. These controls discourage abuse but cannot prevent distributed
+or determined duplicate voting. Hosting providers may retain network logs.

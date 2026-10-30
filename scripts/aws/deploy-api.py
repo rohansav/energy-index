@@ -1,7 +1,7 @@
 """Deploy the existing catalogue/editor persistence API. No credentials are printed.
 Requires an authenticated energy-index AWS CLI profile and .env.aws.json locally.
 """
-import json, subprocess, pathlib, time, zipfile
+import json, subprocess, pathlib, time, zipfile, secrets
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 REGION='us-east-1'
 BASE=['aws','--profile','energy-index','--region',REGION,'--output','json']
@@ -48,7 +48,9 @@ if __name__=='__main__':
         for file in (ROOT/'dist/api').iterdir(): archive.write(file,file.name)
     role=ensure_role('energy-index-api','AWSLambdaVPCAccessExecutionRole')
     authRole=ensure_role('energy-index-authorizer','AWSLambdaBasicExecutionRole')
-    apiArn=function('energy-index-api',role,'handler.handler',{'DATABASE_URL':config['appUrl'],'DATABASE_CA_FILE':'/var/task/rds-ca.pem'}, {'SubnetIds':['subnet-0eb2c46f898a6654a','subnet-0bc592c05c05cbb1f'],'SecurityGroupIds':[sg]})
+    priorEnv=aws('lambda','get-function-configuration','--function-name','energy-index-api').get('Environment',{}).get('Variables',{})
+    guestSecret=priorEnv.get('GUEST_RATE_SECRET') or secrets.token_hex(32)
+    apiArn=function('energy-index-api',role,'handler.handler',{'DATABASE_URL':config['appUrl'],'GUEST_RATE_SECRET':guestSecret,'DATABASE_CA_FILE':'/var/task/rds-ca.pem'}, {'SubnetIds':['subnet-0eb2c46f898a6654a','subnet-0bc592c05c05cbb1f'],'SecurityGroupIds':[sg]})
     authConfig=json.loads((ROOT/'src/lib/auth-config.json').read_text())
     authEnv={'COGNITO_USER_POOL_ID':authConfig['userPoolId'],'COGNITO_CLIENT_ID':authConfig['clientId'],'EDITOR_COGNITO_SUB':authConfig.get('editorSub','')}
     if not authConfig.get('legacyDisabled'): authEnv['EDITOR_GITHUB_ID']='33819259'
@@ -57,15 +59,15 @@ if __name__=='__main__':
     api=next((api for api in apis if api['Name']=='energy-index'),None)
     if not api: api=aws('apigatewayv2','create-api','--name','energy-index','--protocol-type','HTTP')
     apiId=api['ApiId']
-    aws('apigatewayv2','update-api','--api-id',apiId,'--cors-configuration',json.dumps({'AllowOrigins':(['https://rohansav.github.io'] if authConfig.get('legacyDisabled') else ['https://rohansav.github.io','https://brilliant-pavlova-12976b.netlify.app']),'AllowMethods':['GET','PUT','DELETE','OPTIONS'],'AllowHeaders':['authorization','content-type'],'MaxAge':300}))
+    aws('apigatewayv2','update-api','--api-id',apiId,'--cors-configuration',json.dumps({'AllowOrigins':(['https://rohansav.github.io'] if authConfig.get('legacyDisabled') else ['https://rohansav.github.io','https://brilliant-pavlova-12976b.netlify.app']),'AllowMethods':['GET','PUT','DELETE','OPTIONS'],'AllowHeaders':['authorization','content-type','x-guest-token'],'MaxAge':300}))
     integrations=aws('apigatewayv2','get-integrations','--api-id',apiId)['Items']
     integration=integrations[0] if integrations else aws('apigatewayv2','create-integration','--api-id',apiId,'--integration-type','AWS_PROXY','--integration-uri',apiArn,'--payload-format-version','2.0')
     authorizers=aws('apigatewayv2','get-authorizers','--api-id',apiId)['Items']
     authorizer=authorizers[0] if authorizers else aws('apigatewayv2','create-authorizer','--api-id',apiId,'--name','github-owner','--authorizer-type','REQUEST','--authorizer-uri',f'arn:aws:apigateway:{REGION}:lambda:path/2015-03-31/functions/{authArn}/invocations','--identity-source','$request.header.Authorization','--authorizer-payload-format-version','2.0','--enable-simple-responses','--authorizer-result-ttl-in-seconds','0')
     routes=aws('apigatewayv2','get-routes','--api-id',apiId)['Items']
-    for key in ['GET /catalogue','GET /editor/reviews','GET /editor/reviews/{id}','PUT /editor/reviews/{id}','GET /community/{id}','GET /community/{id}/mine','PUT /community/{id}/mine','DELETE /community/{id}/mine']:
+    for key in ['GET /catalogue','GET /editor/reviews','GET /editor/reviews/{id}','PUT /editor/reviews/{id}','GET /community/{id}','GET /community/{id}/mine','PUT /community/{id}/mine','DELETE /community/{id}/mine','GET /guest/{id}','PUT /guest/{id}','DELETE /guest/{id}']:
         args=['--api-id',apiId,'--route-key',key,'--target','integrations/'+integration['IntegrationId']]
-        if key not in ['GET /catalogue','GET /community/{id}']: args+=['--authorization-type','CUSTOM','--authorizer-id',authorizer['AuthorizerId']]
+        if key not in ['GET /catalogue','GET /community/{id}'] and '/guest/' not in key: args+=['--authorization-type','CUSTOM','--authorizer-id',authorizer['AuthorizerId']]
         else: args+=['--authorization-type','NONE']
         existing=next((r for r in routes if r['RouteKey']==key),None)
         if existing: aws('apigatewayv2','update-route','--route-id',existing['RouteId'],*args)

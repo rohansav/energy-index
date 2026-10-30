@@ -1,3 +1,4 @@
+import { verifyGuests } from "./guest-storage";
 import { verifyCommunity } from "./community-storage";
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -95,6 +96,7 @@ test(
         [sample.review, updated],
       );
       await verifyCommunity(pool, sample);
+      await verifyGuests(pool, sample);
     } finally {
       await pool.end();
     }
