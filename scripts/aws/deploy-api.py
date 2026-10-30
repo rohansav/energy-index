@@ -57,7 +57,7 @@ if __name__=='__main__':
     api=next((api for api in apis if api['Name']=='energy-index'),None)
     if not api: api=aws('apigatewayv2','create-api','--name','energy-index','--protocol-type','HTTP')
     apiId=api['ApiId']
-    aws('apigatewayv2','update-api','--api-id',apiId,'--cors-configuration',json.dumps({'AllowOrigins':['https://rohansav.github.io','https://brilliant-pavlova-12976b.netlify.app'],'AllowMethods':['GET','PUT','OPTIONS'],'AllowHeaders':['authorization','content-type'],'MaxAge':300}))
+    aws('apigatewayv2','update-api','--api-id',apiId,'--cors-configuration',json.dumps({'AllowOrigins':(['https://rohansav.github.io'] if authConfig.get('legacyDisabled') else ['https://rohansav.github.io','https://brilliant-pavlova-12976b.netlify.app']),'AllowMethods':['GET','PUT','OPTIONS'],'AllowHeaders':['authorization','content-type'],'MaxAge':300}))
     integrations=aws('apigatewayv2','get-integrations','--api-id',apiId)['Items']
     integration=integrations[0] if integrations else aws('apigatewayv2','create-integration','--api-id',apiId,'--integration-type','AWS_PROXY','--integration-uri',apiArn,'--payload-format-version','2.0')
     authorizers=aws('apigatewayv2','get-authorizers','--api-id',apiId)['Items']

@@ -9,12 +9,14 @@ Region: `us-east-1`. AWS CLI profile: `energy-index` (temporary browser login).
 - RDS-managed master password in Secrets Manager; never sent to the frontend.
 - Separate `energy_app` database login: read catalogue, update editorial reviews,
   append review history. No schema/catalogue/delete permissions.
-- Lambda database handler in the VPC; separate Lambda GitHub authorizer outside
+- Lambda database handler in the VPC; separate Lambda Cognito authorizer outside
   the VPC. No NAT gateway required. API Gateway only allows authenticated owner
   access to editor routes; `/catalogue` is public published content.
 - TLS certificate verification uses the official AWS RDS regional CA bundle.
-- The existing Netlify editor retains its GitHub OAuth login. A Decap backend
-  adapter replaces Git reads/writes with API calls. Stale saves return HTTP 409.
+- Cognito Essentials user pool, public PKCE client, registration disabled, one
+  explicitly authorized editor subject. Stale review saves return HTTP 409.
+- The former Netlify editor URL redirects to the integrated editor; GitHub write
+  authorization is disabled.
 - GitHub Pages exports a database snapshot via the public API on code deploys.
   React refreshes from the API on page load/focus, so publishing needs no rebuild.
 
@@ -45,10 +47,18 @@ then update the API connection. Do not restore stale Git files over database edi
 The original `reviews/` files remain a pre-cutover archive, not the publishing path.
 
 A public API outage leaves the last static HTML snapshot readable. That snapshot
-can be stale until a code deployment rebuilds it. No new sign-in UI, review form,
-or dashboard is introduced by this migration.
+can be stale until a code deployment rebuilds it. The editor uses the API directly.
 
 Database cost: roughly $14/month compute/storage plus about $0.40/month for the
 managed secret, before tax; a public IPv4 endpoint adds roughly $3.65/month while
 enabled. API Gateway/Lambda/logging are usage billed. High availability is not
 included. Keep automatic storage growth disabled unless explicitly needed.
+
+Cognito configuration is reproducible with `python3 scripts/aws/setup-cognito.py`.
+Public IDs and the editor subject are in `src/lib/auth-config.json`; there is no
+browser client secret. The owner completed the emailed invitation and first login.
+Email recovery is verified. Passwords are managed by Cognito, not stored here.
+
+To redeploy the old-host redirect, use `netlify deploy --dir=admin/retired --prod
+--site=506dfa99-f4e7-4638-a16c-1f59bb01529d --no-build`. Do not redeploy `admin/`
+as the live editor. The old OAuth application is no longer trusted by the API.

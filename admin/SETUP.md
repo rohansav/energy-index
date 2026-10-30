@@ -1,3 +1,10 @@
+# Retired Netlify editor
+
+The live editor is https://rohansav.github.io/energy-index/editor/ and uses Cognito.
+Deploy only `admin/retired` to Netlify for the redirect. The API no longer accepts
+GitHub tokens. The remaining instructions below are historical recovery reference,
+not the active publishing setup. See `infra/README.md` for current operations.
+
 # Connect GitHub sign-in
 
 Editor: https://brilliant-pavlova-12976b.netlify.app/

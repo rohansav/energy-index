@@ -3,7 +3,7 @@
 ## Current system
 
 ```text
-Existing Decap editor + GitHub OAuth
+Integrated React editor + Cognito PKCE login
                   ↓ owner-authorized API Gateway routes
 AWS Lambda → RDS PostgreSQL → public /catalogue API
                   ↓
@@ -26,13 +26,12 @@ The repository returns a `Catalogue` containing `Brand[]` and `Drink[]`. Each `D
 
 React handles DOM updates and text escaping. There is no `innerHTML` templating, runtime `eval`, or script that mutates catalogue records before rendering. Build-time validation and page generation fail together; CI never deploys partial output.
 
-## Existing editor
+## Editor publishing
 
-The Netlify-hosted Decap editor retains GitHub OAuth. `admin/database-backend.js`
-extends its GitHub backend for authentication while replacing review persistence
-with the AWS API. The server verifies the immutable GitHub user ID on every editor
-request. Review updates use an expected version and return 409 for stale writes.
-Database credentials never reach the browser. Media creation/deletion is disabled.
+The integrated editor preserves the existing ratings and notes. Review updates
+use an expected version and return 409 for stale writes. Database credentials
+never reach the browser. Media creation/deletion is disabled. The old Decap
+source is retained only for historical reference.
 
 ## Storage and delivery
 
@@ -61,7 +60,6 @@ and token use with `aws-jwt-verify`, then requires the configured editor subject
 Being signed in alone does not grant publishing access. No password or client
 secret is shipped in the site. `auth-config.json` contains public identifiers only.
 
-The existing Netlify/GitHub login remains a temporary fallback until the owner's
-first Cognito login and publish are verified. Setting `legacyDisabled: true` in
-`auth-config.json` and redeploying the API removes GitHub authorization. Community
-accounts, reviews, and moderation are outside this migration.
+The owner's Cognito login and browser publish/reload were verified.
+`legacyDisabled: true` disables GitHub authorization, and the Netlify URL redirects
+to `/editor/`. Community accounts, reviews, and moderation are outside this migration.

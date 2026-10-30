@@ -3,5 +3,6 @@
   "clientId": "1ufbbspkk0tgau77er77kb72g3",
   "authority": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_tBwdTCcrL",
   "domain": "https://energy-index-rohansav.auth.us-east-1.amazoncognito.com",
-  "editorSub": "84987438-8061-70ea-2d6c-3c8fce942ced"
+  "editorSub": "84987438-8061-70ea-2d6c-3c8fce942ced",
+  "legacyDisabled": true
 }

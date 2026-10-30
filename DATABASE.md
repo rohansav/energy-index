@@ -5,9 +5,9 @@
 Production storage is AWS RDS PostgreSQL in `us-east-1`. All six brands and 161
 products/review records were imported with exact read-back verification.
 
-The existing Netlify Decap editor keeps GitHub sign-in, ratings and notes, but saves
-to an owner-authorized API instead of GitHub files. Public pages refresh their
-catalogue from the same API on load/focus. No new product features were added.
+The integrated editor uses Cognito sign-in and saves ratings and notes through
+an owner-authorized API. Public pages refresh their catalogue from the same API
+on load/focus. The login migration changes no database tables or review fields.
 
 See [infra/README.md](infra/README.md) for deployed infrastructure and operations.
 

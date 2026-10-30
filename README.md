@@ -1,6 +1,6 @@
 # Energy index
 
-An energy drink catalogue built with **Next.js, React, and TypeScript**. Public pages are exported to GitHub Pages. The existing Netlify editor signs in through GitHub and publishes reviews to AWS PostgreSQL through an authenticated API.
+An energy drink catalogue built with **Next.js, React, and TypeScript**. Public pages are exported to GitHub Pages. The integrated editor signs in through Amazon Cognito and publishes reviews to AWS PostgreSQL through an authenticated API.
 
 ## Run locally
 
@@ -21,7 +21,7 @@ npm run format    # Formats application and editor source
 
 ## Publish a review
 
-Open https://brilliant-pavlova-12976b.netlify.app/, sign in with GitHub, choose a drink, enter ratings/notes, then **Publish → Publish now**. The existing review JSON format and IDs have been preserved. `Rated` filters only on Overall. Save drafts before refreshing the editor.
+Open https://rohansav.github.io/energy-index/editor/, sign in, choose a drink, enter ratings/notes, then **Publish review**. The existing review format and IDs have been preserved. `Rated` filters only on Overall.
 
 Publishing saves directly to PostgreSQL. Refresh the public catalogue to see new
 ratings; no GitHub build is required. Code changes still trigger GitHub Actions to
@@ -77,4 +77,4 @@ other fields. Publishing writes directly to the existing database.
 The editor warns before discarding changes and keeps unpublished edits in the
 same browser tab across reauthentication/reload. A stale save is rejected rather
 than overwriting a newer review; copy your notes before reloading the drink after
-a conflict. The previous Netlify editor remains available during login cutover.
+a conflict. The previous Netlify URL redirects to this editor; GitHub tokens no longer authorize review writes.
