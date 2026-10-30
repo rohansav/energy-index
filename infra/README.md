@@ -4,6 +4,8 @@ Region: `us-east-1`. AWS CLI profile: `energy-index` (temporary browser login).
 
 - RDS PostgreSQL 17, `db.t4g.micro`, 20 GiB gp3, Single-AZ.
 - Encryption at rest, seven-day automated backups, deletion protection.
+- Private DB endpoint; only the application security group can reach port 5432.
+  Temporary public access used for import has been removed.
 - RDS-managed master password in Secrets Manager; never sent to the frontend.
 - Separate `energy_app` database login: read catalogue, update editorial reviews,
   append review history. No schema/catalogue/delete permissions.

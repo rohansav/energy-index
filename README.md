@@ -63,4 +63,4 @@ Overall (`score`) is 1.0–10.0. Sweetness, Sourness (stored as `tartness` for c
 
 `notes` is the short summary (300 characters), `body` is plain-text review prose (20,000 characters). Review text is rendered through React escaping, never interpreted as HTML. Identity changes, malformed ratings, missing photos, and unknown review files fail the build.
 
-PostgreSQL storage and migration tooling are available; see [DATABASE.md](DATABASE.md). Production now reads and writes through the AWS API. No new authentication screens, review forms, community accounts, dashboard, or paid services have been introduced.
+PostgreSQL storage and migration tooling are available; see [DATABASE.md](DATABASE.md). Production now reads and writes through the AWS API. No new authentication screens, review forms, community accounts, or dashboards have been introduced. AWS infrastructure is now billable as documented in `infra/README.md`.

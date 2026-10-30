@@ -8,14 +8,14 @@ GitHub OAuth is configured through Netlify project `brilliant-pavlova-12976b` (s
 
 ## Netlify authentication provider
 
-1. Create/sign in to a Netlify account and create a Netlify site to anchor its OAuth provider. The public catalogue remains on GitHub Pages; do not move the domain or repository hosting.
+1. Create/sign in to a Netlify account and create a Netlify site to anchor its OAuth provider. The public catalogue remains on GitHub Pages.
 2. Register a GitHub OAuth application in the owner's Developer settings. Use the catalogue URL as Homepage URL and `https://api.netlify.com/auth/done` as the authorization callback.
 3. In the Netlify project's Project configuration → Security → OAuth settings, configure the GitHub OAuth authentication provider using that client ID and client secret. Keep the secret solely in the provider settings, not this repository or chat.
 4. Set `window.ENERGY_AUTH = {site_domain:'ACTUAL-SITE-NAME.netlify.app'};` in `admin/auth-config.js`, using the actual Netlify site hostname.
-5. Upload a ZIP containing `admin/index.html`, `admin/editor.js`, and `admin/auth-config.js` at the ZIP root to the existing Netlify project. The editor shell is public; GitHub authentication controls saving. Commit and deploy the catalogue, then open `/admin/` and sign in as `rohansav`. Changes to the editor files require another Netlify upload; review edits only require Publish.
-6. Verify a real owner-authenticated save and resulting Pages deployment. Do not publish invented ratings as a test.
+5. Deploy all files in `admin/`, including `database-backend.js` and `_headers`, at the site root to the existing Netlify project. The editor shell is public; GitHub authentication controls saving. Commit and deploy the catalogue, then open `/admin/` and sign in as `rohansav`. Changes to the editor files require another Netlify upload; review edits only require Publish.
+6. Verify a real owner-authenticated save and public API read. Do not publish invented ratings as a test.
 
-GitHub checks repository write permissions on every save. Keep the repository's collaborator access owner-only. The editor page itself is public; write access is authenticated. A login or OAuth-provider outage does not affect the read-only catalogue.
+The AWS API checks the GitHub user's immutable ID on every editor request and only permits the owner. The editor page itself is public; write access is authenticated. A login or OAuth-provider outage does not affect the read-only catalogue.
 
 Official references:
 
@@ -24,8 +24,14 @@ Official references:
 
 ## Publishing and recovery
 
-Decap writes a review JSON file to GitHub. The build validates the values before deployment, so bad content does not replace the live site. Previous commits allow recovery. Save/publish before closing the editor; do not assume unsaved browser text is durable. No access tokens or secrets are stored in project source.
+Decap saves reviews through `window.ENERGY_API_URL` to AWS PostgreSQL. The API
+validates ratings and notes, checks the expected version, and writes review history
+in the same transaction. Publish does not commit files or trigger a Pages build.
+Refresh the public page to load the latest database content. Use RDS backups for
+recovery. Save before closing the editor; unsaved browser text is not durable.
 
 The editor requests `public_repo` OAuth scope. This avoids private-repository access, but GitHub OAuth cannot restrict that scope to just this one public repository; review the authorization screen before granting access.
 
 Verified owner login and CMS save on 2026-10-29 by selecting Not rated for an already-unrated drink. No ratings or prose were invented.
+
+Database publishing verified on 2026-10-30, including a no-op save/reload and stale-write rejection.

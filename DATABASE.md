@@ -49,7 +49,7 @@ Never use the importer as an ongoing Git-to-database sync.
 `db:verify` compares the current database against the file snapshot. Differences
 are expected once the database becomes authoritative and receives new reviews.
 `CATALOGUE_STORAGE=postgres` requires a working database; errors never silently
-fall back to old files. The default remains `files` during the cutover period.
+fall back to old files. Local development defaults to `files`; production explicitly selects `http`.
 
 ## Production publishing and recovery
 
