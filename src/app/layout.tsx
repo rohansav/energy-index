@@ -4,6 +4,7 @@ import { SessionProvider } from "@/components/auth/SessionProvider";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import "@/styles/site.css";
+import "@/styles/catalogue.css";
 
 export const metadata: Metadata = {
   title: { default: "Energy drink catalogue", template: "%s — Energy index" },

@@ -2,6 +2,7 @@
 import { useLiveCatalogue } from "@/lib/live-catalogue";
 import { useState } from "react";
 import type { Catalogue } from "@/domain/types";
+import { isRated } from "@/domain/ratings";
 import { filterDrinks } from "@/domain/catalogue";
 import { BrandCard } from "./BrandCard";
 import { DrinkTable } from "./DrinkTable";
@@ -10,26 +11,27 @@ export function CatalogueView(initial: Catalogue) {
   const { brands, drinks } = useLiveCatalogue(initial);
   const [view, setView] = useState<"brands" | "all">("brands");
   const [query, setQuery] = useState("");
-  const filtered = filterDrinks(drinks, { query });
+  const [ratedOnly, setRatedOnly] = useState(false);
+  const filtered = filterDrinks(drinks, { query }).filter(
+    (drink) => !ratedOnly || isRated(drink.review),
+  );
   const shownBrands = brands.filter((brand) =>
     filtered.some((drink) => drink.brand === brand.name),
   );
   return (
-    <>
-      <div className="page-heading">
-        <div>
-          <div className="eyebrow">THE CATALOGUE / 001</div>
-          <h1>By brand.</h1>
-          <p>US flavors, product details, and a place for every review.</p>
-        </div>
-        <div className="catalogue-stats">
-          <strong>
-            {String(brands.length).padStart(2, "0")} <span>brands</span>
-          </strong>
-          <strong>
-            <span className="stat-number">{drinks.length}</span>{" "}
-            <span>flavors</span>
-          </strong>
+    <div className="catalogue-home">
+      <div className="collection-heading">
+        <h1>
+          <span aria-hidden="true" />
+          THE COLLECTION
+        </h1>
+        <div className="collection-receipt">
+          <span>ON THE SHELF</span>
+          <div>
+            <strong>{drinks.length}</strong> drinks{" "}
+            <strong>{String(brands.length).padStart(2, "0")}</strong> brands
+          </div>
+          <div className="collection-barcode" aria-hidden="true" />
         </div>
       </div>
       <div className="toolbar">
@@ -51,6 +53,14 @@ export function CatalogueView(initial: Catalogue) {
             All flavors
           </button>
         </div>
+        <label className="reviewed-filter">
+          <input
+            type="checkbox"
+            checked={ratedOnly}
+            onChange={(e) => setRatedOnly(e.target.checked)}
+          />{" "}
+          Reviewed only
+        </label>
         <label className="search">
           <span aria-hidden="true">⌕</span>
           <input
@@ -98,6 +108,6 @@ export function CatalogueView(initial: Catalogue) {
           brands.
         </p>
       </div>
-    </>
+    </div>
   );
 }
