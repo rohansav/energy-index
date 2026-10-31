@@ -648,3 +648,8 @@ body:has(.catalogue-home) .wordmark span {
   mix-blend-mode: normal;
   filter: drop-shadow(2px 5px 4px #30201360);
 }
+
+.catalogue-home [data-brand="Dunkin’"] .brand-cover {
+  background: #f2e3d7;
+}
+[data-brand="Dunkin’"] .cover-can { mix-blend-mode: multiply; }

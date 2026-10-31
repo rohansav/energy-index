@@ -16,7 +16,7 @@ test("migration preserves every product and every saved rating and note", async 
   );
   assert.equal(catalogue.drinks.length, files.length);
   assert.equal(catalogue.drinks.length, source.products.length);
-  assert.equal(catalogue.brands.length, 6);
+  assert.equal(catalogue.brands.length, source.brands.length);
   for (const drink of catalogue.drinks) {
     const raw = JSON.parse(await readFile(`reviews/${drink.id}.json`, "utf8"));
     for (const key of [

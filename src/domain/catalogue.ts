@@ -8,7 +8,7 @@ export const availabilityLabels: Record<Availability, string> = {
   retiring: "Reported phase-out",
 };
 export const brandSlug = (name: string): string =>
-  name.toLowerCase().replaceAll(" ", "-");
+  name.toLowerCase().replace(/[’']/g, "").replaceAll(" ", "-");
 export const reviewSummary = (drink: Drink): string =>
   drink.review.notes || drink.catalogueNotes;
 export function reviewBody(drink: Drink): string {

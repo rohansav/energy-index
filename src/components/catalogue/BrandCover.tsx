@@ -10,6 +10,7 @@ const logos: Record<string, string> = {
   "Red Bull": "red-bull.svg",
   Ghost: "ghost-energy.svg",
   Alani: "alani-clean.png",
+  "Dunkin’": "dunkin.svg",
 };
 export function BrandCover({
   brand,
