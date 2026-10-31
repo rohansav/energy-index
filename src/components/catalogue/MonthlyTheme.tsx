@@ -12,7 +12,7 @@ const selection = [
   { id: "monster-juice-bad-apple", note: "Apple" },
   { id: "bloom-crisp-apple", note: "Crisp apple" },
   { id: "celsius-sparkling-fuji-apple-pear", note: "Apple & pear" },
-  { id: "monster-java-salted-caramel", note: "The coffee wildcard" },
+  { id: "monster-ultra-sunrise", note: "Orange citrus" },
 ];
 export function MonthlyTheme({ drinks }: { drinks: Drink[] }) {
   return (
@@ -28,24 +28,15 @@ export function MonthlyTheme({ drinks }: { drinks: Drink[] }) {
         Fruits basket<span>.</span>
       </h2>
       <p className="monthly-description">
-        Apples, pears, and a little caramel. Six cans for the fall shelf.
+        Apples, pears, and orange citrus. Six cans for the fall shelf.
       </p>
-      <div className="monthly-lineup monthly-lineup-stardew" aria-label="November drink selection" style={{ backgroundImage: `linear-gradient(#f5e8cd66, #f5e8cd66), url("${assetPath("assets/themes/stardew-fall.jpg")}")` }}>
-        {selection.map(({ id }) => {
-          const drink = drinks.find((item) => item.id === id);
-          if (!drink) return null;
-          return (
-            <Link
-              key={id}
-              href={drinkPath(id)}
-              className="monthly-lineup-item"
-              aria-label={`Read ${drink.brand} ${drink.name} reviews`}
-            >
-              <ProductPhoto product={drink} className="monthly-lineup-can" />
-            </Link>
-          );
-        })}
-      </div>
+      <img
+        className="monthly-image"
+        src={assetPath("assets/themes/november-fruits-basket-clean.webp")}
+        width={1454}
+        height={1082}
+        alt="Six energy drinks and apples in a wooden bowl, beside a candle and Stardew Valley on a handheld console."
+      />
       <div className="monthly-list-heading">
         <span>IN THE BASKET</span>
         <span>EDITOR / 10</span>
