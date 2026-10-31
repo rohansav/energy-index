@@ -10,6 +10,7 @@ import {
 } from "@/domain/catalogue";
 import { brandPath } from "@/lib/paths";
 import { ReviewRow } from "@/components/drinks/ReviewRow";
+import { BrandSummary } from "./BrandSummary";
 import { BrandFilters } from "./BrandFilters";
 
 interface Props {
@@ -57,6 +58,7 @@ export function BrandView({ brand, brands, drinks: initialDrinks }: Props) {
           <span>FLAVORS LISTED</span>
         </div>
       </section>
+      <BrandSummary brand={catalogue.brands.find(item => item.name === brand.name) ?? brand} />
       <nav className="brand-navigation" aria-label="Browse brands">
         {brands.map((item) => (
           <Link

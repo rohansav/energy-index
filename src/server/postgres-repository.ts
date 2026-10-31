@@ -30,6 +30,13 @@ export async function readCatalogue(client: PoolClient): Promise<Catalogue> {
   const brands = (
     await client.query("SELECT name, color, text FROM brands ORDER BY position")
   ).rows;
+  const summaries = (
+    await client.query("SELECT brand, summary FROM brand_summaries")
+  ).rows;
+  for (const row of summaries) {
+    const brand = brands.find((b) => b.name === row.brand);
+    if (brand && row.summary) brand.summary = row.summary;
+  }
   const rows = (
     await client.query(`SELECT p.metadata, r.* FROM products p
     LEFT JOIN editorial_reviews r ON r.product_id = p.id ORDER BY p.position`)

@@ -652,4 +652,42 @@ body:has(.catalogue-home) .wordmark span {
 .catalogue-home [data-brand="Dunkin’"] .brand-cover {
   background: #f2e3d7;
 }
-[data-brand="Dunkin’"] .cover-can { mix-blend-mode: multiply; }
+[data-brand="Dunkin’"] .cover-can {
+  mix-blend-mode: multiply;
+}
+
+.brand-summary {
+  padding: 24px 0;
+  border-top: 1px solid #d4d7cb;
+}
+.brand-summary-copy {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-width: 78ch;
+  line-height: 1.7;
+  color: #53604f;
+}
+.brand-panel .brand-summary {
+  padding: 20px;
+}
+.brand-summary-editor {
+  border: 1px solid #c9cec2;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.brand-summary-editor summary {
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+}
+.brand-summary-editor textarea {
+  width: 100%;
+  resize: vertical;
+}
+.brand-summary-editor .editor-fields {
+  max-width: 800px;
+}
+.brand-summary-published {
+  background: #d8edc9 !important;
+  color: #254722 !important;
+}

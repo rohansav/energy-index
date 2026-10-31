@@ -123,6 +123,53 @@ export async function handler(
         catalogue.drinks.map((drink) => drink.review),
       );
     }
+    if (path === "/editor/brands") {
+      if (method === "GET") {
+        const result = await databasePool().query(
+          `SELECT b.name, COALESCE(s.summary,'') AS summary, COALESCE(s.version,0) AS version FROM brands b LEFT JOIN brand_summaries s ON s.brand=b.name ORDER BY b.position`,
+        );
+        return reply(200, result.rows);
+      }
+      if (method === "PUT") {
+        const body = event.isBase64Encoded
+          ? Buffer.from(event.body ?? "", "base64").toString()
+          : (event.body ?? "");
+        if (Buffer.byteLength(body) > 10000)
+          return reply(413, { error: "Summary is too large" });
+        const input = z
+          .object({
+            name: z.string().min(1).max(100),
+            summary: z.string().trim().max(1200),
+            version: z.number().int().nonnegative(),
+          })
+          .parse(JSON.parse(body));
+        const exists = await databasePool().query(
+          "SELECT 1 FROM brands WHERE name=$1",
+          [input.name],
+        );
+        if (!exists.rowCount) return reply(404, { error: "Unknown brand" });
+        const result =
+          input.version === 0
+            ? await databasePool().query(
+                "INSERT INTO brand_summaries(brand,summary) VALUES($1,$2) ON CONFLICT DO NOTHING RETURNING version",
+                [input.name, input.summary],
+              )
+            : await databasePool().query(
+                "UPDATE brand_summaries SET summary=$2,version=version+1,updated_at=now() WHERE brand=$1 AND version=$3 RETURNING version",
+                [input.name, input.summary, input.version],
+              );
+        if (!result.rowCount)
+          return reply(409, {
+            error:
+              "This brand summary changed in another tab. Reload before saving.",
+          });
+        return reply(200, {
+          summary: input.summary,
+          version: result.rows[0].version,
+        });
+      }
+      return reply(405, { error: "Method not allowed" });
+    }
     const id = path.match(/^\/editor\/reviews\/([a-z0-9-]+)$/)?.[1];
     if (!id) return reply(404, { error: "Unknown route" });
     if (method === "GET") {

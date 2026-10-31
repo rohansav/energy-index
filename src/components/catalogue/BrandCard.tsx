@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandSummary } from "./BrandSummary";
 import { BrandCover } from "./BrandCover";
 import type { Brand, Drink } from "@/domain/types";
 import { rankDrinks, reviewSummary } from "@/domain/catalogue";
@@ -34,6 +35,7 @@ export function BrandCard({ brand, drinks, index }: Props) {
       aria-label={`${brand.name} catalogue`}
     >
       <BrandCover brand={brand} ordered={ordered} index={index} />
+      <BrandSummary brand={brand} />
       <div className="list-heading">
         <span>EDITOR TOP 3</span>
         <span>OVERALL ↓</span>

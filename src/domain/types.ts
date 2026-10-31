@@ -5,6 +5,7 @@ export type RatingKey =
 export type Rating = number | null;
 
 export interface Brand {
+  summary?: string;
   name: string;
   color: string;
   text: string;

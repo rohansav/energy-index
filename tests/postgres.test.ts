@@ -1,3 +1,4 @@
+import { verifyBrandSummaries } from "./brand-summary-storage";
 import { verifyGuests } from "./guest-storage";
 import { verifyCommunity } from "./community-storage";
 import { test } from "node:test";
@@ -37,6 +38,7 @@ test(
       assert.equal(await importCatalogue(pool, source), "verified");
       const repository = new PostgresCatalogueRepository(pool);
       assert.deepEqual(await repository.getCatalogue(), source);
+      await verifyBrandSummaries(pool);
       const sample = source.drinks[0];
       await assert.rejects(() =>
         repository.saveReview(sample.id, { ...sample.review, score: 8.65 }, 1),

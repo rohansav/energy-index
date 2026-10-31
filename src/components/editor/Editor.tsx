@@ -11,6 +11,7 @@ import { requestedDrink } from "@/lib/auth-navigation";
 import { basePath } from "@/lib/paths";
 import { ProductPhoto } from "@/components/drinks/ProductPhoto";
 import { confirmPublication } from "@/lib/confirm-publication";
+import { BrandSummaryEditor } from "./BrandSummaryEditor";
 import { ReviewForm } from "./ReviewForm";
 export function Editor({
   products,
@@ -200,6 +201,7 @@ export function Editor({
           </button>
         )}
       </div>
+      {signedIn && <BrandSummaryEditor />}
       {error && (
         <div className="editor-error" role="alert">
           {error}{" "}

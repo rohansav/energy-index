@@ -11,6 +11,7 @@ import {migrateDatabase} from "../src/server/migrate-database";
 export async function handler(){ const pool=databasePool();try{
 const fingerprint=async()=> (await pool.query("SELECT md5(jsonb_agg(to_jsonb(r) ORDER BY product_id)::text) AS hash FROM editorial_reviews r")).rows[0].hash;
 const before=await fingerprint();await migrateDatabase(pool);
+await pool.query("GRANT SELECT,INSERT,UPDATE ON brand_summaries TO energy_app");
 await pool.query("GRANT SELECT,INSERT,UPDATE ON community_users,community_reviews TO energy_app");
 await pool.query("GRANT INSERT ON community_review_history TO energy_app");
 await pool.query("GRANT SELECT,INSERT,UPDATE,DELETE ON guest_rate_limits TO energy_app");

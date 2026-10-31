@@ -34,6 +34,7 @@ export const productSchema = z.object({
 export const catalogueSchema = z.object({
   brands: z.array(
     z.object({
+      summary: z.string().max(1200).optional(),
       name: z.string().min(1),
       color: z.string().regex(/^#[a-fA-F0-9]{6}$/),
       text: z.string().regex(/^#[a-fA-F0-9]{6}$/),

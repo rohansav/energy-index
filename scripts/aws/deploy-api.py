@@ -65,7 +65,7 @@ if __name__=='__main__':
     authorizers=aws('apigatewayv2','get-authorizers','--api-id',apiId)['Items']
     authorizer=authorizers[0] if authorizers else aws('apigatewayv2','create-authorizer','--api-id',apiId,'--name','github-owner','--authorizer-type','REQUEST','--authorizer-uri',f'arn:aws:apigateway:{REGION}:lambda:path/2015-03-31/functions/{authArn}/invocations','--identity-source','$request.header.Authorization','--authorizer-payload-format-version','2.0','--enable-simple-responses','--authorizer-result-ttl-in-seconds','0')
     routes=aws('apigatewayv2','get-routes','--api-id',apiId)['Items']
-    for key in ['GET /catalogue','GET /editor/reviews','GET /editor/reviews/{id}','PUT /editor/reviews/{id}','GET /community/{id}','GET /community/{id}/mine','PUT /community/{id}/mine','DELETE /community/{id}/mine','GET /guest/{id}','PUT /guest/{id}','DELETE /guest/{id}']:
+    for key in ['GET /editor/brands','PUT /editor/brands','GET /catalogue','GET /editor/reviews','GET /editor/reviews/{id}','PUT /editor/reviews/{id}','GET /community/{id}','GET /community/{id}/mine','PUT /community/{id}/mine','DELETE /community/{id}/mine','GET /guest/{id}','PUT /guest/{id}','DELETE /guest/{id}']:
         args=['--api-id',apiId,'--route-key',key,'--target','integrations/'+integration['IntegrationId']]
         if key not in ['GET /catalogue','GET /community/{id}'] and '/guest/' not in key: args+=['--authorization-type','CUSTOM','--authorizer-id',authorizer['AuthorizerId']]
         else: args+=['--authorization-type','NONE']
